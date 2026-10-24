@@ -4,6 +4,18 @@ import tempfile
 from pathlib import Path
 from typing import Optional
 
+# Ensure UTF-8 console output on Windows
+if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+if sys.stderr and hasattr(sys.stderr, "reconfigure"):
+    try:
+        sys.stderr.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 import click
 
 from zalia_ruta.asr import LithuanianASR
@@ -15,6 +27,7 @@ from zalia_ruta.ffmpeg_utils import (
     probe_media,
     remux_video_with_audio_and_subtitles,
 )
+from zalia_ruta.highlights import export_highlight_clip, find_profanity_highlight_windows
 from zalia_ruta.profanity import ProfanityDetector
 from zalia_ruta.subtitles import generate_srt
 
@@ -77,6 +90,12 @@ from zalia_ruta.subtitles import generate_srt
     help="Inference device for Whisper model (default: auto-detected cuda if available, else cpu).",
 )
 @click.option(
+    "--mms-align/--no-mms-align",
+    default=True,
+    show_default=True,
+    help="Use MMS forced alignment for word boundary precision (replaces raw Whisper timestamps).",
+)
+@click.option(
     "--export-srt/--no-export-srt",
     default=True,
     show_default=True,
@@ -88,6 +107,18 @@ from zalia_ruta.subtitles import generate_srt
     show_default=True,
     help="Keep intermediate extracted WAV files instead of cleaning them up.",
 )
+@click.option(
+    "--transcribe-only",
+    is_flag=True,
+    default=False,
+    help="Only perform transcription and export verbatim .srt subtitles without bleeping or video remuxing.",
+)
+@click.option(
+    "--highlight-clips",
+    type=int,
+    default=None,
+    help="Extract Top N ~1-minute pause-aligned clips with highest profanity density (raw MP4 + 16kHz WAV + verbatim SRT).",
+)
 def main(
     input_path: Path,
     output_path: Optional[Path],
@@ -97,8 +128,11 @@ def main(
     pad_start: float,
     pad_end: float,
     device: Optional[str],
+    mms_align: bool,
     export_srt: bool,
     keep_temp: bool,
+    transcribe_only: bool,
+    highlight_clips: Optional[int] = None,
 ) -> None:
     """
     Zalia-Ruta: Automated Lithuanian Video & Audio Profanity Bleeper.
@@ -108,7 +142,8 @@ def main(
     bleeps, and embeds soft synchronized subtitles.
     """
     click.echo("=" * 60)
-    click.echo("🌿 Zalia-Ruta: Lithuanian Profanity Bleeper")
+    title = "🌿 Zalia-Ruta: Lithuanian ASR Transcriber" if transcribe_only else "🌿 Zalia-Ruta: Lithuanian Profanity Bleeper"
+    click.echo(title)
     click.echo("=" * 60)
     click.echo(f"Input: {input_path}")
 
@@ -116,13 +151,17 @@ def main(
     if output_path is None:
         target_dir = Path("output") / input_path.stem
         target_dir.mkdir(parents=True, exist_ok=True)
-        output_path = target_dir / f"{input_path.stem}_bleeped{input_path.suffix}"
+        if transcribe_only:
+            output_path = target_dir / f"{input_path.stem}.srt"
+        else:
+            output_path = target_dir / f"{input_path.stem}_bleeped{input_path.suffix}"
     else:
         output_path.parent.mkdir(parents=True, exist_ok=True)
     click.echo(f"Output: {output_path}")
 
     # Verify input has audio streams
-    click.echo("\n[1/6] Probing media file...")
+    total_steps = 4 if transcribe_only else 6
+    click.echo(f"\n[1/{total_steps}] Probing media file...")
     try:
         media_info = probe_media(input_path)
     except Exception as e:
@@ -153,31 +192,93 @@ def main(
         master_wav = temp_dir / "master.wav"
         asr_wav = temp_dir / "asr_16k.wav"
         clean_wav = temp_dir / "clean.wav"
-        srt_path = output_path.with_suffix(".srt")
+        srt_path = output_path if output_path.suffix.lower() == ".srt" else output_path.with_suffix(".srt")
 
-        # Step 1: Lossless Audio Extraction
-        click.echo("\n[2/6] Extracting lossless master audio & 16kHz ASR audio...")
-        extract_audio_lossless(input_path, master_wav)
+        # Step 1: Audio Extraction
+        if not transcribe_only:
+            click.echo(f"\n[2/{total_steps}] Extracting lossless master audio & 16kHz ASR audio...")
+            extract_audio_lossless(input_path, master_wav)
+        else:
+            click.echo(f"\n[2/{total_steps}] Extracting 16kHz ASR audio...")
         extract_audio_for_asr(input_path, asr_wav)
 
         # Step 2: Pause-Aligned Audio Chunking
-        click.echo("\n[3/6] Slicing audio into pause-aligned speech chunks...")
+        click.echo(f"\n[3/{total_steps}] Slicing audio into pause-aligned speech chunks...")
         chunks, sr = chunk_audio_file(asr_wav)
         click.echo(f"  Created {len(chunks)} speech chunk(s) (20s-29s pause boundaries).")
 
-        # Step 3: Transcription & Acoustic Refinement
-        click.echo(f"\n[4/6] Transcribing Lithuanian speech on {device or 'auto'}...")
-        asr = LithuanianASR(device=device)
+        # Step 3: Transcription & MMS Forced Alignment
+        align_desc = "with MMS forced alignment" if mms_align else "(raw Whisper timestamps)"
+        click.echo(f"\n[4/{total_steps}] Transcribing Lithuanian speech {align_desc} on {device or 'auto'}...")
+        asr = LithuanianASR(device=device, use_mms_align=mms_align)
         words = asr.transcribe_chunks(chunks, sr=sr)
         click.echo(f"  Transcribed {len(words)} words total.")
 
-        # Step 4: Profanity Detection
-        click.echo("\n[5/6] Scanning transcript for profanities & inflections...")
         detector = ProfanityDetector(
             custom_words_file=custom_words,
             pad_start_s=pad_start,
             pad_end_s=pad_end,
         )
+
+        if highlight_clips and highlight_clips > 0:
+            click.echo(f"\n[Highlights] Finding Top {highlight_clips} pause-aligned profanity highlight windows...")
+            windows = find_profanity_highlight_windows(
+                words=words,
+                detector=detector,
+                top_k=highlight_clips,
+                target_duration_sec=60.0,
+                min_duration_sec=45.0,
+                max_duration_sec=75.0,
+            )
+            if not windows:
+                click.secho("  No profanity highlight windows found.", fg="yellow")
+            else:
+                highlights_dir = output_path.parent / "highlights"
+                highlights_dir.mkdir(parents=True, exist_ok=True)
+                click.echo(f"  Exporting {len(windows)} raw highlight clips to: {highlights_dir}")
+                
+                report_lines = [
+                    f"# Profanity Highlights Report: {input_path.name}",
+                    f"- Total words transcribed: {len(words)}",
+                    f"- Highlight clips extracted: {len(windows)}\n",
+                    "| Rank | Start | End | Duration | Profanities | Profane Words |",
+                    "|------|-------|-----|----------|-------------|---------------|",
+                ]
+
+                for win in windows:
+                    click.echo(f"  -> Clip #{win.rank}: [{win.start_sec:.1f}s - {win.end_sec:.1f}s] ({win.duration_sec:.1f}s) - {win.profanity_count} profanities")
+                    mp4_p, wav_p, srt_p = export_highlight_clip(
+                        input_media_path=input_path,
+                        window=win,
+                        words=words,
+                        output_dir=highlights_dir,
+                        clip_prefix=f"{input_path.stem[:25]}_highlight",
+                    )
+                    words_summary = ", ".join(win.profane_words[:8])
+                    if len(win.profane_words) > 8:
+                        words_summary += f" (+{len(win.profane_words)-8} more)"
+                    report_lines.append(
+                        f"| {win.rank} | {win.start_sec:.2f}s | {win.end_sec:.2f}s | {win.duration_sec:.2f}s | {win.profanity_count} | {words_summary} |"
+                    )
+
+                report_path = highlights_dir / "highlights_report.md"
+                report_path.write_text("\n".join(report_lines), encoding="utf-8")
+                click.secho(f"  Report written to: {report_path}", fg="green")
+
+        if transcribe_only:
+            generate_srt(
+                words=words,
+                profanity_detector=None,
+                output_srt_path=srt_path,
+                mark_bleeps=False,
+            )
+            click.secho("\n" + "=" * 60, fg="green")
+            click.secho(f"✅ Success! Word-level SRT subtitles saved to: {srt_path}", fg="green")
+            click.secho("=" * 60, fg="green")
+            return
+
+        # Step 4: Profanity Detection
+        click.echo("\n[5/6] Scanning transcript for profanities & inflections...")
         intervals = detector.find_intervals(words)
 
         if not intervals:

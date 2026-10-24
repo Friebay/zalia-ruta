@@ -1,4 +1,8 @@
-from zalia_ruta.asr import WordTimestamp
+import numpy as np
+import pytest
+import torch
+
+from zalia_ruta.asr import MMSWordAligner, WordTimestamp, acoustic_refine_words, clean_for_mms
 
 
 def test_word_timestamp_creation():
@@ -9,10 +13,75 @@ def test_word_timestamp_creation():
     assert "lietuva" in repr(wt)
 
 
-def test_acoustic_refine_words():
-    import numpy as np
-    from zalia_ruta.asr import acoustic_refine_words
+def test_clean_for_mms():
+    # Lithuanian diacritics mapping
+    assert clean_for_mms("ąčęėįšųūž") == "aceeisuuz"
+    assert clean_for_mms("ĄČĘĖĮŠŲŪŽ") == "aceeisuuz"
+    assert clean_for_mms("Lietuvos") == "lietuvos"
 
+    # Punctuation stripping
+    assert clean_for_mms("labas,") == "labas"
+    assert clean_for_mms("„žodis“!") == "zodis"
+    assert clean_for_mms("-kaip-") == "kaip"
+    assert clean_for_mms("gal-but") == "gal-but"
+
+    # Non-letter / digits handling
+    assert clean_for_mms("123") == ""
+    assert clean_for_mms("---") == ""
+    assert clean_for_mms("???") == ""
+
+
+def test_mms_aligner_fallback_guarantee():
+    aligner = MMSWordAligner(device="cpu")
+
+    audio = np.zeros(16000 * 2, dtype=np.float32)
+
+    # Word list containing a number that produces no CTC tokens
+    words = [
+        WordTimestamp(word="pirmas", start=0.1, end=0.6),
+        WordTimestamp(word="12345", start=0.6, end=1.1),
+        WordTimestamp(word="antras", start=1.1, end=1.7),
+    ]
+
+    aligned = aligner.align(audio, words, sr=16000, time_offset=0.0)
+
+    # All 3 words must be preserved in exact order
+    assert len(aligned) == 3
+    assert [w.word for w in aligned] == ["pirmas", "12345", "antras"]
+
+    # "12345" had no clean tokens, so its Whisper fallback timestamps MUST be preserved
+    assert aligned[1].start == 0.6
+    assert aligned[1].end == 1.1
+
+    # Empty inputs guarantee
+    assert aligner.align(np.array([], dtype=np.float32), words) == words
+    assert aligner.align(audio, []) == []
+
+
+def test_mms_aligner_synthetic_audio():
+    aligner = MMSWordAligner(device="cpu")
+
+    # Generate 1.5 seconds of synthetic audio
+    sr = 16000
+    t = np.linspace(0, 1.5, int(1.5 * sr), endpoint=False)
+    audio = 0.3 * np.sin(2 * np.pi * 300 * t).astype(np.float32)
+
+    words = [
+        WordTimestamp(word="labas", start=0.0, end=0.5),
+        WordTimestamp(word="vakaras", start=0.5, end=1.2),
+    ]
+
+    offset = 5.0
+    aligned = aligner.align(audio, words, sr=sr, time_offset=offset)
+
+    assert len(aligned) == 2
+    for w in aligned:
+        assert w.start >= offset
+        assert w.end > w.start
+        assert w.end <= offset + 2.0
+
+
+def test_acoustic_refine_words():
     sr = 16000
     # Create 3 seconds of audio:
     # 0.0s - 0.4s: silence
@@ -49,4 +118,3 @@ def test_acoustic_refine_words():
     # There MUST be a significant gap between word 0 and word 1
     gap = refined[1].start - refined[0].end
     assert gap > 0.60, f"Expected gap > 600ms, got {gap*1000:.0f}ms"
-

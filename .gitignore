@@ -183,4 +183,11 @@ cython_debug/
 # Project media and output folders
 original_videos/
 output/
-output_test/
+output_test/
+
+# Benchmark working data
+# benchmark/audio/ is tracked so the benchmark dataset is self-contained (~10MB)
+benchmark/drafts/
+benchmark/hyp/
+benchmark/youtube/
+

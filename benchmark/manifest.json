@@ -1,0 +1,145 @@
+{
+  "clips": [
+    {
+      "id": "sinkevicius",
+      "file": "original_videos/Sinkevičius apie nukritusį droną Pasvalio rajone_ tikėkimės, kad tai netaps įprasta.mp4",
+      "youtube_id": "_bwhLk-Hxl0",
+      "category": "speech",
+      "notes": "Short, clean speech, drone news commentary (48.2s)"
+    },
+    {
+      "id": "stubbas",
+      "file": "original_videos/stubbas_AYzmpjtX-90.mp4",
+      "youtube_id": "AYzmpjtX-90",
+      "category": "speech",
+      "notes": "Alexander Stubb news short (11.3s)"
+    },
+    {
+      "id": "jav_kariai",
+      "file": "original_videos/jav_kariai_EhGdOHHJHPw.mp4",
+      "youtube_id": "EhGdOHHJHPw",
+      "category": "speech",
+      "notes": "JAV kariu rotacija Lietuvoje news short"
+    },
+    {
+      "id": "paramedikas",
+      "file": "original_videos/paramedikas_CPISslmJLBo.mp4",
+      "youtube_id": "CPISslmJLBo",
+      "category": "speech",
+      "notes": "Paramediko nuzudymo byla news short"
+    },
+    {
+      "id": "sinica",
+      "file": "original_videos/sinica_KPClYRxYBdc.mp4",
+      "youtube_id": "KPClYRxYBdc",
+      "category": "speech",
+      "notes": "Sinica apie ivykius prie Kauno mecetes news short"
+    },
+    {
+      "id": "gecas",
+      "file": "original_videos/Gečas： ūkiškam Sinkevičiui reikėtų daugiau kalbėti apie tikslus ir ateitį_DfsE7_GNqrc.mp4",
+      "youtube_id": "DfsE7_GNqrc",
+      "category": "speech",
+      "notes": "Mindaugas Gecas apie Sinkeviciu news short (39.1s, 76 words)"
+    },
+    {
+      "id": "tubelis_taiklumas",
+      "file": "original_videos/PRITRŪKO TAIKLUMO🤣 #lturepublic #tubelis #zalgiris #gta5 #gtav_4NaxoovQnVM.mp4",
+      "youtube_id": "4NaxoovQnVM",
+      "category": "speech",
+      "notes": "Tubelis GTA5 / gaming short (19.4s)"
+    },
+    {
+      "id": "tubelis_komentaras",
+      "file": "original_videos/KOMENTARĄ PRAŠYČIAU😤#lturepublic #cs2 #lietuva #lietuviskai #tubelis_0MrfLsnNqR8.mp4",
+      "youtube_id": "0MrfLsnNqR8",
+      "category": "speech",
+      "notes": "Tubelis CS2 / gaming short (21.2s)"
+    },
+    {
+      "id": "kaimo_reikalai",
+      "file": "original_videos/＂Ten parašytos kvailystės＂ - Kaimo komiteto pozicija apie vyriausybės programą... 🤣_bo4S9ehYTtM.mp4",
+      "youtube_id": "bo4S9ehYTtM",
+      "category": "speech",
+      "notes": "Kaimo komiteto pozicija news short (21.8s)"
+    },
+    {
+      "id": "karalius_short_01",
+      "file": "original_videos/karalius_short_01_110s_141s.mp4",
+      "youtube_id": "dSObkwfw2MA",
+      "category": "reaction",
+      "notes": "Karalius Reaguoja reaction short, heavy slang/profanities (31.7s, 79 words)"
+    },
+    {
+      "id": "karalius_short_04",
+      "file": "original_videos/karalius_short_04_1722s_1743s.mp4",
+      "youtube_id": "dSObkwfw2MA",
+      "category": "reaction",
+      "notes": "Karalius Reaguoja reaction short (20.4s, 50 words)"
+    },
+    {
+      "id": "karalius_10s_01",
+      "file": "original_videos/karalius_10s_01.mp4",
+      "category": "speech",
+      "notes": "Karalius fast speech, opinions on spending (9.3s)"
+    },
+    {
+      "id": "karalius_10s_02",
+      "file": "original_videos/karalius_10s_02.mp4",
+      "category": "speech",
+      "notes": "Karalius commentary on Tapinas influence (10.3s)"
+    },
+    {
+      "id": "karalius_10s_03",
+      "file": "original_videos/karalius_10s_03.mp4",
+      "category": "speech",
+      "notes": "Karalius US politics commentary (10.2s)"
+    },
+    {
+      "id": "karalius_10s_04",
+      "file": "original_videos/karalius_10s_04.mp4",
+      "category": "speech",
+      "notes": "Karalius sparse deliberate speech (9.8s)"
+    },
+    {
+      "id": "karalius_10s_05",
+      "file": "original_videos/karalius_10s_05.mp4",
+      "category": "speech",
+      "notes": "Karalius LFF and basketball clubs discussion (10.6s)"
+    },
+    {
+      "id": "karalius_prof_01",
+      "file": "original_videos/karalius_prof_01.mp4",
+      "category": "profanity",
+      "notes": "Karalius political commentary, 'laižeką pisa' (6.0s)"
+    },
+    {
+      "id": "orlauskas_prof_02",
+      "file": "original_videos/orlauskas_prof_02.mp4",
+      "youtube_id": "nGMb_oEVGJk",
+      "category": "profanity",
+      "notes": "Orlauskas commentary, 'kad pistų protą' (3.18s, clean start in pause before 'Kaip')"
+    },
+    {
+      "id": "orlauskas_prof_03",
+      "file": "original_videos/orlauskas_prof_03.mp4",
+      "youtube_id": "nGMb_oEVGJk",
+      "category": "profanity",
+      "notes": "Orlauskas commentary, 'kaip prisipist ant valstybių' (5.00s, clean start before 'į')"
+    },
+    {
+      "id": "orlauskas_prof_04",
+      "file": "original_videos/orlauskas_prof_04.mp4",
+      "youtube_id": "nGMb_oEVGJk",
+      "category": "profanity",
+      "notes": "Orlauskas commentary, 'o iš esmės kurvės visi' (3.65s, clean start in pause before 'O')"
+    },
+    {
+      "id": "orlauskas_prof_05",
+      "file": "original_videos/orlauskas_prof_05.mp4",
+      "youtube_id": "nGMb_oEVGJk",
+      "category": "profanity",
+      "notes": "Orlauskas commentary, 'ne šitas ble kažkoks' (2.92s, clean start in pause before 'Tai')"
+    }
+  ]
+}
