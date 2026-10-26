@@ -20,6 +20,7 @@ dependencies = [
 
 [project.optional-dependencies]
 bench = [
+    "datasets>=5.1.0",
     "jiwer>=3.0",
 ]
 
