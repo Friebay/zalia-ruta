@@ -233,20 +233,34 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
         systems = [system]
     elif model:
         systems = [f"{model}_acoustic", f"{model}_refined"]
-    elif all_systems:
-        systems = ["paprika_acoustic", "paprika_refined", "whisper_small_lt_acoustic", "whisper_small_lt_refined", "paprika_raw", "youtube_auto"]
     else:
-        # Default active production and acoustic refinement systems
-        systems = ["paprika_acoustic"]
-        if (runner.hyp_dir / "azuolas_acoustic").exists():
-            systems.append("azuolas_acoustic")
-        if (runner.hyp_dir / "whisper_small_lt_acoustic").exists():
-            systems.append("whisper_small_lt_acoustic")
-        systems.append("paprika_refined")
-        if (runner.hyp_dir / "azuolas_refined").exists():
-            systems.append("azuolas_refined")
-        if (runner.hyp_dir / "whisper_small_lt_refined").exists():
-            systems.append("whisper_small_lt_refined")
+        # Discover available models from KNOWN_MODELS and runner.hyp_dir
+        model_keys = list(KNOWN_MODELS.keys())
+        if runner.hyp_dir.exists():
+            for d in sorted(runner.hyp_dir.iterdir()):
+                if d.is_dir():
+                    for suffix in ("_acoustic", "_refined", "_raw"):
+                        if d.name.endswith(suffix):
+                            pfx = d.name[:-len(suffix)]
+                            if pfx not in model_keys and pfx != "youtube":
+                                model_keys.append(pfx)
+
+        acoustic_systems = [f"{m}_acoustic" for m in model_keys if (runner.hyp_dir / f"{m}_acoustic").exists()]
+        refined_systems = [f"{m}_refined" for m in model_keys if (runner.hyp_dir / f"{m}_refined").exists()]
+
+        if all_systems:
+            raw_systems = [f"{m}_raw" for m in model_keys if (runner.hyp_dir / f"{m}_raw").exists()]
+            other_systems = []
+            if (runner.hyp_dir / "youtube_auto").exists():
+                other_systems.append("youtube_auto")
+            known_set = set(acoustic_systems + refined_systems + raw_systems + other_systems)
+            if runner.hyp_dir.exists():
+                for d in sorted(runner.hyp_dir.iterdir()):
+                    if d.is_dir() and d.name not in known_set:
+                        other_systems.append(d.name)
+            systems = acoustic_systems + refined_systems + raw_systems + other_systems
+        else:
+            systems = acoustic_systems + refined_systems
     results = []
 
     for c in manifest.get("clips", []):

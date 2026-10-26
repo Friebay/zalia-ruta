@@ -1,0 +1,110 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 6.8 
+tiers? <exists> 
+size = 3 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "Acoustic_Refined" 
+        xmin = 0 
+        xmax = 6.8 
+        intervals: size = 7 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.3026457426272551 
+            text = "" 
+        intervals [2]:
+            xmin = 0.3026457426272551 
+            xmax = 0.9229530408877208 
+            text = "terminas" 
+        intervals [3]:
+            xmin = 0.9229530408877208 
+            xmax = 0.926127252405271 
+            text = "" 
+        intervals [4]:
+            xmin = 0.926127252405271 
+            xmax = 1.1978397583075684 
+            text = "yra" 
+        intervals [5]:
+            xmin = 1.1978397583075684 
+            xmax = 5.421205790455773 
+            text = "" 
+        intervals [6]:
+            xmin = 5.421205790455773 
+            xmax = 5.795762749526699 
+            text = "okei" 
+        intervals [7]:
+            xmin = 5.795762749526699 
+            xmax = 6.8 
+            text = "" 
+    item [2]:
+        class = "IntervalTier" 
+        name = "Etalonas" 
+        xmin = 0 
+        xmax = 6.8 
+        intervals: size = 7 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.28 
+            text = "" 
+        intervals [2]:
+            xmin = 0.28 
+            xmax = 0.885 
+            text = "terminas" 
+        intervals [3]:
+            xmin = 0.885 
+            xmax = 0.94 
+            text = "" 
+        intervals [4]:
+            xmin = 0.94 
+            xmax = 1.15 
+            text = "yra" 
+        intervals [5]:
+            xmin = 1.15 
+            xmax = 5.43 
+            text = "" 
+        intervals [6]:
+            xmin = 5.43 
+            xmax = 5.76 
+            text = "okei" 
+        intervals [7]:
+            xmin = 5.76 
+            xmax = 6.8 
+            text = "" 
+    item [3]:
+        class = "IntervalTier" 
+        name = "MMS_Refined" 
+        xmin = 0 
+        xmax = 6.8 
+        intervals: size = 7 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.281 
+            text = "" 
+        intervals [2]:
+            xmin = 0.281 
+            xmax = 0.883 
+            text = "terminas" 
+        intervals [3]:
+            xmin = 0.883 
+            xmax = 0.963 
+            text = "" 
+        intervals [4]:
+            xmin = 0.963 
+            xmax = 1.123 
+            text = "yra" 
+        intervals [5]:
+            xmin = 1.123 
+            xmax = 5.456 
+            text = "" 
+        intervals [6]:
+            xmin = 5.456 
+            xmax = 5.757 
+            text = "okei" 
+        intervals [7]:
+            xmin = 5.757 
+            xmax = 6.8 
+            text = "" 

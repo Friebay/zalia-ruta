@@ -186,8 +186,12 @@ output/
 output_test/
 
 # Benchmark working data
-# benchmark/audio/ is tracked so the benchmark dataset is self-contained (~10MB)
+# benchmark/audio/ tracks only the trimmed 47 benchmark clips (~16MB total)
 benchmark/drafts/
 benchmark/hyp/
 benchmark/youtube/
+benchmark/audio/*.webm
+benchmark/audio/B7Mygu8uiYM.*
+benchmark/audio/UBisblxMd5w.*
+benchmark/audio/CT0GB0vd1RI.*
 

@@ -1,0 +1,158 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 5.503125 
+tiers? <exists> 
+size = 3 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "Acoustic_Refined" 
+        xmin = 0 
+        xmax = 5.503125 
+        intervals: size = 11 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.9899710680401422 
+            text = "" 
+        intervals [2]:
+            xmin = 0.9899710680401422 
+            xmax = 1.1395271306086343 
+            text = "pala" 
+        intervals [3]:
+            xmin = 1.1395271306086343 
+            xmax = 1.1761772328981461 
+            text = "" 
+        intervals [4]:
+            xmin = 1.1761772328981461 
+            xmax = 1.3039904524182833 
+            text = "kur" 
+        intervals [5]:
+            xmin = 1.3039904524182833 
+            xmax = 1.3187687194705058 
+            text = "" 
+        intervals [6]:
+            xmin = 1.3187687194705058 
+            xmax = 1.4399505092987306 
+            text = "mes" 
+        intervals [7]:
+            xmin = 1.4399505092987306 
+            xmax = 1.4712804354494422 
+            text = "" 
+        intervals [8]:
+            xmin = 1.4712804354494422 
+            xmax = 1.577 
+            text = "tą" 
+        intervals [9]:
+            xmin = 1.577 
+            xmax = 1.5936400446498329 
+            text = "" 
+        intervals [10]:
+            xmin = 1.5936400446498329 
+            xmax = 2.007677848254714 
+            text = "žiūrėjom" 
+        intervals [11]:
+            xmin = 2.007677848254714 
+            xmax = 5.503125 
+            text = "" 
+    item [2]:
+        class = "IntervalTier" 
+        name = "Etalonas" 
+        xmin = 0 
+        xmax = 5.503125 
+        intervals: size = 11 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.984 
+            text = "" 
+        intervals [2]:
+            xmin = 0.984 
+            xmax = 1.09 
+            text = "va" 
+        intervals [3]:
+            xmin = 1.09 
+            xmax = 1.165 
+            text = "" 
+        intervals [4]:
+            xmin = 1.165 
+            xmax = 1.295 
+            text = "kur" 
+        intervals [5]:
+            xmin = 1.295 
+            xmax = 1.325 
+            text = "" 
+        intervals [6]:
+            xmin = 1.325 
+            xmax = 1.436 
+            text = "mes" 
+        intervals [7]:
+            xmin = 1.436 
+            xmax = 1.466 
+            text = "" 
+        intervals [8]:
+            xmin = 1.466 
+            xmax = 1.577 
+            text = "ten" 
+        intervals [9]:
+            xmin = 1.577 
+            xmax = 1.607 
+            text = "" 
+        intervals [10]:
+            xmin = 1.607 
+            xmax = 1.975 
+            text = "žiūrėjom" 
+        intervals [11]:
+            xmin = 1.975 
+            xmax = 5.503125 
+            text = "" 
+    item [3]:
+        class = "IntervalTier" 
+        name = "MMS_Refined" 
+        xmin = 0 
+        xmax = 5.503125 
+        intervals: size = 11 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.984 
+            text = "" 
+        intervals [2]:
+            xmin = 0.984 
+            xmax = 1.044 
+            text = "va" 
+        intervals [3]:
+            xmin = 1.044 
+            xmax = 1.165 
+            text = "" 
+        intervals [4]:
+            xmin = 1.165 
+            xmax = 1.285 
+            text = "kur" 
+        intervals [5]:
+            xmin = 1.285 
+            xmax = 1.326 
+            text = "" 
+        intervals [6]:
+            xmin = 1.326 
+            xmax = 1.446 
+            text = "mes" 
+        intervals [7]:
+            xmin = 1.446 
+            xmax = 1.466 
+            text = "" 
+        intervals [8]:
+            xmin = 1.466 
+            xmax = 1.587 
+            text = "ten" 
+        intervals [9]:
+            xmin = 1.587 
+            xmax = 1.607 
+            text = "" 
+        intervals [10]:
+            xmin = 1.607 
+            xmax = 1.928 
+            text = "žiūrėjom" 
+        intervals [11]:
+            xmin = 1.928 
+            xmax = 5.503125 
+            text = "" 

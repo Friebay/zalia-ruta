@@ -1,0 +1,126 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 6.9 
+tiers? <exists> 
+size = 3 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "Acoustic_Refined" 
+        xmin = 0 
+        xmax = 6.9 
+        intervals: size = 9 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.5017066848016334 
+            text = "" 
+        intervals [2]:
+            xmin = 0.5017066848016334 
+            xmax = 0.888425293287629 
+            text = "labas" 
+        intervals [3]:
+            xmin = 0.888425293287629 
+            xmax = 0.8925206492020041 
+            text = "" 
+        intervals [4]:
+            xmin = 0.8925206492020041 
+            xmax = 1.506870729887455 
+            text = "emi" 
+        intervals [5]:
+            xmin = 1.506870729887455 
+            xmax = 5.9265779200902 
+            text = "" 
+        intervals [6]:
+            xmin = 5.9265779200902 
+            xmax = 6.4184151247872965 
+            text = "labas" 
+        intervals [7]:
+            xmin = 6.4184151247872965 
+            xmax = 6.478676181847187 
+            text = "" 
+        intervals [8]:
+            xmin = 6.478676181847187 
+            xmax = 6.883818519634107 
+            text = "labas" 
+        intervals [9]:
+            xmin = 6.883818519634107 
+            xmax = 6.9 
+            text = "" 
+    item [2]:
+        class = "IntervalTier" 
+        name = "Etalonas" 
+        xmin = 0 
+        xmax = 6.9 
+        intervals: size = 9 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.495 
+            text = "" 
+        intervals [2]:
+            xmin = 0.495 
+            xmax = 0.893 
+            text = "labas" 
+        intervals [3]:
+            xmin = 0.893 
+            xmax = 0.923 
+            text = "" 
+        intervals [4]:
+            xmin = 0.923 
+            xmax = 1.133 
+            text = "emi" 
+        intervals [5]:
+            xmin = 1.133 
+            xmax = 1.163 
+            text = "" 
+        intervals [6]:
+            xmin = 1.163 
+            xmax = 1.354 
+            text = "labas" 
+        intervals [7]:
+            xmin = 1.354 
+            xmax = 1.384 
+            text = "" 
+        intervals [8]:
+            xmin = 1.384 
+            xmax = 6.82 
+            text = "labas" 
+        intervals [9]:
+            xmin = 6.82 
+            xmax = 6.9 
+            text = "" 
+    item [3]:
+        class = "IntervalTier" 
+        name = "MMS_Refined" 
+        xmin = 0 
+        xmax = 6.9 
+        intervals: size = 7 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.522 
+            text = "" 
+        intervals [2]:
+            xmin = 0.522 
+            xmax = 0.863 
+            text = "labas" 
+        intervals [3]:
+            xmin = 0.863 
+            xmax = 0.923 
+            text = "" 
+        intervals [4]:
+            xmin = 0.923 
+            xmax = 1.163 
+            text = "emi" 
+        intervals [5]:
+            xmin = 1.163 
+            xmax = 1.384 
+            text = "labas" 
+        intervals [6]:
+            xmin = 1.384 
+            xmax = 6.82 
+            text = "labas" 
+        intervals [7]:
+            xmin = 6.82 
+            xmax = 6.9 
+            text = "" 

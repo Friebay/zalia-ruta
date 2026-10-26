@@ -1,0 +1,278 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 5.363812 
+tiers? <exists> 
+size = 3 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "Acoustic_Refined" 
+        xmin = 0 
+        xmax = 5.363812 
+        intervals: size = 21 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.495 
+            text = "" 
+        intervals [2]:
+            xmin = 0.495 
+            xmax = 0.653 
+            text = "nes" 
+        intervals [3]:
+            xmin = 0.653 
+            xmax = 0.683 
+            text = "" 
+        intervals [4]:
+            xmin = 0.683 
+            xmax = 0.765 
+            text = "čia" 
+        intervals [5]:
+            xmin = 0.765 
+            xmax = 0.84 
+            text = "" 
+        intervals [6]:
+            xmin = 0.84 
+            xmax = 0.99 
+            text = "nu" 
+        intervals [7]:
+            xmin = 0.99 
+            xmax = 1.419895867755284 
+            text = "" 
+        intervals [8]:
+            xmin = 1.419895867755284 
+            xmax = 1.919 
+            text = "actually" 
+        intervals [9]:
+            xmin = 1.919 
+            xmax = 1.9236384669955597 
+            text = "" 
+        intervals [10]:
+            xmin = 1.9236384669955597 
+            xmax = 2.2474516330091707 
+            text = "ragai" 
+        intervals [11]:
+            xmin = 2.2474516330091707 
+            xmax = 2.315165437665519 
+            text = "" 
+        intervals [12]:
+            xmin = 2.315165437665519 
+            xmax = 2.615 
+            text = "būtų" 
+        intervals [13]:
+            xmin = 2.615 
+            xmax = 2.800321665594998 
+            text = "" 
+        intervals [14]:
+            xmin = 2.800321665594998 
+            xmax = 3.0248463862976256 
+            text = "bet" 
+        intervals [15]:
+            xmin = 3.0248463862976256 
+            xmax = 3.8303127246857858 
+            text = "" 
+        intervals [16]:
+            xmin = 3.8303127246857858 
+            xmax = 4.202579731241925 
+            text = "socdemam" 
+        intervals [17]:
+            xmin = 4.202579731241925 
+            xmax = 4.245346344709093 
+            text = "" 
+        intervals [18]:
+            xmin = 4.245346344709093 
+            xmax = 4.611243411126696 
+            text = "pochui" 
+        intervals [19]:
+            xmin = 4.611243411126696 
+            xmax = 4.88106849184415 
+            text = "" 
+        intervals [20]:
+            xmin = 4.88106849184415 
+            xmax = 5.104999231224518 
+            text = "ir" 
+        intervals [21]:
+            xmin = 5.104999231224518 
+            xmax = 5.363812 
+            text = "" 
+    item [2]:
+        class = "IntervalTier" 
+        name = "Etalonas" 
+        xmin = 0 
+        xmax = 5.363812 
+        intervals: size = 21 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.495 
+            text = "" 
+        intervals [2]:
+            xmin = 0.495 
+            xmax = 0.653 
+            text = "nes" 
+        intervals [3]:
+            xmin = 0.653 
+            xmax = 0.683 
+            text = "" 
+        intervals [4]:
+            xmin = 0.683 
+            xmax = 0.765 
+            text = "čia" 
+        intervals [5]:
+            xmin = 0.765 
+            xmax = 0.84 
+            text = "" 
+        intervals [6]:
+            xmin = 0.84 
+            xmax = 0.99 
+            text = "nu" 
+        intervals [7]:
+            xmin = 0.99 
+            xmax = 1.46 
+            text = "" 
+        intervals [8]:
+            xmin = 1.46 
+            xmax = 1.919 
+            text = "ekšli" 
+        intervals [9]:
+            xmin = 1.919 
+            xmax = 1.949 
+            text = "" 
+        intervals [10]:
+            xmin = 1.949 
+            xmax = 2.28 
+            text = "ragai" 
+        intervals [11]:
+            xmin = 2.28 
+            xmax = 2.31 
+            text = "" 
+        intervals [12]:
+            xmin = 2.31 
+            xmax = 2.615 
+            text = "būtų" 
+        intervals [13]:
+            xmin = 2.615 
+            xmax = 2.83 
+            text = "" 
+        intervals [14]:
+            xmin = 2.83 
+            xmax = 3.035 
+            text = "bet" 
+        intervals [15]:
+            xmin = 3.035 
+            xmax = 3.775 
+            text = "" 
+        intervals [16]:
+            xmin = 3.775 
+            xmax = 4.195 
+            text = "susidavom" 
+        intervals [17]:
+            xmin = 4.195 
+            xmax = 4.239 
+            text = "" 
+        intervals [18]:
+            xmin = 4.239 
+            xmax = 4.38 
+            text = "po" 
+        intervals [19]:
+            xmin = 4.38 
+            xmax = 4.915 
+            text = "" 
+        intervals [20]:
+            xmin = 4.915 
+            xmax = 5.095 
+            text = "ir" 
+        intervals [21]:
+            xmin = 5.095 
+            xmax = 5.363812 
+            text = "" 
+    item [3]:
+        class = "IntervalTier" 
+        name = "MMS_Refined" 
+        xmin = 0 
+        xmax = 5.363812 
+        intervals: size = 21 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.522 
+            text = "" 
+        intervals [2]:
+            xmin = 0.522 
+            xmax = 0.643 
+            text = "nes" 
+        intervals [3]:
+            xmin = 0.643 
+            xmax = 0.683 
+            text = "" 
+        intervals [4]:
+            xmin = 0.683 
+            xmax = 0.743 
+            text = "čia" 
+        intervals [5]:
+            xmin = 0.743 
+            xmax = 0.864 
+            text = "" 
+        intervals [6]:
+            xmin = 0.864 
+            xmax = 0.944 
+            text = "nu" 
+        intervals [7]:
+            xmin = 0.944 
+            xmax = 1.487 
+            text = "" 
+        intervals [8]:
+            xmin = 1.487 
+            xmax = 1.888 
+            text = "ekšli" 
+        intervals [9]:
+            xmin = 1.888 
+            xmax = 1.949 
+            text = "" 
+        intervals [10]:
+            xmin = 1.949 
+            xmax = 2.25 
+            text = "ragai" 
+        intervals [11]:
+            xmin = 2.25 
+            xmax = 2.31 
+            text = "" 
+        intervals [12]:
+            xmin = 2.31 
+            xmax = 2.571 
+            text = "būtų" 
+        intervals [13]:
+            xmin = 2.571 
+            xmax = 2.853 
+            text = "" 
+        intervals [14]:
+            xmin = 2.853 
+            xmax = 3.033 
+            text = "bet" 
+        intervals [15]:
+            xmin = 3.033 
+            xmax = 3.777 
+            text = "" 
+        intervals [16]:
+            xmin = 3.777 
+            xmax = 4.179 
+            text = "susidavom" 
+        intervals [17]:
+            xmin = 4.179 
+            xmax = 4.239 
+            text = "" 
+        intervals [18]:
+            xmin = 4.239 
+            xmax = 4.339 
+            text = "po" 
+        intervals [19]:
+            xmin = 4.339 
+            xmax = 4.942 
+            text = "" 
+        intervals [20]:
+            xmin = 4.942 
+            xmax = 5.083 
+            text = "ir" 
+        intervals [21]:
+            xmin = 5.083 
+            xmax = 5.363812 
+            text = "" 

@@ -1,0 +1,418 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 5.65 
+tiers? <exists> 
+size = 3 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "Acoustic_Refined" 
+        xmin = 0 
+        xmax = 5.65 
+        intervals: size = 33 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.075 
+            text = "" 
+        intervals [2]:
+            xmin = 0.075 
+            xmax = 0.2766861613108604 
+            text = "šiek" 
+        intervals [3]:
+            xmin = 0.2766861613108604 
+            xmax = 0.29031218143670995 
+            text = "" 
+        intervals [4]:
+            xmin = 0.29031218143670995 
+            xmax = 0.501 
+            text = "tiek" 
+        intervals [5]:
+            xmin = 0.501 
+            xmax = 0.9099644131047324 
+            text = "" 
+        intervals [6]:
+            xmin = 0.9099644131047324 
+            xmax = 1.0505601662214532 
+            text = "nes" 
+        intervals [7]:
+            xmin = 1.0505601662214532 
+            xmax = 1.0542763535285031 
+            text = "" 
+        intervals [8]:
+            xmin = 1.0542763535285031 
+            xmax = 1.1700975245982248 
+            text = "jis" 
+        intervals [9]:
+            xmin = 1.1700975245982248 
+            xmax = 1.3199837459825703 
+            text = "" 
+        intervals [10]:
+            xmin = 1.3199837459825703 
+            xmax = 1.545 
+            text = "piso" 
+        intervals [11]:
+            xmin = 1.545 
+            xmax = 1.6346604952652541 
+            text = "" 
+        intervals [12]:
+            xmin = 1.6346604952652541 
+            xmax = 1.893 
+            text = "protą" 
+        intervals [13]:
+            xmin = 1.893 
+            xmax = 1.9325748443804212 
+            text = "" 
+        intervals [14]:
+            xmin = 1.9325748443804212 
+            xmax = 2.074 
+            text = "dėl" 
+        intervals [15]:
+            xmin = 2.074 
+            xmax = 2.104 
+            text = "" 
+        intervals [16]:
+            xmin = 2.104 
+            xmax = 2.389669322752023 
+            text = "visko" 
+        intervals [17]:
+            xmin = 2.389669322752023 
+            xmax = 2.846969211208549 
+            text = "" 
+        intervals [18]:
+            xmin = 2.846969211208549 
+            xmax = 3.005 
+            text = "bet" 
+        intervals [19]:
+            xmin = 3.005 
+            xmax = 3.12 
+            text = "" 
+        intervals [20]:
+            xmin = 3.12 
+            xmax = 3.156 
+            text = "o" 
+        intervals [21]:
+            xmin = 3.156 
+            xmax = 3.186 
+            text = "" 
+        intervals [22]:
+            xmin = 3.186 
+            xmax = 3.384878507883404 
+            text = "koks" 
+        intervals [23]:
+            xmin = 3.384878507883404 
+            xmax = 3.3885946951904535 
+            text = "" 
+        intervals [24]:
+            xmin = 3.3885946951904535 
+            xmax = 3.8316559491155826 
+            text = "skirtumas" 
+        intervals [25]:
+            xmin = 3.8316559491155826 
+            xmax = 3.847 
+            text = "" 
+        intervals [26]:
+            xmin = 3.847 
+            xmax = 4.074783913800158 
+            text = "dabar" 
+        intervals [27]:
+            xmin = 4.074783913800158 
+            xmax = 4.7746821999232445 
+            text = "" 
+        intervals [28]:
+            xmin = 4.7746821999232445 
+            xmax = 4.9127835259254615 
+            text = "tas" 
+        intervals [29]:
+            xmin = 4.9127835259254615 
+            xmax = 4.978352642892901 
+            text = "" 
+        intervals [30]:
+            xmin = 4.978352642892901 
+            xmax = 5.23 
+            text = "proto" 
+        intervals [31]:
+            xmin = 5.23 
+            xmax = 5.322353066783943 
+            text = "" 
+        intervals [32]:
+            xmin = 5.322353066783943 
+            xmax = 5.64729736245582 
+            text = "pisimas" 
+        intervals [33]:
+            xmin = 5.64729736245582 
+            xmax = 5.65 
+            text = "" 
+    item [2]:
+        class = "IntervalTier" 
+        name = "Etalonas" 
+        xmin = 0 
+        xmax = 5.65 
+        intervals: size = 33 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.075 
+            text = "" 
+        intervals [2]:
+            xmin = 0.075 
+            xmax = 0.24 
+            text = "šiek" 
+        intervals [3]:
+            xmin = 0.24 
+            xmax = 0.28 
+            text = "" 
+        intervals [4]:
+            xmin = 0.28 
+            xmax = 0.501 
+            text = "tiek" 
+        intervals [5]:
+            xmin = 0.501 
+            xmax = 0.89 
+            text = "" 
+        intervals [6]:
+            xmin = 0.89 
+            xmax = 1.012 
+            text = "nes" 
+        intervals [7]:
+            xmin = 1.012 
+            xmax = 1.042 
+            text = "" 
+        intervals [8]:
+            xmin = 1.042 
+            xmax = 1.165 
+            text = "jis" 
+        intervals [9]:
+            xmin = 1.165 
+            xmax = 1.3 
+            text = "" 
+        intervals [10]:
+            xmin = 1.3 
+            xmax = 1.545 
+            text = "piso" 
+        intervals [11]:
+            xmin = 1.545 
+            xmax = 1.603 
+            text = "" 
+        intervals [12]:
+            xmin = 1.603 
+            xmax = 1.893 
+            text = "protą" 
+        intervals [13]:
+            xmin = 1.893 
+            xmax = 1.923 
+            text = "" 
+        intervals [14]:
+            xmin = 1.923 
+            xmax = 2.074 
+            text = "dėl" 
+        intervals [15]:
+            xmin = 2.074 
+            xmax = 2.104 
+            text = "" 
+        intervals [16]:
+            xmin = 2.104 
+            xmax = 2.355 
+            text = "visko" 
+        intervals [17]:
+            xmin = 2.355 
+            xmax = 2.84 
+            text = "" 
+        intervals [18]:
+            xmin = 2.84 
+            xmax = 3.005 
+            text = "bet" 
+        intervals [19]:
+            xmin = 3.005 
+            xmax = 3.12 
+            text = "" 
+        intervals [20]:
+            xmin = 3.12 
+            xmax = 3.156 
+            text = "o" 
+        intervals [21]:
+            xmin = 3.156 
+            xmax = 3.186 
+            text = "" 
+        intervals [22]:
+            xmin = 3.186 
+            xmax = 3.356 
+            text = "koks" 
+        intervals [23]:
+            xmin = 3.356 
+            xmax = 3.386 
+            text = "" 
+        intervals [24]:
+            xmin = 3.386 
+            xmax = 3.817 
+            text = "skirtumas" 
+        intervals [25]:
+            xmin = 3.817 
+            xmax = 3.847 
+            text = "" 
+        intervals [26]:
+            xmin = 3.847 
+            xmax = 4.07 
+            text = "dabar" 
+        intervals [27]:
+            xmin = 4.07 
+            xmax = 4.768 
+            text = "" 
+        intervals [28]:
+            xmin = 4.768 
+            xmax = 4.91 
+            text = "tas" 
+        intervals [29]:
+            xmin = 4.91 
+            xmax = 4.949 
+            text = "" 
+        intervals [30]:
+            xmin = 4.949 
+            xmax = 5.23 
+            text = "proto" 
+        intervals [31]:
+            xmin = 5.23 
+            xmax = 5.309 
+            text = "" 
+        intervals [32]:
+            xmin = 5.309 
+            xmax = 5.63 
+            text = "pėsimas" 
+        intervals [33]:
+            xmin = 5.63 
+            xmax = 5.65 
+            text = "" 
+    item [3]:
+        class = "IntervalTier" 
+        name = "MMS_Refined" 
+        xmin = 0 
+        xmax = 5.65 
+        intervals: size = 32 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.1 
+            text = "" 
+        intervals [2]:
+            xmin = 0.1 
+            xmax = 0.24 
+            text = "šiek" 
+        intervals [3]:
+            xmin = 0.24 
+            xmax = 0.28 
+            text = "" 
+        intervals [4]:
+            xmin = 0.28 
+            xmax = 0.501 
+            text = "tiek" 
+        intervals [5]:
+            xmin = 0.501 
+            xmax = 0.902 
+            text = "" 
+        intervals [6]:
+            xmin = 0.902 
+            xmax = 1.042 
+            text = "nes" 
+        intervals [7]:
+            xmin = 1.042 
+            xmax = 1.162 
+            text = "jis" 
+        intervals [8]:
+            xmin = 1.162 
+            xmax = 1.302 
+            text = "" 
+        intervals [9]:
+            xmin = 1.302 
+            xmax = 1.543 
+            text = "piso" 
+        intervals [10]:
+            xmin = 1.543 
+            xmax = 1.603 
+            text = "" 
+        intervals [11]:
+            xmin = 1.603 
+            xmax = 1.863 
+            text = "protą" 
+        intervals [12]:
+            xmin = 1.863 
+            xmax = 1.923 
+            text = "" 
+        intervals [13]:
+            xmin = 1.923 
+            xmax = 2.044 
+            text = "dėl" 
+        intervals [14]:
+            xmin = 2.044 
+            xmax = 2.104 
+            text = "" 
+        intervals [15]:
+            xmin = 2.104 
+            xmax = 2.344 
+            text = "visko" 
+        intervals [16]:
+            xmin = 2.344 
+            xmax = 2.865 
+            text = "" 
+        intervals [17]:
+            xmin = 2.865 
+            xmax = 3.005 
+            text = "bet" 
+        intervals [18]:
+            xmin = 3.005 
+            xmax = 3.146 
+            text = "" 
+        intervals [19]:
+            xmin = 3.146 
+            xmax = 3.166 
+            text = "o" 
+        intervals [20]:
+            xmin = 3.166 
+            xmax = 3.186 
+            text = "" 
+        intervals [21]:
+            xmin = 3.186 
+            xmax = 3.366 
+            text = "koks" 
+        intervals [22]:
+            xmin = 3.366 
+            xmax = 3.386 
+            text = "" 
+        intervals [23]:
+            xmin = 3.386 
+            xmax = 3.827 
+            text = "skirtumas" 
+        intervals [24]:
+            xmin = 3.827 
+            xmax = 3.847 
+            text = "" 
+        intervals [25]:
+            xmin = 3.847 
+            xmax = 4.067 
+            text = "dabar" 
+        intervals [26]:
+            xmin = 4.067 
+            xmax = 4.768 
+            text = "" 
+        intervals [27]:
+            xmin = 4.768 
+            xmax = 4.909 
+            text = "tas" 
+        intervals [28]:
+            xmin = 4.909 
+            xmax = 4.949 
+            text = "" 
+        intervals [29]:
+            xmin = 4.949 
+            xmax = 5.229 
+            text = "proto" 
+        intervals [30]:
+            xmin = 5.229 
+            xmax = 5.309 
+            text = "" 
+        intervals [31]:
+            xmin = 5.309 
+            xmax = 5.63 
+            text = "pėsimas" 
+        intervals [32]:
+            xmin = 5.63 
+            xmax = 5.65 
+            text = "" 

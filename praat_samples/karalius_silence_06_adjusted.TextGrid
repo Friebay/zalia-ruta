@@ -1,0 +1,62 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 7.500063 
+tiers? <exists> 
+size = 3 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "Acoustic_Refined" 
+        xmin = 0 
+        xmax = 7.500063 
+        intervals: size = 3 
+        intervals [1]:
+            xmin = 0 
+            xmax = 2.848 
+            text = "" 
+        intervals [2]:
+            xmin = 2.848 
+            xmax = 3.8888568992895305 
+            text = "galbūt" 
+        intervals [3]:
+            xmin = 3.8888568992895305 
+            xmax = 7.500063 
+            text = "" 
+    item [2]:
+        class = "IntervalTier" 
+        name = "Etalonas" 
+        xmin = 0 
+        xmax = 7.500063 
+        intervals: size = 3 
+        intervals [1]:
+            xmin = 0 
+            xmax = 2.848 
+            text = "" 
+        intervals [2]:
+            xmin = 2.848 
+            xmax = 3.991 
+            text = "galbūt" 
+        intervals [3]:
+            xmin = 3.991 
+            xmax = 7.500063 
+            text = "" 
+    item [3]:
+        class = "IntervalTier" 
+        name = "MMS_Refined" 
+        xmin = 0 
+        xmax = 7.500063 
+        intervals: size = 3 
+        intervals [1]:
+            xmin = 0 
+            xmax = 2.848 
+            text = "" 
+        intervals [2]:
+            xmin = 2.848 
+            xmax = 3.991 
+            text = "galbūt" 
+        intervals [3]:
+            xmin = 3.991 
+            xmax = 7.500063 
+            text = "" 

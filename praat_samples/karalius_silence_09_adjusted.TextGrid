@@ -1,0 +1,206 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 5.503125 
+tiers? <exists> 
+size = 3 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "Acoustic_Refined" 
+        xmin = 0 
+        xmax = 5.503125 
+        intervals: size = 15 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.5375938987778862 
+            text = "" 
+        intervals [2]:
+            xmin = 0.5375938987778862 
+            xmax = 1.1371950325884879 
+            text = "ble" 
+        intervals [3]:
+            xmin = 1.1371950325884879 
+            xmax = 1.300257318514842 
+            text = "" 
+        intervals [4]:
+            xmin = 1.300257318514842 
+            xmax = 1.67 
+            text = "šitie" 
+        intervals [5]:
+            xmin = 1.67 
+            xmax = 1.6760473867354508 
+            text = "" 
+        intervals [6]:
+            xmin = 1.6760473867354508 
+            xmax = 1.9565227183179845 
+            text = "jauni" 
+        intervals [7]:
+            xmin = 1.9565227183179845 
+            xmax = 1.9627728649827763 
+            text = "" 
+        intervals [8]:
+            xmin = 1.9627728649827763 
+            xmax = 2.514125770371498 
+            text = "žmonės" 
+        intervals [9]:
+            xmin = 2.514125770371498 
+            xmax = 2.9066457279906994 
+            text = "" 
+        intervals [10]:
+            xmin = 2.9066457279906994 
+            xmax = 3.588832954344416 
+            text = "čia" 
+        intervals [11]:
+            xmin = 3.588832954344416 
+            xmax = 3.764195554638318 
+            text = "" 
+        intervals [12]:
+            xmin = 3.764195554638318 
+            xmax = 4.610062214879494 
+            text = "jum" 
+        intervals [13]:
+            xmin = 4.610062214879494 
+            xmax = 4.686733922548758 
+            text = "" 
+        intervals [14]:
+            xmin = 4.686733922548758 
+            xmax = 5.264271067806856 
+            text = "pizda" 
+        intervals [15]:
+            xmin = 5.264271067806856 
+            xmax = 5.503125 
+            text = "" 
+    item [2]:
+        class = "IntervalTier" 
+        name = "Etalonas" 
+        xmin = 0 
+        xmax = 5.503125 
+        intervals: size = 15 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.52 
+            text = "" 
+        intervals [2]:
+            xmin = 0.52 
+            xmax = 0.79 
+            text = "ple" 
+        intervals [3]:
+            xmin = 0.79 
+            xmax = 1.345 
+            text = "" 
+        intervals [4]:
+            xmin = 1.345 
+            xmax = 1.67 
+            text = "šitie" 
+        intervals [5]:
+            xmin = 1.67 
+            xmax = 1.7 
+            text = "" 
+        intervals [6]:
+            xmin = 1.7 
+            xmax = 1.978 
+            text = "jauni" 
+        intervals [7]:
+            xmin = 1.978 
+            xmax = 2.008 
+            text = "" 
+        intervals [8]:
+            xmin = 2.008 
+            xmax = 2.43 
+            text = "žmonės" 
+        intervals [9]:
+            xmin = 2.43 
+            xmax = 2.945 
+            text = "" 
+        intervals [10]:
+            xmin = 2.945 
+            xmax = 3.2 
+            text = "čia" 
+        intervals [11]:
+            xmin = 3.2 
+            xmax = 3.895 
+            text = "" 
+        intervals [12]:
+            xmin = 3.895 
+            xmax = 4.525 
+            text = "jum" 
+        intervals [13]:
+            xmin = 4.525 
+            xmax = 4.675 
+            text = "" 
+        intervals [14]:
+            xmin = 4.675 
+            xmax = 5.065 
+            text = "bizda" 
+        intervals [15]:
+            xmin = 5.065 
+            xmax = 5.503125 
+            text = "" 
+    item [3]:
+        class = "IntervalTier" 
+        name = "MMS_Refined" 
+        xmin = 0 
+        xmax = 5.503125 
+        intervals: size = 15 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.522 
+            text = "" 
+        intervals [2]:
+            xmin = 0.522 
+            xmax = 0.743 
+            text = "ple" 
+        intervals [3]:
+            xmin = 0.743 
+            xmax = 1.346 
+            text = "" 
+        intervals [4]:
+            xmin = 1.346 
+            xmax = 1.627 
+            text = "šitie" 
+        intervals [5]:
+            xmin = 1.627 
+            xmax = 1.707 
+            text = "" 
+        intervals [6]:
+            xmin = 1.707 
+            xmax = 1.948 
+            text = "jauni" 
+        intervals [7]:
+            xmin = 1.948 
+            xmax = 2.008 
+            text = "" 
+        intervals [8]:
+            xmin = 2.008 
+            xmax = 2.43 
+            text = "žmonės" 
+        intervals [9]:
+            xmin = 2.43 
+            xmax = 2.972 
+            text = "" 
+        intervals [10]:
+            xmin = 2.972 
+            xmax = 3.153 
+            text = "čia" 
+        intervals [11]:
+            xmin = 3.153 
+            xmax = 3.896 
+            text = "" 
+        intervals [12]:
+            xmin = 3.896 
+            xmax = 4.479 
+            text = "jum" 
+        intervals [13]:
+            xmin = 4.479 
+            xmax = 4.68 
+            text = "" 
+        intervals [14]:
+            xmin = 4.68 
+            xmax = 5.021 
+            text = "bizda" 
+        intervals [15]:
+            xmin = 5.021 
+            xmax = 5.503125 
+            text = "" 

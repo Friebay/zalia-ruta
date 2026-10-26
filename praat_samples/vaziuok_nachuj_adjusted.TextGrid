@@ -1,0 +1,618 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 18.459875 
+tiers? <exists> 
+size = 3 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "Acoustic_Refined" 
+        xmin = 0 
+        xmax = 18.459875 
+        intervals: size = 39 
+        intervals [1]:
+            xmin = 0 
+            xmax = 2.2274692182012457 
+            text = "" 
+        intervals [2]:
+            xmin = 2.2274692182012457 
+            xmax = 2.350681437741705 
+            text = "nu" 
+        intervals [3]:
+            xmin = 2.350681437741705 
+            xmax = 2.418211211912918 
+            text = "" 
+        intervals [4]:
+            xmin = 2.418211211912918 
+            xmax = 2.759782159745799 
+            text = "kurva" 
+        intervals [5]:
+            xmin = 2.759782159745799 
+            xmax = 2.864855507747082 
+            text = "" 
+        intervals [6]:
+            xmin = 2.864855507747082 
+            xmax = 3.55563946792917 
+            text = "traukis" 
+        intervals [7]:
+            xmin = 3.55563946792917 
+            xmax = 3.5775570262128094 
+            text = "" 
+        intervals [8]:
+            xmin = 3.5775570262128094 
+            xmax = 4.055303264395307 
+            text = "pasitrauk" 
+        intervals [9]:
+            xmin = 4.055303264395307 
+            xmax = 4.128069658247184 
+            text = "" 
+        intervals [10]:
+            xmin = 4.128069658247184 
+            xmax = 4.455 
+            text = "Eimai" 
+        intervals [11]:
+            xmin = 4.455 
+            xmax = 4.485 
+            text = "" 
+        intervals [12]:
+            xmin = 4.485 
+            xmax = 4.835 
+            text = "Gytis" 
+        intervals [13]:
+            xmin = 4.835 
+            xmax = 4.865 
+            text = "" 
+        intervals [14]:
+            xmin = 4.865 
+            xmax = 5.602750611508794 
+            text = "parvaro" 
+        intervals [15]:
+            xmin = 5.602750611508794 
+            xmax = 5.9848499181441674 
+            text = "" 
+        intervals [16]:
+            xmin = 5.9848499181441674 
+            xmax = 6.291835685868313 
+            text = "pasitrauk" 
+        intervals [17]:
+            xmin = 6.291835685868313 
+            xmax = 6.299351553086187 
+            text = "" 
+        intervals [18]:
+            xmin = 6.299351553086187 
+            xmax = 6.744038368078325 
+            text = "pasitrauk" 
+        intervals [19]:
+            xmin = 6.744038368078325 
+            xmax = 7.875996789451351 
+            text = "" 
+        intervals [20]:
+            xmin = 7.875996789451351 
+            xmax = 8.239 
+            text = "važiuok" 
+        intervals [21]:
+            xmin = 8.239 
+            xmax = 8.269 
+            text = "" 
+        intervals [22]:
+            xmin = 8.269 
+            xmax = 8.643471202917429 
+            text = "nachui" 
+        intervals [23]:
+            xmin = 8.643471202917429 
+            xmax = 8.746904412279434 
+            text = "iš" 
+        intervals [24]:
+            xmin = 8.746904412279434 
+            xmax = 8.959976823565164 
+            text = "čia" 
+        intervals [25]:
+            xmin = 8.959976823565164 
+            xmax = 9.607468714171317 
+            text = "" 
+        intervals [26]:
+            xmin = 9.607468714171317 
+            xmax = 9.878463722699768 
+            text = "bybį" 
+        intervals [27]:
+            xmin = 9.878463722699768 
+            xmax = 9.983965596249014 
+            text = "" 
+        intervals [28]:
+            xmin = 9.983965596249014 
+            xmax = 10.398885686154486 
+            text = "pačiulpk" 
+        intervals [29]:
+            xmin = 10.398885686154486 
+            xmax = 10.845 
+            text = "kurva" 
+        intervals [30]:
+            xmin = 10.845 
+            xmax = 10.995 
+            text = "nu" 
+        intervals [31]:
+            xmin = 10.995 
+            xmax = 11.06292689025856 
+            text = "" 
+        intervals [32]:
+            xmin = 11.06292689025856 
+            xmax = 11.492 
+            text = "palauk" 
+        intervals [33]:
+            xmin = 11.492 
+            xmax = 11.535 
+            text = "" 
+        intervals [34]:
+            xmin = 11.535 
+            xmax = 11.775891179738984 
+            text = "kurva" 
+        intervals [35]:
+            xmin = 11.775891179738984 
+            xmax = 11.844157097917908 
+            text = "" 
+        intervals [36]:
+            xmin = 11.844157097917908 
+            xmax = 12.083 
+            text = "Gytis" 
+        intervals [37]:
+            xmin = 12.083 
+            xmax = 12.113 
+            text = "" 
+        intervals [38]:
+            xmin = 12.113 
+            xmax = 12.580601548575384 
+            text = "šoka" 
+        intervals [39]:
+            xmin = 12.580601548575384 
+            xmax = 18.459875 
+            text = "" 
+    item [2]:
+        class = "IntervalTier" 
+        name = "Etalonas" 
+        xmin = 0 
+        xmax = 18.459875 
+        intervals: size = 56 
+        intervals [1]:
+            xmin = 0 
+            xmax = 2.215 
+            text = "" 
+        intervals [2]:
+            xmin = 2.215 
+            xmax = 2.325 
+            text = "nu" 
+        intervals [3]:
+            xmin = 2.325 
+            xmax = 2.4 
+            text = "" 
+        intervals [4]:
+            xmin = 2.4 
+            xmax = 2.67 
+            text = "kur" 
+        intervals [5]:
+            xmin = 2.67 
+            xmax = 2.7 
+            text = "" 
+        intervals [6]:
+            xmin = 2.7 
+            xmax = 3.305 
+            text = "atrauk" 
+        intervals [7]:
+            xmin = 3.305 
+            xmax = 3.335 
+            text = "" 
+        intervals [8]:
+            xmin = 3.335 
+            xmax = 3.53 
+            text = "jis" 
+        intervals [9]:
+            xmin = 3.53 
+            xmax = 3.56 
+            text = "" 
+        intervals [10]:
+            xmin = 3.56 
+            xmax = 4.134 
+            text = "pasitrauk" 
+        intervals [11]:
+            xmin = 4.134 
+            xmax = 4.164 
+            text = "" 
+        intervals [12]:
+            xmin = 4.164 
+            xmax = 4.455 
+            text = "eimai" 
+        intervals [13]:
+            xmin = 4.455 
+            xmax = 4.485 
+            text = "" 
+        intervals [14]:
+            xmin = 4.485 
+            xmax = 4.835 
+            text = "hitus" 
+        intervals [15]:
+            xmin = 4.835 
+            xmax = 4.865 
+            text = "" 
+        intervals [16]:
+            xmin = 4.865 
+            xmax = 5.975 
+            text = "parvauk" 
+        intervals [17]:
+            xmin = 5.975 
+            xmax = 6.08 
+            text = "" 
+        intervals [18]:
+            xmin = 6.08 
+            xmax = 6.74 
+            text = "pasitrauk" 
+        intervals [19]:
+            xmin = 6.74 
+            xmax = 7.865 
+            text = "" 
+        intervals [20]:
+            xmin = 7.865 
+            xmax = 8.239 
+            text = "važiuok" 
+        intervals [21]:
+            xmin = 8.239 
+            xmax = 8.269 
+            text = "" 
+        intervals [22]:
+            xmin = 8.269 
+            xmax = 9.49 
+            text = "nakvaizdžiai" 
+        intervals [23]:
+            xmin = 9.49 
+            xmax = 9.57 
+            text = "" 
+        intervals [24]:
+            xmin = 9.57 
+            xmax = 9.801 
+            text = "kaip" 
+        intervals [25]:
+            xmin = 9.801 
+            xmax = 9.831 
+            text = "" 
+        intervals [26]:
+            xmin = 9.831 
+            xmax = 9.961 
+            text = "kaip" 
+        intervals [27]:
+            xmin = 9.961 
+            xmax = 9.991 
+            text = "" 
+        intervals [28]:
+            xmin = 9.991 
+            xmax = 10.231 
+            text = "pačių" 
+        intervals [29]:
+            xmin = 10.231 
+            xmax = 10.45 
+            text = "" 
+        intervals [30]:
+            xmin = 10.45 
+            xmax = 10.775 
+            text = "kur" 
+        intervals [31]:
+            xmin = 10.775 
+            xmax = 10.845 
+            text = "" 
+        intervals [32]:
+            xmin = 10.845 
+            xmax = 10.995 
+            text = "nu" 
+        intervals [33]:
+            xmin = 10.995 
+            xmax = 11.05 
+            text = "" 
+        intervals [34]:
+            xmin = 11.05 
+            xmax = 11.492 
+            text = "palauk" 
+        intervals [35]:
+            xmin = 11.492 
+            xmax = 11.535 
+            text = "" 
+        intervals [36]:
+            xmin = 11.535 
+            xmax = 11.703 
+            text = "kur" 
+        intervals [37]:
+            xmin = 11.703 
+            xmax = 11.733 
+            text = "" 
+        intervals [38]:
+            xmin = 11.733 
+            xmax = 12.083 
+            text = "akyt" 
+        intervals [39]:
+            xmin = 12.083 
+            xmax = 12.113 
+            text = "" 
+        intervals [40]:
+            xmin = 12.113 
+            xmax = 12.343 
+            text = "šuo" 
+        intervals [41]:
+            xmin = 12.343 
+            xmax = 12.373 
+            text = "" 
+        intervals [42]:
+            xmin = 12.373 
+            xmax = 12.6 
+            text = "aš" 
+        intervals [43]:
+            xmin = 12.6 
+            xmax = 16.675 
+            text = "" 
+        intervals [44]:
+            xmin = 16.675 
+            xmax = 16.805 
+            text = "nu" 
+        intervals [45]:
+            xmin = 16.805 
+            xmax = 16.895 
+            text = "" 
+        intervals [46]:
+            xmin = 16.895 
+            xmax = 17.189 
+            text = "palauk" 
+        intervals [47]:
+            xmin = 17.189 
+            xmax = 17.219 
+            text = "" 
+        intervals [48]:
+            xmin = 17.219 
+            xmax = 17.369 
+            text = "kur" 
+        intervals [49]:
+            xmin = 17.369 
+            xmax = 17.399 
+            text = "" 
+        intervals [50]:
+            xmin = 17.399 
+            xmax = 17.449 
+            text = "akyt" 
+        intervals [51]:
+            xmin = 17.449 
+            xmax = 17.479 
+            text = "" 
+        intervals [52]:
+            xmin = 17.479 
+            xmax = 17.705 
+            text = "šuo" 
+        intervals [53]:
+            xmin = 17.705 
+            xmax = 17.755 
+            text = "" 
+        intervals [54]:
+            xmin = 17.755 
+            xmax = 18.029 
+            text = "aš" 
+        intervals [55]:
+            xmin = 18.029 
+            xmax = 18.059 
+            text = "" 
+        intervals [56]:
+            xmin = 18.059 
+            xmax = 18.459875 
+            text = "aaa" 
+    item [3]:
+        class = "IntervalTier" 
+        name = "MMS_Refined" 
+        xmin = 0 
+        xmax = 18.459875 
+        intervals: size = 53 
+        intervals [1]:
+            xmin = 0 
+            xmax = 2.242 
+            text = "" 
+        intervals [2]:
+            xmin = 2.242 
+            xmax = 2.302 
+            text = "nu" 
+        intervals [3]:
+            xmin = 2.302 
+            xmax = 2.403 
+            text = "" 
+        intervals [4]:
+            xmin = 2.403 
+            xmax = 2.623 
+            text = "kur" 
+        intervals [5]:
+            xmin = 2.623 
+            xmax = 2.723 
+            text = "" 
+        intervals [6]:
+            xmin = 2.723 
+            xmax = 3.304 
+            text = "atrauk" 
+        intervals [7]:
+            xmin = 3.304 
+            xmax = 3.344 
+            text = "" 
+        intervals [8]:
+            xmin = 3.344 
+            xmax = 3.484 
+            text = "jis" 
+        intervals [9]:
+            xmin = 3.484 
+            xmax = 3.564 
+            text = "" 
+        intervals [10]:
+            xmin = 3.564 
+            xmax = 4.104 
+            text = "pasitrauk" 
+        intervals [11]:
+            xmin = 4.104 
+            xmax = 4.164 
+            text = "" 
+        intervals [12]:
+            xmin = 4.164 
+            xmax = 4.465 
+            text = "eimai" 
+        intervals [13]:
+            xmin = 4.465 
+            xmax = 4.485 
+            text = "" 
+        intervals [14]:
+            xmin = 4.485 
+            xmax = 4.805 
+            text = "hitus" 
+        intervals [15]:
+            xmin = 4.805 
+            xmax = 4.865 
+            text = "" 
+        intervals [16]:
+            xmin = 4.865 
+            xmax = 5.966 
+            text = "parvauk" 
+        intervals [17]:
+            xmin = 5.966 
+            xmax = 6.107 
+            text = "" 
+        intervals [18]:
+            xmin = 6.107 
+            xmax = 6.727 
+            text = "pasitrauk" 
+        intervals [19]:
+            xmin = 6.727 
+            xmax = 7.888 
+            text = "" 
+        intervals [20]:
+            xmin = 7.888 
+            xmax = 8.209 
+            text = "važiuok" 
+        intervals [21]:
+            xmin = 8.209 
+            xmax = 8.269 
+            text = "" 
+        intervals [22]:
+            xmin = 8.269 
+            xmax = 9.49 
+            text = "nakvaizdžiai" 
+        intervals [23]:
+            xmin = 9.49 
+            xmax = 9.57 
+            text = "" 
+        intervals [24]:
+            xmin = 9.57 
+            xmax = 9.811 
+            text = "kaip" 
+        intervals [25]:
+            xmin = 9.811 
+            xmax = 9.831 
+            text = "" 
+        intervals [26]:
+            xmin = 9.831 
+            xmax = 9.971 
+            text = "kaip" 
+        intervals [27]:
+            xmin = 9.971 
+            xmax = 9.991 
+            text = "" 
+        intervals [28]:
+            xmin = 9.991 
+            xmax = 10.231 
+            text = "pačių" 
+        intervals [29]:
+            xmin = 10.231 
+            xmax = 10.451 
+            text = "" 
+        intervals [30]:
+            xmin = 10.451 
+            xmax = 10.732 
+            text = "kur" 
+        intervals [31]:
+            xmin = 10.732 
+            xmax = 10.872 
+            text = "" 
+        intervals [32]:
+            xmin = 10.872 
+            xmax = 10.952 
+            text = "nu" 
+        intervals [33]:
+            xmin = 10.952 
+            xmax = 11.052 
+            text = "" 
+        intervals [34]:
+            xmin = 11.052 
+            xmax = 11.492 
+            text = "palauk" 
+        intervals [35]:
+            xmin = 11.492 
+            xmax = 11.552 
+            text = "" 
+        intervals [36]:
+            xmin = 11.552 
+            xmax = 11.693 
+            text = "kur" 
+        intervals [37]:
+            xmin = 11.693 
+            xmax = 11.733 
+            text = "" 
+        intervals [38]:
+            xmin = 11.733 
+            xmax = 12.053 
+            text = "akyt" 
+        intervals [39]:
+            xmin = 12.053 
+            xmax = 12.113 
+            text = "" 
+        intervals [40]:
+            xmin = 12.113 
+            xmax = 12.373 
+            text = "šuo" 
+        intervals [41]:
+            xmin = 12.373 
+            xmax = 12.554 
+            text = "aš" 
+        intervals [42]:
+            xmin = 12.554 
+            xmax = 16.698 
+            text = "" 
+        intervals [43]:
+            xmin = 16.698 
+            xmax = 16.758 
+            text = "nu" 
+        intervals [44]:
+            xmin = 16.758 
+            xmax = 16.918 
+            text = "" 
+        intervals [45]:
+            xmin = 16.918 
+            xmax = 17.199 
+            text = "palauk" 
+        intervals [46]:
+            xmin = 17.199 
+            xmax = 17.219 
+            text = "" 
+        intervals [47]:
+            xmin = 17.219 
+            xmax = 17.399 
+            text = "kur" 
+        intervals [48]:
+            xmin = 17.399 
+            xmax = 17.479 
+            text = "akyt" 
+        intervals [49]:
+            xmin = 17.479 
+            xmax = 17.659 
+            text = "šuo" 
+        intervals [50]:
+            xmin = 17.659 
+            xmax = 17.779 
+            text = "" 
+        intervals [51]:
+            xmin = 17.779 
+            xmax = 17.999 
+            text = "aš" 
+        intervals [52]:
+            xmin = 17.999 
+            xmax = 18.059 
+            text = "" 
+        intervals [53]:
+            xmin = 18.059 
+            xmax = 18.459875 
+            text = "aaa" 

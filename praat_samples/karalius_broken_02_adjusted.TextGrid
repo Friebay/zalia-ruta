@@ -1,0 +1,294 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 4.66725 
+tiers? <exists> 
+size = 3 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "Acoustic_Refined" 
+        xmin = 0 
+        xmax = 4.66725 
+        intervals: size = 21 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.21891349727594844 
+            text = "" 
+        intervals [2]:
+            xmin = 0.21891349727594844 
+            xmax = 0.393133457810097 
+            text = "tipo" 
+        intervals [3]:
+            xmin = 0.393133457810097 
+            xmax = 0.441194136578138 
+            text = "" 
+        intervals [4]:
+            xmin = 0.441194136578138 
+            xmax = 0.8426102713441412 
+            text = "visiškai" 
+        intervals [5]:
+            xmin = 0.8426102713441412 
+            xmax = 0.86 
+            text = "" 
+        intervals [6]:
+            xmin = 0.86 
+            xmax = 1.2559321087492934 
+            text = "viskas" 
+        intervals [7]:
+            xmin = 1.2559321087492934 
+            xmax = 1.327551773702662 
+            text = "" 
+        intervals [8]:
+            xmin = 1.327551773702662 
+            xmax = 1.567901730333498 
+            text = "na" 
+        intervals [9]:
+            xmin = 1.567901730333498 
+            xmax = 1.83189896110572 
+            text = "" 
+        intervals [10]:
+            xmin = 1.83189896110572 
+            xmax = 1.9793229217511967 
+            text = "fuck" 
+        intervals [11]:
+            xmin = 1.9793229217511967 
+            xmax = 2.1101022416786357 
+            text = "" 
+        intervals [12]:
+            xmin = 2.1101022416786357 
+            xmax = 2.5834441592301083 
+            text = "this" 
+        intervals [13]:
+            xmin = 2.5834441592301083 
+            xmax = 3.245 
+            text = "" 
+        intervals [14]:
+            xmin = 3.245 
+            xmax = 3.50000749712101 
+            text = "sakau" 
+        intervals [15]:
+            xmin = 3.50000749712101 
+            xmax = 3.5087261184495055 
+            text = "" 
+        intervals [16]:
+            xmin = 3.5087261184495055 
+            xmax = 3.926 
+            text = "jaunimas	" 
+        intervals [17]:
+            xmin = 3.926 
+            xmax = 3.957314865441301 
+            text = "" 
+        intervals [18]:
+            xmin = 3.957314865441301 
+            xmax = 4.247 
+            text = "turėtų" 
+        intervals [19]:
+            xmin = 4.247 
+            xmax = 4.277 
+            text = "" 
+        intervals [20]:
+            xmin = 4.277 
+            xmax = 4.648772553843142 
+            text = "čia" 
+        intervals [21]:
+            xmin = 4.648772553843142 
+            xmax = 4.66725 
+            text = "" 
+    item [2]:
+        class = "IntervalTier" 
+        name = "Etalonas" 
+        xmin = 0 
+        xmax = 4.66725 
+        intervals: size = 23 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.18 
+            text = "" 
+        intervals [2]:
+            xmin = 0.18 
+            xmax = 0.29 
+            text = "taip" 
+        intervals [3]:
+            xmin = 0.29 
+            xmax = 0.32 
+            text = "" 
+        intervals [4]:
+            xmin = 0.32 
+            xmax = 0.405 
+            text = "va" 
+        intervals [5]:
+            xmin = 0.405 
+            xmax = 0.435 
+            text = "" 
+        intervals [6]:
+            xmin = 0.435 
+            xmax = 0.83 
+            text = "visiškai" 
+        intervals [7]:
+            xmin = 0.83 
+            xmax = 0.86 
+            text = "" 
+        intervals [8]:
+            xmin = 0.86 
+            xmax = 1.242 
+            text = "viskas" 
+        intervals [9]:
+            xmin = 1.242 
+            xmax = 1.335 
+            text = "" 
+        intervals [10]:
+            xmin = 1.335 
+            xmax = 1.505 
+            text = "na" 
+        intervals [11]:
+            xmin = 1.505 
+            xmax = 1.763 
+            text = "" 
+        intervals [12]:
+            xmin = 1.763 
+            xmax = 2.025 
+            text = "fak" 
+        intervals [13]:
+            xmin = 2.025 
+            xmax = 2.08 
+            text = "" 
+        intervals [14]:
+            xmin = 2.08 
+            xmax = 2.445 
+            text = "dis" 
+        intervals [15]:
+            xmin = 2.445 
+            xmax = 3.245 
+            text = "" 
+        intervals [16]:
+            xmin = 3.245 
+            xmax = 3.495 
+            text = "sakau" 
+        intervals [17]:
+            xmin = 3.495 
+            xmax = 3.525 
+            text = "" 
+        intervals [18]:
+            xmin = 3.525 
+            xmax = 3.926 
+            text = "jaunimas" 
+        intervals [19]:
+            xmin = 3.926 
+            xmax = 3.965 
+            text = "" 
+        intervals [20]:
+            xmin = 3.965 
+            xmax = 4.247 
+            text = "turėtų" 
+        intervals [21]:
+            xmin = 4.247 
+            xmax = 4.277 
+            text = "" 
+        intervals [22]:
+            xmin = 4.277 
+            xmax = 4.43 
+            text = "čia" 
+        intervals [23]:
+            xmin = 4.43 
+            xmax = 4.66725 
+            text = "" 
+    item [3]:
+        class = "IntervalTier" 
+        name = "MMS_Refined" 
+        xmin = 0 
+        xmax = 4.66725 
+        intervals: size = 23 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.18 
+            text = "" 
+        intervals [2]:
+            xmin = 0.18 
+            xmax = 0.3 
+            text = "taip" 
+        intervals [3]:
+            xmin = 0.3 
+            xmax = 0.32 
+            text = "" 
+        intervals [4]:
+            xmin = 0.32 
+            xmax = 0.361 
+            text = "va" 
+        intervals [5]:
+            xmin = 0.361 
+            xmax = 0.461 
+            text = "" 
+        intervals [6]:
+            xmin = 0.461 
+            xmax = 0.821 
+            text = "visiškai" 
+        intervals [7]:
+            xmin = 0.821 
+            xmax = 0.861 
+            text = "" 
+        intervals [8]:
+            xmin = 0.861 
+            xmax = 1.242 
+            text = "viskas" 
+        intervals [9]:
+            xmin = 1.242 
+            xmax = 1.362 
+            text = "" 
+        intervals [10]:
+            xmin = 1.362 
+            xmax = 1.462 
+            text = "na" 
+        intervals [11]:
+            xmin = 1.462 
+            xmax = 1.763 
+            text = "" 
+        intervals [12]:
+            xmin = 1.763 
+            xmax = 2.023 
+            text = "fak" 
+        intervals [13]:
+            xmin = 2.023 
+            xmax = 2.103 
+            text = "" 
+        intervals [14]:
+            xmin = 2.103 
+            xmax = 2.444 
+            text = "dis" 
+        intervals [15]:
+            xmin = 2.444 
+            xmax = 3.245 
+            text = "" 
+        intervals [16]:
+            xmin = 3.245 
+            xmax = 3.485 
+            text = "sakau" 
+        intervals [17]:
+            xmin = 3.485 
+            xmax = 3.525 
+            text = "" 
+        intervals [18]:
+            xmin = 3.525 
+            xmax = 3.926 
+            text = "jaunimas" 
+        intervals [19]:
+            xmin = 3.926 
+            xmax = 3.966 
+            text = "" 
+        intervals [20]:
+            xmin = 3.966 
+            xmax = 4.247 
+            text = "turėtų" 
+        intervals [21]:
+            xmin = 4.247 
+            xmax = 4.287 
+            text = "" 
+        intervals [22]:
+            xmin = 4.287 
+            xmax = 4.387 
+            text = "čia" 
+        intervals [23]:
+            xmin = 4.387 
+            xmax = 4.66725 
+            text = "" 
