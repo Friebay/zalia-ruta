@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 """
-Package and publish the 47-clip Lithuanian ASR & Word-Boundary Alignment
-Benchmark (zalia-ruta-bench-lt) to Hugging Face Datasets.
+Package and publish the 47-clip Lithuanian ASR Benchmark (zalia-ruta-bench-lt)
+to Hugging Face Datasets.
 
-Features:
-- Validates all 47 audio files and ground-truth SRT references.
-- Exports structured data/ metadata (JSONL + 16 kHz WAV audio).
-- Builds a HuggingFace Dataset with Audio and nested word timestamps.
-- Generates a full Dataset Card (README.md) with YAML tags & Phase 1 leaderboard.
-- Supports pushing directly to the Hugging Face Hub (with optional private flag).
+Exports:
+- 16 kHz mono WAV audio files.
+- Verbatim human-audited Lithuanian transcripts.
+- Non-commercial research dataset card (CC BY-NC 4.0).
+- Pure audio + text schema (no word timestamps, no internal model run data).
 
 Usage:
     # 1. Export locally to inspect:
     uv run python scripts/export_hf_dataset.py
 
-    # 2. Export and push to Hugging Face Hub:
+    # 2. Export and push to Hugging Face Hub (public, non-commercial):
     uv run python scripts/export_hf_dataset.py --push --repo-id Friebay/zalia-ruta-bench-lt
 """
 
@@ -45,15 +44,12 @@ task_categories:
 - automatic-speech-recognition
 task_ids:
 - speech-recognition
-pretty_name: "Žalia Rūta Lithuanian Speech & Word-Boundary Alignment Benchmark"
+pretty_name: "Žalia Rūta Lithuanian Speech Benchmark"
 tags:
 - speech
 - audio
 - lithuanian
 - asr
-- whisper
-- forced-alignment
-- profanity-detection
 - benchmark
 configs:
 - config_name: default
@@ -62,37 +58,21 @@ configs:
     path: "data/metadata.jsonl"
 ---
 
-# Žalia Rūta: Lithuanian Speech & Word-Boundary Alignment Benchmark (`zalia-ruta-bench-lt`)
+# Žalia Rūta: Lithuanian Speech Benchmark (`zalia-ruta-bench-lt`)
 
-A precision-audited evaluation dataset designed to benchmark **Lithuanian speech recognition (ASR)**, **word-level boundary precision (Forced Alignment)**, and **hallucination in silence gaps (Pause Bleed)**.
+A curated evaluation dataset consisting of **47 audited Lithuanian audio clips** and verbatim human-verified transcripts for speech recognition benchmarking.
 
 ---
 
 ## Dataset Overview
 
 - **Clips:** **47 unique clips** (16 kHz mono WAV, 16-bit PCM).
-- **Ground Truth:** Audited word-level subtitles (1 word per cue) refined acoustically in Praat TextGrid down to ~10–20 ms boundary precision.
-- **Extreme Challenge Cases:**
-  - Fast conversational speech & debates (Alexander Stubb, Virginijus Sinkevičius, Vytautas Sinica).
-  - Streamer slang, gaming exclamations, vulgarities, and compound Slavic/English loanwords.
-  - Multi-second dead silence pauses and music reactions designed to stress-test Whisper hallucination loops.
-
----
-
-## Phase 1 Leaderboard (Evaluated on All 47 Clips)
-
-| System / Model | Macro WER% | Macro CER% | ≤50ms Precision | Pause Bleed% | Speed | Peak VRAM |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **`paprika_acoustic`** (`paprika-whisper-lt-v3` + MMS + Refiner) | **13.43%** | **5.50%** | **77.7%** | **8.9%** | *Baseline* | *Baseline* |
-| **`paprika_refined`** (`paprika-whisper-lt-v3` + MMS FA) | **13.43%** | **5.50%** | **69.9%** | **7.5%** | *Baseline* | *Baseline* |
-| **`azuolas_acoustic`** (`azuolas-whisper-lt` + MMS + Refiner) | **19.09%** | **10.53%** | **77.0%** | **7.8%** | 0.1× | 9,462 MB |
-| **`azuolas_refined`** (`azuolas-whisper-lt` + MMS FA) | **19.09%** | **10.53%** | **69.6%** | **6.6%** | 0.1× | 9,462 MB |
-| **`turbo_acoustic`** (`whisper-large-v3-turbo` + MMS + Refiner) | **39.72%** | **31.69%** | **76.7%** | **6.6%** | 0.5× | 7,444 MB |
-| **`turbo_refined`** (`whisper-large-v3-turbo` + MMS FA) | **39.72%** | **31.69%** | **68.6%** | **5.5%** | 0.5× | 7,444 MB |
-| **`whisper_small_lt_acoustic`** (`whisper-small-lt` + MMS + Refiner) | **169.91%** | **120.62%** | **65.9%** | **14.0%** | 0.7× | 5,205 MB |
-| **`whisper_small_lt_refined`** (`whisper-small-lt` + MMS FA) | **169.91%** | **120.62%** | **58.4%** | **13.0%** | 0.7× | 5,205 MB |
-
-*Note: Benchmarked on local NVIDIA GTX 1650 (4 GB physical VRAM). Large v3 models experience PCIe system RAM paging overhead without quantization.*
+- **Transcripts:** Human-audited verbatim Lithuanian orthographic transcripts.
+- **Coverage & Speech Diversity:**
+  - Conversational speech, political debates, and news commentary (Alexander Stubb, Virginijus Sinkevičius, Vytautas Sinica).
+  - Streamer speech, gaming commentary, vulgarities, and compound slang / loanwords.
+  - Natural pauses, background audio, and acoustic noise challenges.
+- **Alignment:** Word-level alignment timestamps will be provided in a future update.
 
 ---
 
@@ -109,13 +89,7 @@ Each sample in `test` contains:
         "sampling_rate": 16000
     },
     "text": "Stubb apie Suomijos ir NATO saugumo politiką...",
-    "words": [
-        {"word": "Stubb", "start": 0.52, "end": 0.94},
-        {"word": "apie", "start": 1.01, "end": 1.25},
-        ...
-    ],
     "duration": 11.33,
-    "num_words": 23,
     "category": "speech",
     "youtube_id": "AYzmpjtX-90",
     "notes": "Alexander Stubb news short (11.3s)"
@@ -134,19 +108,19 @@ dataset = load_dataset("Friebay/zalia-ruta-bench-lt", split="test")
 sample = dataset[0]
 print("Clip ID:", sample["id"])
 print("Transcript:", sample["text"])
-print("First word:", sample["words"][0])
 ```
 
 ---
 
-## Citation & License
+## Terms of Use & License
 
-- **License:** CC BY-NC 4.0 (Non-Commercial Research & Benchmarking).
-- Sourced and curated as part of the [`zalia-ruta`](https://github.com/Friebay/zalia-ruta) automated Lithuanian speech and profanity bleeper project.
+- **License:** [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).
+- **Intended Use:** Non-commercial research, academic evaluation, and private benchmarking. Not licensed for commercial deployment or commercial model training without explicit authorization.
+- **Source Project:** Curated as part of the [`zalia-ruta`](https://github.com/Friebay/zalia-ruta) Lithuanian speech processing project.
 """
 
 
-def load_and_validate_records() -> List[Dict[str, Any]]:
+def load_and_validate_records(include_timestamps: bool = False) -> List[Dict[str, Any]]:
     """Loads manifest and cross-verifies audio files and SRT references."""
     manifest_file = BENCH_DIR / "manifest.json"
     if not manifest_file.exists():
@@ -170,7 +144,7 @@ def load_and_validate_records() -> List[Dict[str, Any]]:
         info = sf.info(str(wav_path))
         duration = round(info.duration, 3)
 
-        # Parse cues
+        # Parse cues for verbatim transcript
         cues = parse_srt(srt_path.read_text(encoding="utf-8"))
         words = []
         spoken_tokens = []
@@ -178,28 +152,31 @@ def load_and_validate_records() -> List[Dict[str, Any]]:
             clean_word = cue.text.strip()
             if not clean_word:
                 continue
-            words.append({
-                "word": clean_word,
-                "start": round(cue.start, 3),
-                "end": round(cue.end, 3),
-            })
+            if include_timestamps:
+                words.append({
+                    "word": clean_word,
+                    "start": round(cue.start, 3),
+                    "end": round(cue.end, 3),
+                })
             if not clean_word.startswith("#"):
                 spoken_tokens.append(clean_word)
 
         text = " ".join(spoken_tokens).strip()
 
-        records.append({
+        rec = {
             "id": cid,
             "wav_path": wav_path,
             "srt_path": srt_path,
             "text": text,
-            "words": words,
             "duration": duration,
-            "num_words": len(words),
             "category": c.get("category", "speech"),
             "youtube_id": c.get("youtube_id", ""),
             "notes": c.get("notes", ""),
-        })
+        }
+        if include_timestamps:
+            rec["words"] = words
+
+        records.append(rec)
 
     return records
 
@@ -210,6 +187,12 @@ def load_and_validate_records() -> List[Dict[str, Any]]:
     type=click.Path(path_type=Path),
     default=DEFAULT_EXPORT_DIR,
     help="Target directory for the packaged Hugging Face dataset.",
+)
+@click.option(
+    "--include-timestamps",
+    is_flag=True,
+    default=False,
+    help="Include word-level timestamp array in export (disabled by default).",
 )
 @click.option(
     "--push",
@@ -235,6 +218,7 @@ def load_and_validate_records() -> List[Dict[str, Any]]:
 )
 def export_dataset(
     output_dir: Path,
+    include_timestamps: bool,
     push: bool,
     repo_id: str,
     private: bool,
@@ -242,7 +226,7 @@ def export_dataset(
 ):
     """Packages the 47-clip benchmark dataset for Hugging Face and optionally pushes to the Hub."""
     click.echo(f"Validating and preparing dataset from {BENCH_DIR}...")
-    records = load_and_validate_records()
+    records = load_and_validate_records(include_timestamps=include_timestamps)
     click.echo(f"Loaded {len(records)} verified clips.")
 
     # 1. Prepare export directories
@@ -263,26 +247,29 @@ def export_dataset(
             "file_name": f"audio/{cid}.wav",
             "id": cid,
             "text": r["text"],
-            "words": r["words"],
             "duration": r["duration"],
-            "num_words": r["num_words"],
             "category": r["category"],
             "youtube_id": r["youtube_id"],
             "notes": r["notes"],
         }
+        if include_timestamps:
+            meta_entry["words"] = r["words"]
+
         metadata_lines.append(json.dumps(meta_entry, ensure_ascii=False))
 
-        hf_dataset_rows.append({
+        hf_row = {
             "id": cid,
             "audio": str(dest_wav),
             "text": r["text"],
-            "words": r["words"],
             "duration": r["duration"],
-            "num_words": r["num_words"],
             "category": r["category"],
             "youtube_id": r["youtube_id"],
             "notes": r["notes"],
-        })
+        }
+        if include_timestamps:
+            hf_row["words"] = r["words"]
+
+        hf_dataset_rows.append(hf_row)
 
     # Write metadata.jsonl
     metadata_file = data_dir / "metadata.jsonl"
