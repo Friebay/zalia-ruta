@@ -1,8 +1,10 @@
 import json
+import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 import numpy as np
 import soundfile as sf
+import torch
 
 from zalia_ruta.acoustic_refiner import refine_word_boundaries
 from zalia_ruta.asr import LithuanianASR, WordTimestamp, acoustic_refine_words
@@ -54,11 +56,37 @@ class BenchmarkRunner:
 
     def get_asr(self, model_id: str) -> LithuanianASR:
         if model_id not in self._asr_models:
-            self._asr_models[model_id] = LithuanianASR(model_id, use_mms_align=False)
+            asr = LithuanianASR(model_id, use_mms_align=False)
+            # Warm up CUDA kernels so clip 1 does not absorb one-time JIT and allocation latency
+            dummy_audio = np.zeros(8000, dtype=np.float32)
+            try:
+                asr.transcribe_chunk(dummy_audio, sr=16000, time_offset=0.0)
+            except Exception:
+                pass
+            self._asr_models[model_id] = asr
         return self._asr_models[model_id]
 
     def get_hyp_path(self, system_id: str, clip_id: str) -> Path:
         return self.hyp_dir / system_id / f"{clip_id}.json"
+
+    def get_metrics_path(self, system_id: str) -> Path:
+        return self.hyp_dir / system_id / "_metrics.json"
+
+    def load_metrics(self, system_id: str) -> Dict[str, dict]:
+        p = self.get_metrics_path(system_id)
+        if not p.exists():
+            return {}
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            return {}
+
+    def save_metric(self, system_id: str, clip_id: str, metric: dict) -> None:
+        metrics = self.load_metrics(system_id)
+        metrics[clip_id] = metric
+        p = self.get_metrics_path(system_id)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(json.dumps(metrics, indent=2), encoding="utf-8")
 
     def is_cached(self, system_id: str, clip_id: str) -> bool:
         return self.get_hyp_path(system_id, clip_id).exists()
@@ -83,8 +111,32 @@ class BenchmarkRunner:
                 return cached
 
         asr = self.get_asr(model_id)
+
+        if torch.cuda.is_available():
+            torch.cuda.reset_peak_memory_stats()
+            torch.cuda.synchronize()
+
+        t0 = time.perf_counter()
         words = asr.transcribe_chunk(audio, sr=sr, time_offset=0.0)
+        if torch.cuda.is_available():
+            torch.cuda.synchronize()
+        t1 = time.perf_counter()
+
+        duration_s = float(len(audio) / sr)
+        latency_s = float(t1 - t0)
+        rtf = float(latency_s / duration_s) if duration_s > 0 else 0.0
+        speedup = float(duration_s / latency_s) if latency_s > 0 else 0.0
+        peak_vram_mb = float(torch.cuda.max_memory_allocated() / (1024 ** 2)) if torch.cuda.is_available() else 0.0
+
         self.save_cached(system_id, clip_id, words)
+        self.save_metric(system_id, clip_id, {
+            "duration_s": round(duration_s, 3),
+            "latency_s": round(latency_s, 4),
+            "rtf": round(rtf, 4),
+            "speedup": round(speedup, 2),
+            "peak_vram_mb": round(peak_vram_mb, 1),
+            "stage": "raw",
+        })
         return words
 
     def run_model_refined(self, model_id: str, prefix: str, clip_id: str, audio: np.ndarray, sr: int = 16000, force: bool = False) -> List[WordTimestamp]:
@@ -97,8 +149,37 @@ class BenchmarkRunner:
         raw_words = self.run_model_raw(model_id, prefix, clip_id, audio, sr=sr, force=force)
         if self._mms_aligner is None:
             self._mms_aligner = MMSAligner()
+
+        if torch.cuda.is_available():
+            torch.cuda.synchronize()
+
+        t0 = time.perf_counter()
         refined = self._mms_aligner.align(audio, raw_words, sr=sr, time_offset=0.0)
+        if torch.cuda.is_available():
+            torch.cuda.synchronize()
+        t1 = time.perf_counter()
+
+        duration_s = float(len(audio) / sr)
+        stage_latency_s = float(t1 - t0)
+
+        raw_metrics = self.load_metrics(f"{prefix}_raw").get(clip_id, {})
+        raw_latency = raw_metrics.get("latency_s", 0.0)
+        total_latency_s = raw_latency + stage_latency_s
+
+        rtf = float(total_latency_s / duration_s) if duration_s > 0 else 0.0
+        speedup = float(duration_s / total_latency_s) if total_latency_s > 0 else 0.0
+        peak_vram_mb = float(torch.cuda.max_memory_allocated() / (1024 ** 2)) if torch.cuda.is_available() else 0.0
+
         self.save_cached(system_id, clip_id, refined)
+        self.save_metric(system_id, clip_id, {
+            "duration_s": round(duration_s, 3),
+            "latency_s": round(total_latency_s, 4),
+            "stage_latency_s": round(stage_latency_s, 4),
+            "rtf": round(rtf, 4),
+            "speedup": round(speedup, 2),
+            "peak_vram_mb": round(peak_vram_mb, 1),
+            "stage": "refined",
+        })
         return refined
 
     def run_model_acoustic(self, model_id: str, prefix: str, clip_id: str, audio: np.ndarray, sr: int = 16000, force: bool = False) -> List[WordTimestamp]:
@@ -109,8 +190,32 @@ class BenchmarkRunner:
                 return cached
 
         base_words = self.run_model_refined(model_id, prefix, clip_id, audio, sr=sr, force=force)
+
+        t0 = time.perf_counter()
         refined = refine_word_boundaries(audio, base_words, sr=sr)
+        t1 = time.perf_counter()
+
+        duration_s = float(len(audio) / sr)
+        stage_latency_s = float(t1 - t0)
+
+        refined_metrics = self.load_metrics(f"{prefix}_refined").get(clip_id, {})
+        refined_latency = refined_metrics.get("latency_s", 0.0)
+        total_latency_s = refined_latency + stage_latency_s
+
+        rtf = float(total_latency_s / duration_s) if duration_s > 0 else 0.0
+        speedup = float(duration_s / total_latency_s) if total_latency_s > 0 else 0.0
+        peak_vram_mb = float(torch.cuda.max_memory_allocated() / (1024 ** 2)) if torch.cuda.is_available() else 0.0
+
         self.save_cached(system_id, clip_id, refined)
+        self.save_metric(system_id, clip_id, {
+            "duration_s": round(duration_s, 3),
+            "latency_s": round(total_latency_s, 4),
+            "stage_latency_s": round(stage_latency_s, 4),
+            "rtf": round(rtf, 4),
+            "speedup": round(speedup, 2),
+            "peak_vram_mb": round(peak_vram_mb, 1),
+            "stage": "acoustic",
+        })
         return refined
 
     def run_paprika_raw(self, clip_id: str, audio: np.ndarray, sr: int = 16000, force: bool = False) -> List[WordTimestamp]:

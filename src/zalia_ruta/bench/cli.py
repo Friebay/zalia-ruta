@@ -305,22 +305,38 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
             "bleed": bleed,
         }
 
+        # Efficiency metrics
+        sys_metrics = runner.load_metrics(sys_id)
+        clip_metrics = [sys_metrics[r.clip_id] for r in sys_res if r.clip_id in sys_metrics]
+        if clip_metrics:
+            mean_rtf = sum(m["rtf"] for m in clip_metrics) / len(clip_metrics)
+            mean_speed = sum(m["speedup"] for m in clip_metrics) / len(clip_metrics)
+            max_vram = max(m.get("peak_vram_mb", 0.0) for m in clip_metrics)
+            system_aggregates[sys_id]["rtf"] = f"{mean_rtf:.3f}"
+            system_aggregates[sys_id]["speed"] = f"{mean_speed:.1f}x"
+            system_aggregates[sys_id]["vram"] = f"{max_vram:.0f} MB" if max_vram > 0 else "N/A"
+        else:
+            system_aggregates[sys_id]["rtf"] = "N/A"
+            system_aggregates[sys_id]["speed"] = "N/A"
+            system_aggregates[sys_id]["vram"] = "N/A"
+
     # Print Executive Summary table
     click.echo("\n============================== Benchmark Executive Summary ==============================")
-    sum_headers = ["System", "Clips", "Macro WER%", "Macro CER%", "≤50ms Precision", "Pause Bleed%"]
-    click.echo("{:<26} {:>6} {:>12} {:>12} {:>17} {:>14}".format(*sum_headers))
-    click.echo("-" * 92)
+    sum_headers = ["System", "Clips", "Macro WER%", "Macro CER%", "≤50ms Precision", "Pause Bleed%", "RTF", "Speed", "Peak VRAM"]
+    click.echo("{:<26} {:>6} {:>12} {:>12} {:>17} {:>14} {:>8} {:>8} {:>11}".format(*sum_headers))
+    click.echo("-" * 120)
     for sys_id, agg in system_aggregates.items():
-        click.echo("{:<26} {:>6} {:>11.2f}% {:>11.2f}% {:>16.1f}% {:>13.1f}%".format(
-            sys_id, agg["clips"], agg["wer"], agg["cer"], agg["within_50"], agg["bleed"]
+        click.echo("{:<26} {:>6} {:>11.2f}% {:>11.2f}% {:>16.1f}% {:>13.1f}% {:>8} {:>8} {:>11}".format(
+            sys_id, agg["clips"], agg["wer"], agg["cer"], agg["within_50"], agg["bleed"],
+            agg["rtf"], agg["speed"], agg["vram"]
         ))
-    click.echo("-" * 92)
+    click.echo("-" * 120)
 
     # Print Detailed Per-Clip Table
     click.echo("\nDetailed Per-Clip Results:")
-    headers = ["System", "Clip", "WER%", "CER%", "Start Med (ms)", "End Med (ms)", "≤50ms%", "End Bias (ms)", "Pause Bleed%"]
-    click.echo("{:<26} {:<20} {:>6} {:>6} {:>15} {:>13} {:>8} {:>14} {:>13}".format(*headers))
-    click.echo("-" * 128)
+    headers = ["System", "Clip", "WER%", "CER%", "Start Med (ms)", "End Med (ms)", "≤50ms%", "End Bias (ms)", "Pause Bleed%", "RTF", "Latency (s)"]
+    click.echo("{:<26} {:<20} {:>6} {:>6} {:>15} {:>13} {:>8} {:>14} {:>13} {:>8} {:>12}".format(*headers))
+    click.echo("-" * 150)
 
     report_lines = [
         "# Lithuanian ASR & Word-Boundary Benchmark Results\n",
@@ -330,7 +346,7 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
     ]
     for sys_id, agg in system_aggregates.items():
         report_lines.append(
-            f"| {sys_id} | {agg['clips']} | {agg['wer']:.2f}% | {agg['cer']:.2f}% | {agg['within_50']:.1f}% | {agg['bleed']:.1f}% |"
+            f"| {sys_id} | {agg['clips']} | {agg['wer']:.2f}% | {agg['cer']:.2f}% | {agg['within_50']:.1f}% | {agg['bleed']:.1f}% | {agg['rtf']} | {agg['speed']} | {agg['vram']} |"
         )
     report_lines.append("\n## Detailed Per-Clip Results\n")
     report_lines.append(f"| {' | '.join(headers)} |")
@@ -338,6 +354,11 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
 
     for r in results:
         t = r.timing
+        sys_metrics = runner.load_metrics(r.system_id)
+        cm = sys_metrics.get(r.clip_id)
+        rtf_col = f"{cm['rtf']:.3f}" if cm else "N/A"
+        lat_col = f"{cm['latency_s']:.2f}s" if cm else "N/A"
+
         if t:
             row = [
                 r.system_id,
@@ -349,11 +370,13 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
                 f"{t.within_50ms_pct:.1f}",
                 f"{t.end_bias_ms:+.1f}" if r.system_id != "youtube_auto" else "N/A",
                 f"{t.pause_bleed_pct:.1f}%" if r.system_id != "youtube_auto" else "N/A",
+                rtf_col,
+                lat_col,
             ]
         else:
-            row = [r.system_id, r.clip_id, f"{r.wer:.1f}", f"{r.cer:.1f}", "N/A", "N/A", "N/A", "N/A", "N/A"]
+            row = [r.system_id, r.clip_id, f"{r.wer:.1f}", f"{r.cer:.1f}", "N/A", "N/A", "N/A", "N/A", "N/A", rtf_col, lat_col]
 
-        click.echo("{:<26} {:<20} {:>6} {:>6} {:>15} {:>13} {:>8} {:>14} {:>13}".format(*row))
+        click.echo("{:<26} {:<20} {:>6} {:>6} {:>15} {:>13} {:>8} {:>14} {:>13} {:>8} {:>12}".format(*row))
         report_lines.append(f"| {' | '.join(row)} |")
 
     report_file = reports_dir / "results.md"
