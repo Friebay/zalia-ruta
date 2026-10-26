@@ -42,8 +42,6 @@ size_categories:
 - n<1K
 task_categories:
 - automatic-speech-recognition
-task_ids:
-- speech-recognition
 pretty_name: "Žalia Rūta Lithuanian Speech Benchmark"
 tags:
 - speech
