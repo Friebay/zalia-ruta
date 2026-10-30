@@ -322,6 +322,430 @@
       "youtube_id": "7og_55op5Kg",
       "category": "speech",
       "notes": "Karalius broken ASR, 'nes čia nu actually ragai būtų bet socdemam pochui ir' (ASR: 'akšli ragai būtų bet susidavom')"
+    },
+    {
+      "id": "karalius_prof_12",
+      "file": "original_videos/karalius_prof_12.mp4",
+      "youtube_id": "6hIRVqm5kdo",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius rant on audience, '80% Lietuvos yra debilai... visą kontą debilams... žmonių yra debilai' (4 profanities)"
+    },
+    {
+      "id": "karalius_prof_13",
+      "file": "original_videos/karalius_prof_13.mp4",
+      "youtube_id": "6hIRVqm5kdo",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius politics discussion, 'nėra dalbajobų valdžioj... dalbajobų valdžioj... dalbajobų nėra valdžioj' (4 profanities)"
+    },
+    {
+      "id": "karalius_prof_14",
+      "file": "original_videos/karalius_prof_14.mp4",
+      "youtube_id": "6hIRVqm5kdo",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary, 'kas juos labiau užpiso... idealaus pasaulio, kur nebus dalbajobų' (2 profanities)"
+    },
+    {
+      "id": "karalius_prof_15",
+      "file": "original_videos/karalius_prof_15.mp4",
+      "youtube_id": "6hIRVqm5kdo",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius content rant, 'žiūri žmonės dalbajobai ir jie liks dalbajobai' (2 profanities)"
+    },
+    {
+      "id": "karalius_prof_16",
+      "file": "original_videos/karalius_prof_16.mp4",
+      "youtube_id": "6hIRVqm5kdo",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius democracy commentary, 'išrenka debilus... tupi žmonės išrinktų debilus' (2 profanities)"
+    },
+    {
+      "id": "karalius_prof_17",
+      "file": "original_videos/karalius_prof_17.mp4",
+      "youtube_id": "6hIRVqm5kdo",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius audience rant, 'kuriame yra 80% debilų... edukuoti bent vieną du debilus' (2 profanities)"
+    },
+    {
+      "id": "karalius_prof_18",
+      "file": "original_videos/karalius_prof_18.mp4",
+      "youtube_id": "3_wAkycMk0c",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius politics critique, 'Visiem išpiso protus. Visiem išpiso protus dėl migrantų' (2 profanities)"
+    },
+    {
+      "id": "karalius_prof_19",
+      "file": "original_videos/karalius_prof_19.mp4",
+      "youtube_id": "3_wAkycMk0c",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius election commentary, 'planas yra toks: prapisam rinkimus... nes jie prapisa' (2 profanities)"
+    },
+    {
+      "id": "karalius_prof_20",
+      "file": "original_videos/karalius_prof_20.mp4",
+      "youtube_id": "XnkFuZ5cBB8",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius legal commentary, 'Gerai, debilu pavadinu žmogų... kažkokį debilą debilu pavadinau' (3 profanities)"
+    },
+    {
+      "id": "karalius_prof_21",
+      "file": "original_videos/karalius_prof_21.mp4",
+      "youtube_id": "XnkFuZ5cBB8",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius legal commentary, 'Tai yra riba peržengta... debilų žmogų debilą pavadini' (2 profanities)"
+    },
+    {
+      "id": "karalius_prof_22",
+      "file": "original_videos/karalius_prof_22.mp4",
+      "youtube_id": "7og_55op5Kg",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'debilas' [debil], 'blicas' [ble], 'blicas' [ble] (21.7s)"
+    },
+    {
+      "id": "karalius_prof_23",
+      "file": "original_videos/karalius_prof_23.mp4",
+      "youtube_id": "7og_55op5Kg",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'debilės' [debil], 'ble' [ble] (21.4s)"
+    },
+    {
+      "id": "karalius_prof_24",
+      "file": "original_videos/karalius_prof_24.mp4",
+      "youtube_id": "7og_55op5Kg",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'blet' [ble], 'blet' [ble], 'užpisa' [pis] (20.6s)"
+    },
+    {
+      "id": "karalius_prof_25",
+      "file": "original_videos/karalius_prof_25.mp4",
+      "youtube_id": "3_wAkycMk0c",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'blet' [ble], 'blet' [ble], 'piso' [pis] (20.3s)"
+    },
+    {
+      "id": "karalius_prof_26",
+      "file": "original_videos/karalius_prof_26.mp4",
+      "youtube_id": "3_wAkycMk0c",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'ble' [ble], 'pizdės' [pis] (22.8s)"
+    },
+    {
+      "id": "karalius_prof_27",
+      "file": "original_videos/karalius_prof_27.mp4",
+      "youtube_id": "PZ2gyZC5Kuw",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 3 roots: 'pochui' [nachui], 'prisikviestan' [sik], 'pochui' [nachui], 'pochui' [nachui], 'pochui' [nachui], 'pochui' [nachui], 'apipisą' [pis] (20.6s)"
+    },
+    {
+      "id": "karalius_prof_28",
+      "file": "original_videos/karalius_prof_28.mp4",
+      "youtube_id": "y3UteynmikA",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'nachui' [nachui], 'pisa' [pis] (22.6s)"
+    },
+    {
+      "id": "karalius_prof_29",
+      "file": "original_videos/karalius_prof_29.mp4",
+      "youtube_id": "Q7EuWWdNeV0",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 3 roots: 'blet' [ble], 'nepisk' [pis], 'pochui' [nachui] (20.5s)"
+    },
+    {
+      "id": "karalius_prof_30",
+      "file": "original_videos/karalius_prof_30.mp4",
+      "youtube_id": "5TvrAjcZYNw",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'ble' [ble], 'debilai' [debil] (20.7s)"
+    },
+    {
+      "id": "karalius_prof_31",
+      "file": "original_videos/karalius_prof_31.mp4",
+      "youtube_id": "DAXhjychhoE",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'debilai' [debil], 'šiknos' [sik] (21.3s)"
+    },
+    {
+      "id": "karalius_prof_32",
+      "file": "original_videos/karalius_prof_32.mp4",
+      "youtube_id": "DAXhjychhoE",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'blet' [ble], 'prisikviestum' [sik] (23.1s)"
+    },
+    {
+      "id": "karalius_prof_33",
+      "file": "original_videos/karalius_prof_33.mp4",
+      "youtube_id": "Q7EuWWdNeV0",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 3 roots: 'blet' [ble], 'nepisk' [pis], 'pochui' [nachui] (20.5s)"
+    },
+    {
+      "id": "karalius_prof_34",
+      "file": "original_videos/karalius_prof_34.mp4",
+      "youtube_id": "DAXhjychhoE",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'debilai' [debil], 'šiknos' [sik] (21.3s)"
+    },
+    {
+      "id": "karalius_prof_35",
+      "file": "original_videos/karalius_prof_35.mp4",
+      "youtube_id": "DAXhjychhoE",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'blet' [ble], 'prisikviestum' [sik] (23.1s)"
+    },
+    {
+      "id": "karalius_prof_36",
+      "file": "original_videos/karalius_prof_36.mp4",
+      "youtube_id": "5TvrAjcZYNw",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'ble' [ble], 'debilai' [debil] (20.7s)"
+    },
+    {
+      "id": "karalius_prof_37",
+      "file": "original_videos/karalius_prof_37.mp4",
+      "youtube_id": "y3UteynmikA",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'nachui' [nachui], 'pisa' [pis] (22.6s)"
+    },
+    {
+      "id": "karalius_prof_38",
+      "file": "original_videos/karalius_prof_38.mp4",
+      "youtube_id": "Q7EuWWdNeV0",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 3 roots: 'blet' [ble], 'nepisk' [pis], 'pochui' [nachui] (20.5s)"
+    },
+    {
+      "id": "karalius_prof_39",
+      "file": "original_videos/karalius_prof_39.mp4",
+      "youtube_id": "Q7EuWWdNeV0",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 3 roots: 'blet' [ble], 'nepisk' [pis], 'pochui' [nachui] (20.5s)"
+    },
+    {
+      "id": "karalius_prof_40",
+      "file": "original_videos/karalius_prof_40.mp4",
+      "youtube_id": "DAXhjychhoE",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'debilai' [debil], 'šiknos' [sik] (21.3s)"
+    },
+    {
+      "id": "karalius_prof_41",
+      "file": "original_videos/karalius_prof_41.mp4",
+      "youtube_id": "DAXhjychhoE",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'blet' [ble], 'prisikviestum' [sik] (23.1s)"
+    },
+    {
+      "id": "karalius_prof_42",
+      "file": "original_videos/karalius_prof_42.mp4",
+      "youtube_id": "5TvrAjcZYNw",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'ble' [ble], 'debilai' [debil] (20.7s)"
+    },
+    {
+      "id": "karalius_prof_43",
+      "file": "original_videos/karalius_prof_43.mp4",
+      "youtube_id": "y3UteynmikA",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'nachui' [nachui], 'pisa' [pis] (22.6s)"
+    },
+    {
+      "id": "karalius_prof_44",
+      "file": "original_videos/karalius_prof_44.mp4",
+      "youtube_id": "4oajhqE66RQ",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 3 roots: 'piskit' [pis], 'nachai' [nachui], 'blet' [ble] (19.2s)"
+    },
+    {
+      "id": "karalius_prof_45",
+      "file": "original_videos/karalius_prof_45.mp4",
+      "youtube_id": "Q7EuWWdNeV0",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 3 roots: 'blet' [ble], 'nepisk' [pis], 'pochui' [nachui] (20.5s)"
+    },
+    {
+      "id": "karalius_prof_46",
+      "file": "original_videos/karalius_prof_46.mp4",
+      "youtube_id": "DAXhjychhoE",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'debilai' [debil], 'šiknos' [sik] (21.3s)"
+    },
+    {
+      "id": "karalius_prof_47",
+      "file": "original_videos/karalius_prof_47.mp4",
+      "youtube_id": "DAXhjychhoE",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'blet' [ble], 'prisikviestum' [sik] (23.1s)"
+    },
+    {
+      "id": "karalius_prof_48",
+      "file": "original_videos/karalius_prof_48.mp4",
+      "youtube_id": "5TvrAjcZYNw",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'ble' [ble], 'debilai' [debil] (20.7s)"
+    },
+    {
+      "id": "karalius_prof_49",
+      "file": "original_videos/karalius_prof_49.mp4",
+      "youtube_id": "y3UteynmikA",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'nachui' [nachui], 'pisa' [pis] (22.6s)"
+    },
+    {
+      "id": "karalius_prof_50",
+      "file": "original_videos/karalius_prof_50.mp4",
+      "youtube_id": "4oajhqE66RQ",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 3 roots: 'piskit' [pis], 'nachai' [nachui], 'blet' [ble] (19.2s)"
+    },
+    {
+      "id": "karalius_prof_51",
+      "file": "original_videos/karalius_prof_51.mp4",
+      "youtube_id": "PZ2gyZC5Kuw",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 3 roots: 'pochui' [nachui], 'prisikviestan' [sik], 'pochui' [nachui], 'pochui' [nachui], 'pochui' [nachui], 'pochui' [nachui], 'apipisą' [pis] (20.6s)"
+    },
+    {
+      "id": "karalius_prof_52",
+      "file": "original_videos/karalius_prof_52.mp4",
+      "youtube_id": "3_wAkycMk0c",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'blet' [ble], 'blet' [ble], 'piso' [pis] (20.3s)"
+    },
+    {
+      "id": "karalius_prof_53",
+      "file": "original_videos/karalius_prof_53.mp4",
+      "youtube_id": "3_wAkycMk0c",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'ble' [ble], 'pizdės' [pis] (22.8s)"
+    },
+    {
+      "id": "karalius_prof_54",
+      "file": "original_videos/karalius_prof_54.mp4",
+      "youtube_id": "7og_55op5Kg",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'debilas' [debil], 'blicas' [ble], 'blicas' [ble] (21.7s)"
+    },
+    {
+      "id": "karalius_prof_55",
+      "file": "original_videos/karalius_prof_55.mp4",
+      "youtube_id": "7og_55op5Kg",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'debilės' [debil], 'ble' [ble] (21.4s)"
+    },
+    {
+      "id": "karalius_prof_56",
+      "file": "original_videos/karalius_prof_56.mp4",
+      "youtube_id": "7og_55op5Kg",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'blet' [ble], 'blet' [ble], 'užpisa' [pis] (20.6s)"
+    },
+    {
+      "id": "karalius_prof_57",
+      "file": "original_videos/karalius_prof_57.mp4",
+      "youtube_id": "tGw1JL9vQ0k",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'blet' [ble], 'piso' [pis] (21.8s)"
+    },
+    {
+      "id": "karalius_prof_58",
+      "file": "original_videos/karalius_prof_58.mp4",
+      "youtube_id": "CfKsB4pVaW8",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'pistis' [pis], 'pisa' [pis], 'šikną' [sik] (20.8s)"
+    },
+    {
+      "id": "karalius_prof_59",
+      "file": "original_videos/karalius_prof_59.mp4",
+      "youtube_id": "bT-MuUiZ5Nc",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'blet' [ble], 'pisa' [pis] (21.2s)"
+    },
+    {
+      "id": "karalius_prof_60",
+      "file": "original_videos/karalius_prof_60.mp4",
+      "youtube_id": "bT-MuUiZ5Nc",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'nachui' [nachui], 'dalbajobe' [dalbajob] (23.9s)"
+    },
+    {
+      "id": "karalius_prof_61",
+      "file": "original_videos/karalius_prof_61.mp4",
+      "youtube_id": "bT-MuUiZ5Nc",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'nachui' [nachui], 'debilo' [debil] (19.6s)"
+    },
+    {
+      "id": "karalius_prof_62",
+      "file": "original_videos/karalius_prof_62.mp4",
+      "youtube_id": "hrqrSXe8fU0",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'dalbajobų' [dalbajob], 'išpistom' [pis] (19.5s)"
+    },
+    {
+      "id": "karalius_prof_63",
+      "file": "original_videos/karalius_prof_63.mp4",
+      "youtube_id": "hrqrSXe8fU0",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'jobanė' [job], 'blet' [ble] (20.2s)"
+    },
+    {
+      "id": "karalius_prof_64",
+      "file": "original_videos/karalius_prof_64.mp4",
+      "youtube_id": "QNMnH5WOVIw",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Karalius commentary with 2 roots: 'pisk' [pis], 'nachui' [nachui] (19.4s)"
     }
   ]
 }
