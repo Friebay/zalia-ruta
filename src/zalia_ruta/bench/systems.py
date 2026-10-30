@@ -36,12 +36,99 @@ def deserialize_words(data: List[Dict[str, Any]]) -> List[WordTimestamp]:
     ]
 
 
+CT2_LOCAL_PATH = Path("models/paprika-whisper-lt-v3-ct2-int8_float16")
+CT2_MODEL_ID = str(CT2_LOCAL_PATH) if CT2_LOCAL_PATH.exists() else "RobertasTa/paprika-whisper-lt-v3-ct2-int8"
+
+CT2_FP16_LOCAL_PATH = Path("models/paprika-whisper-lt-v3-ct2-float16")
+CT2_FP16_MODEL_ID = str(CT2_FP16_LOCAL_PATH)
+
 KNOWN_MODELS: Dict[str, str] = {
     "paprika": "kristijonas/paprika-whisper-lt-v3",
+    "paprika_prompt": "kristijonas/paprika-whisper-lt-v3",
+    "paprika_ct2": CT2_MODEL_ID,
+    "paprika_ct2_prompt": CT2_MODEL_ID,
+    "paprika_ct2_fp16": CT2_FP16_MODEL_ID,
     "whisper_small_lt": "DeividasM/whisper-small-lt",
     "azuolas": "akisviete/azuolas-whisper-lt",
     "turbo": "openai/whisper-large-v3-turbo",
+    "lt_ausys": "RobertasTa/lt-ausys",
 }
+
+
+class LtAusysASR:
+    """Adapter for ONNX-ASR Parakeet-TDT (RobertasTa/lt-ausys)."""
+
+    def __init__(self, model_id: str = "RobertasTa/lt-ausys"):
+        try:
+            import onnx_asr
+        except ImportError as e:
+            raise ImportError(
+                "onnx-asr is required for lt_ausys. "
+                "Install it via `uv add --optional bench onnx-asr`."
+            ) from e
+        self.model = onnx_asr.load_model(model_id, quantization="int8")
+        self.window_step = getattr(self.model.asr, "window_step", 0.01)
+        self.subsampling_factor = getattr(self.model.asr, "_subsampling_factor", 8)
+        self.token_dur = self.window_step * self.subsampling_factor
+
+    def transcribe_chunk(
+        self,
+        audio: np.ndarray,
+        sr: int = 16000,
+        time_offset: float = 0.0,
+        initial_prompt: Optional[str] = None,
+    ) -> List[WordTimestamp]:
+        import re
+
+        if audio.dtype != np.float32:
+            audio = audio.astype(np.float32)
+
+        res = self.model.with_timestamps().recognize(audio, sample_rate=sr)
+        if not getattr(res, "tokens", None) or not getattr(res, "timestamps", None):
+            return []
+
+        words: List[WordTimestamp] = []
+        curr_tokens: List[str] = []
+        curr_start: Optional[float] = None
+        curr_end: Optional[float] = None
+
+        for tok, ts in zip(res.tokens, res.timestamps):
+            clean_tok = tok.strip()
+            is_punc = bool(re.match(r"^[^\w\s]+$", clean_tok))
+            is_new_word = tok.startswith(" ") or (curr_tokens and is_punc)
+
+            if is_new_word and curr_tokens:
+                w_clean = re.sub(r"[^\w]", "", "".join(curr_tokens).strip())
+                if w_clean and curr_start is not None and curr_end is not None:
+                    words.append(
+                        WordTimestamp(
+                            word=w_clean,
+                            start=round(time_offset + curr_start, 3),
+                            end=round(time_offset + curr_end, 3),
+                        )
+                    )
+                curr_tokens = []
+                curr_start = None
+                curr_end = None
+
+            if not is_punc:
+                if curr_start is None:
+                    curr_start = ts
+                curr_end = ts + self.token_dur
+                curr_tokens.append(clean_tok)
+
+        if curr_tokens and curr_start is not None and curr_end is not None:
+            w_clean = re.sub(r"[^\w]", "", "".join(curr_tokens).strip())
+            if w_clean:
+                words.append(
+                    WordTimestamp(
+                        word=w_clean,
+                        start=round(time_offset + curr_start, 3),
+                        end=round(time_offset + curr_end, 3),
+                    )
+                )
+
+        return words
 
 
 class BenchmarkRunner:
@@ -51,20 +138,24 @@ class BenchmarkRunner:
         self.hyp_dir = self.bench_dir / "hyp"
         self.youtube_dir = self.bench_dir / "youtube"
 
-        self._asr_models: Dict[str, LithuanianASR] = {}
+        self._asr_models: Dict[str, Any] = {}
         self._mms_aligner: Optional[MMSAligner] = None
 
-    def get_asr(self, model_id: str) -> LithuanianASR:
-        if model_id not in self._asr_models:
-            asr = LithuanianASR(model_id, use_mms_align=False)
-            # Warm up CUDA kernels so clip 1 does not absorb one-time JIT and allocation latency
-            dummy_audio = np.zeros(8000, dtype=np.float32)
-            try:
-                asr.transcribe_chunk(dummy_audio, sr=16000, time_offset=0.0)
-            except Exception:
-                pass
-            self._asr_models[model_id] = asr
-        return self._asr_models[model_id]
+    def get_asr(self, model_id: str, initial_prompt: Optional[str] = None) -> Any:
+        cache_key = f"{model_id}::prompt={initial_prompt}"
+        if cache_key not in self._asr_models:
+            if "lt-ausys" in model_id.lower() or "lt_ausys" in model_id.lower():
+                asr: Any = LtAusysASR(model_id)
+            else:
+                asr = LithuanianASR(model_id, use_mms_align=False, initial_prompt=initial_prompt)
+                # Warm up CUDA kernels so clip 1 does not absorb one-time JIT and allocation latency
+                dummy_audio = np.zeros(8000, dtype=np.float32)
+                try:
+                    asr.transcribe_chunk(dummy_audio, sr=16000, time_offset=0.0)
+                except Exception:
+                    pass
+            self._asr_models[cache_key] = asr
+        return self._asr_models[cache_key]
 
     def get_hyp_path(self, system_id: str, clip_id: str) -> Path:
         return self.hyp_dir / system_id / f"{clip_id}.json"
@@ -110,14 +201,16 @@ class BenchmarkRunner:
             if cached is not None:
                 return cached
 
-        asr = self.get_asr(model_id)
+        from zalia_ruta.asr import DEFAULT_INITIAL_PROMPT
+        eff_prompt = DEFAULT_INITIAL_PROMPT if "prompt" in prefix else None
+        asr = self.get_asr(model_id, initial_prompt=eff_prompt)
 
         if torch.cuda.is_available():
             torch.cuda.reset_peak_memory_stats()
             torch.cuda.synchronize()
 
         t0 = time.perf_counter()
-        words = asr.transcribe_chunk(audio, sr=sr, time_offset=0.0)
+        words = asr.transcribe_chunk(audio, sr=sr, time_offset=0.0, initial_prompt=eff_prompt)
         if torch.cuda.is_available():
             torch.cuda.synchronize()
         t1 = time.perf_counter()
@@ -240,6 +333,15 @@ class BenchmarkRunner:
 
     def run_whisper_small_acoustic(self, clip_id: str, audio: np.ndarray, sr: int = 16000, force: bool = False) -> List[WordTimestamp]:
         return self.run_model_acoustic(KNOWN_MODELS["whisper_small_lt"], "whisper_small_lt", clip_id, audio, sr=sr, force=force)
+
+    def run_paprika_prompt_raw(self, clip_id: str, audio: np.ndarray, sr: int = 16000, force: bool = False) -> List[WordTimestamp]:
+        return self.run_model_raw(KNOWN_MODELS["paprika"], "paprika_prompt", clip_id, audio, sr=sr, force=force)
+
+    def run_paprika_prompt_refined(self, clip_id: str, audio: np.ndarray, sr: int = 16000, force: bool = False) -> List[WordTimestamp]:
+        return self.run_model_refined(KNOWN_MODELS["paprika"], "paprika_prompt", clip_id, audio, sr=sr, force=force)
+
+    def run_paprika_prompt_acoustic(self, clip_id: str, audio: np.ndarray, sr: int = 16000, force: bool = False) -> List[WordTimestamp]:
+        return self.run_model_acoustic(KNOWN_MODELS["paprika"], "paprika_prompt", clip_id, audio, sr=sr, force=force)
 
     def run_youtube_auto(self, clip_id: str) -> Optional[List[WordTimestamp]]:
         cached = self.load_cached("youtube_auto", clip_id)

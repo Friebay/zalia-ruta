@@ -20,6 +20,8 @@ def fetch_youtube_captions(
 
     cmd = [
         "yt-dlp",
+        "--cookies-from-browser",
+        "firefox",
         "--skip-download",
         "--write-auto-subs",
         "--sub-langs",

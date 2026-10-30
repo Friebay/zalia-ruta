@@ -287,6 +287,10 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
         return
 
     # Compute aggregate macro averages per system
+    clip_timing_audited = {
+        c["id"]: c.get("timing_audited", True) for c in manifest.get("clips", [])
+    }
+
     system_aggregates = {}
     for sys_id in systems:
         sys_res = [r for r in results if r.system_id == sys_id]
@@ -294,11 +298,15 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
             continue
         mean_wer = sum(r.wer for r in sys_res) / len(sys_res)
         mean_cer = sum(r.cer for r in sys_res) / len(sys_res)
-        timing_list = [r.timing for r in sys_res if r.timing]
+        timing_list = [
+            r.timing for r in sys_res
+            if r.timing and clip_timing_audited.get(r.clip_id, True)
+        ]
         within_50 = sum(t.within_50ms_pct for t in timing_list) / len(timing_list) if timing_list else 0.0
         bleed = sum(t.pause_bleed_pct for t in timing_list) / len(timing_list) if timing_list else 0.0
         system_aggregates[sys_id] = {
             "clips": len(sys_res),
+            "audited_clips": len(timing_list),
             "wer": mean_wer,
             "cer": mean_cer,
             "within_50": within_50,
@@ -322,15 +330,16 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
 
     # Print Executive Summary table
     click.echo("\n============================== Benchmark Executive Summary ==============================")
-    sum_headers = ["System", "Clips", "Macro WER%", "Macro CER%", "≤50ms Precision", "Pause Bleed%", "RTF", "Speed", "Peak VRAM"]
-    click.echo("{:<26} {:>6} {:>12} {:>12} {:>17} {:>14} {:>8} {:>8} {:>11}".format(*sum_headers))
-    click.echo("-" * 120)
+    sum_headers = ["System", "Clips", "Macro WER%", "Macro CER%", "≤50ms Precision*", "Pause Bleed%*", "RTF", "Speed", "Peak VRAM"]
+    click.echo("{:<26} {:>6} {:>12} {:>12} {:>18} {:>15} {:>8} {:>8} {:>11}".format(*sum_headers))
+    click.echo("-" * 122)
     for sys_id, agg in system_aggregates.items():
-        click.echo("{:<26} {:>6} {:>11.2f}% {:>11.2f}% {:>16.1f}% {:>13.1f}% {:>8} {:>8} {:>11}".format(
+        click.echo("{:<26} {:>6} {:>11.2f}% {:>11.2f}% {:>17.1f}% {:>14.1f}% {:>8} {:>8} {:>11}".format(
             sys_id, agg["clips"], agg["wer"], agg["cer"], agg["within_50"], agg["bleed"],
             agg["rtf"], agg["speed"], agg["vram"]
         ))
-    click.echo("-" * 120)
+    click.echo("-" * 122)
+    click.echo("*Timing metrics computed strictly across human-audited clips (excluding timing_audited=False).")
 
     # Print Detailed Per-Clip Table
     click.echo("\nDetailed Per-Clip Results:")
@@ -348,18 +357,20 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
         report_lines.append(
             f"| {sys_id} | {agg['clips']} | {agg['wer']:.2f}% | {agg['cer']:.2f}% | {agg['within_50']:.1f}% | {agg['bleed']:.1f}% | {agg['rtf']} | {agg['speed']} | {agg['vram']} |"
         )
-    report_lines.append("\n## Detailed Per-Clip Results\n")
+    report_lines.append("\n> \\*Timing precision and pause bleed metrics are evaluated exclusively on human-audited clips (`timing_audited: true`). Clips marked `timing_audited: false` are evaluated for WER%/CER% only to prevent circular ground-truth bias.\n")
+    report_lines.append("## Detailed Per-Clip Results\n")
     report_lines.append(f"| {' | '.join(headers)} |")
     report_lines.append(f"| {' | '.join(['---'] * len(headers))} |")
 
     for r in results:
         t = r.timing
+        is_timing_audited = clip_timing_audited.get(r.clip_id, True)
         sys_metrics = runner.load_metrics(r.system_id)
         cm = sys_metrics.get(r.clip_id)
         rtf_col = f"{cm['rtf']:.3f}" if cm else "N/A"
         lat_col = f"{cm['latency_s']:.2f}s" if cm else "N/A"
 
-        if t:
+        if t and is_timing_audited:
             row = [
                 r.system_id,
                 r.clip_id,
@@ -374,7 +385,8 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
                 lat_col,
             ]
         else:
-            row = [r.system_id, r.clip_id, f"{r.wer:.1f}", f"{r.cer:.1f}", "N/A", "N/A", "N/A", "N/A", "N/A", rtf_col, lat_col]
+            timing_note = "N/A*" if not is_timing_audited else "N/A"
+            row = [r.system_id, r.clip_id, f"{r.wer:.1f}", f"{r.cer:.1f}", timing_note, timing_note, timing_note, timing_note, timing_note, rtf_col, lat_col]
 
         click.echo("{:<26} {:<20} {:>6} {:>6} {:>15} {:>13} {:>8} {:>14} {:>13} {:>8} {:>12}".format(*row))
         report_lines.append(f"| {' | '.join(row)} |")
