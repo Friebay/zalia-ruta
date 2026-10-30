@@ -746,6 +746,38 @@
       "category": "profanity",
       "timing_audited": false,
       "notes": "Karalius commentary with 2 roots: 'pisk' [pis], 'nachui' [nachui] (19.4s)"
+    },
+    {
+      "id": "karalius_prof_65",
+      "file": "original_videos/karalius_prof_65.mp4",
+      "youtube_id": "U9zCzviOi-s",
+      "category": "reaction",
+      "timing_audited": false,
+      "notes": "Karalius reaction/commentary: 'leisk savo laiką nesąmonėm' (10.5s)"
+    },
+    {
+      "id": "karalius_prof_66",
+      "file": "original_videos/karalius_prof_66.mp4",
+      "youtube_id": "U9zCzviOi-s",
+      "category": "reaction",
+      "timing_audited": false,
+      "notes": "Karalius reaction/commentary with insults: 'degraduk', 'menkista', 'tafak' (34.6s)"
+    },
+    {
+      "id": "karalius_prof_67",
+      "file": "original_videos/karalius_prof_67.mp4",
+      "youtube_id": "U9zCzviOi-s",
+      "category": "reaction",
+      "timing_audited": false,
+      "notes": "Karalius reaction/commentary: 'dešimties metų banas holy shit' (20.0s)"
+    },
+    {
+      "id": "karalius_prof_68",
+      "file": "original_videos/karalius_prof_68.mp4",
+      "youtube_id": "U9zCzviOi-s",
+      "category": "reaction",
+      "timing_audited": false,
+      "notes": "Karalius reaction/commentary: 'konservatnikų informatnikas' (12.0s)"
     }
   ]
 }

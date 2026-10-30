@@ -5,7 +5,7 @@
 | System | Clips | Macro WER% | Macro CER% | ≤50ms Precision* | Pause Bleed%* | RTF | Speed | Peak VRAM |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | paprika_acoustic | 48 | 13.37% | 5.49% | 77.7% | 8.9% | 1.496 | 0.7x | 5050 MB |
-| paprika_ct2_acoustic | 100 | 7.69% | 3.39% | 78.7% | 8.6% | 0.547 | 3.0x | 2116 MB |
+| paprika_ct2_acoustic | 104 | 8.23% | 3.60% | 78.7% | 8.6% | 0.534 | 3.0x | 2116 MB |
 | paprika_ct2_prompt_acoustic | 47 | 17.61% | 9.14% | 77.7% | 11.4% | 0.853 | 1.7x | 2116 MB |
 | paprika_ct2_fp16_acoustic | 1 | 0.00% | 0.00% | 78.3% | 13.8% | 1.563 | 0.6x | 1426 MB |
 | whisper_small_lt_acoustic | 47 | 169.91% | 120.62% | 65.9% | 14.0% | 2.214 | 0.7x | 5205 MB |
@@ -13,7 +13,7 @@
 | turbo_acoustic | 47 | 39.72% | 31.69% | 76.7% | 6.6% | 2.381 | 0.5x | 7444 MB |
 | lt_ausys_acoustic | 1 | 78.79% | 53.40% | 85.7% | 0.0% | 0.193 | 5.2x | 1388 MB |
 | paprika_refined | 48 | 13.37% | 5.49% | 69.9% | 7.5% | 1.494 | 0.7x | 5050 MB |
-| paprika_ct2_refined | 100 | 7.69% | 3.39% | 70.9% | 7.5% | 0.547 | 3.0x | 2116 MB |
+| paprika_ct2_refined | 104 | 8.23% | 3.60% | 70.9% | 7.5% | 0.534 | 3.0x | 2116 MB |
 | paprika_ct2_prompt_refined | 47 | 17.61% | 9.14% | 69.9% | 9.8% | 0.853 | 1.7x | 2116 MB |
 | paprika_ct2_fp16_refined | 1 | 0.00% | 0.00% | 60.9% | 10.8% | 1.562 | 0.6x | 1426 MB |
 | whisper_small_lt_refined | 47 | 169.91% | 120.62% | 58.4% | 13.0% | 2.213 | 0.7x | 5205 MB |
@@ -693,13 +693,21 @@
 | paprika_ct2_refined | karalius_prof_58 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.177 | 3.69s |
 | paprika_ct2_acoustic | karalius_prof_59 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.150 | 3.19s |
 | paprika_ct2_refined | karalius_prof_59 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.150 | 3.18s |
-| paprika_ct2_acoustic | karalius_prof_60 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.202 | 4.84s |
-| paprika_ct2_refined | karalius_prof_60 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.202 | 4.84s |
-| paprika_ct2_acoustic | karalius_prof_61 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.159 | 3.12s |
-| paprika_ct2_refined | karalius_prof_61 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.159 | 3.11s |
-| paprika_ct2_acoustic | karalius_prof_62 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.160 | 3.13s |
-| paprika_ct2_refined | karalius_prof_62 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.160 | 3.12s |
-| paprika_ct2_acoustic | karalius_prof_63 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.163 | 3.29s |
-| paprika_ct2_refined | karalius_prof_63 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.163 | 3.29s |
-| paprika_ct2_acoustic | karalius_prof_64 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.166 | 3.21s |
-| paprika_ct2_refined | karalius_prof_64 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.165 | 3.20s |
+| paprika_ct2_acoustic | karalius_prof_60 | 6.8 | 1.5 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.202 | 4.84s |
+| paprika_ct2_refined | karalius_prof_60 | 6.8 | 1.5 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.202 | 4.84s |
+| paprika_ct2_acoustic | karalius_prof_61 | 29.7 | 11.8 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.159 | 3.12s |
+| paprika_ct2_refined | karalius_prof_61 | 29.7 | 11.8 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.159 | 3.11s |
+| paprika_ct2_acoustic | karalius_prof_62 | 7.5 | 1.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.160 | 3.13s |
+| paprika_ct2_refined | karalius_prof_62 | 7.5 | 1.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.160 | 3.12s |
+| paprika_ct2_acoustic | karalius_prof_63 | 11.5 | 4.1 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.163 | 3.29s |
+| paprika_ct2_refined | karalius_prof_63 | 11.5 | 4.1 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.163 | 3.29s |
+| paprika_ct2_acoustic | karalius_prof_64 | 3.7 | 1.6 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.166 | 3.21s |
+| paprika_ct2_refined | karalius_prof_64 | 3.7 | 1.6 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.165 | 3.20s |
+| paprika_ct2_acoustic | karalius_prof_65 | 13.6 | 7.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.259 | 2.71s |
+| paprika_ct2_refined | karalius_prof_65 | 13.6 | 7.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.258 | 2.71s |
+| paprika_ct2_acoustic | karalius_prof_66 | 6.7 | 2.4 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.183 | 6.34s |
+| paprika_ct2_refined | karalius_prof_66 | 6.7 | 2.4 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.183 | 6.33s |
+| paprika_ct2_acoustic | karalius_prof_67 | 6.7 | 4.5 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.191 | 3.81s |
+| paprika_ct2_refined | karalius_prof_67 | 6.7 | 4.5 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.190 | 3.81s |
+| paprika_ct2_acoustic | karalius_prof_68 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.189 | 2.27s |
+| paprika_ct2_refined | karalius_prof_68 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.189 | 2.26s |
