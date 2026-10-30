@@ -118,3 +118,24 @@ def test_acoustic_refine_words():
     # There MUST be a significant gap between word 0 and word 1
     gap = refined[1].start - refined[0].end
     assert gap > 0.60, f"Expected gap > 600ms, got {gap*1000:.0f}ms"
+
+
+def test_lithuanian_asr_backend_resolution():
+    from pathlib import Path
+    from zalia_ruta.asr import LithuanianASR, DEFAULT_INITIAL_PROMPT
+
+    ct2_path = Path("models/paprika-whisper-lt-v3-ct2-int8_float16")
+    if ct2_path.exists():
+        asr = LithuanianASR(model_id=str(ct2_path), device="cpu", backend="auto", use_mms_align=False)
+        assert asr.effective_backend == "faster-whisper"
+        assert asr.compute_type == "int8"
+        assert asr.initial_prompt == DEFAULT_INITIAL_PROMPT
+
+        # Custom prompt
+        asr_custom = LithuanianASR(model_id=str(ct2_path), device="cpu", backend="auto", use_mms_align=False, initial_prompt="blet nachui")
+        assert asr_custom.initial_prompt == "blet nachui"
+
+        # Disabled prompt
+        asr_disabled = LithuanianASR(model_id=str(ct2_path), device="cpu", backend="auto", use_mms_align=False, initial_prompt=None)
+        assert asr_disabled.initial_prompt is None
+

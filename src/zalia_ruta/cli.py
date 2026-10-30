@@ -114,10 +114,36 @@ from zalia_ruta.subtitles import generate_srt
     help="Only perform transcription and export verbatim .srt subtitles without bleeping or video remuxing.",
 )
 @click.option(
+    "--backend",
+    type=click.Choice(["transformers", "faster-whisper", "auto"], case_sensitive=False),
+    default="transformers",
+    show_default=True,
+    help="ASR backend engine (transformers for highest accuracy 13.4% WER, or faster-whisper for 5x speed and low VRAM).",
+)
+@click.option(
+    "--model",
+    "model_id",
+    type=str,
+    default=None,
+    help="Custom model path or Hugging Face ID (defaults to paprika-whisper-lt-v3).",
+)
+@click.option(
     "--highlight-clips",
     type=int,
     default=None,
     help="Extract Top N ~1-minute pause-aligned clips with highest profanity density (raw MP4 + 16kHz WAV + verbatim SRT).",
+)
+@click.option(
+    "--initial-prompt",
+    type=str,
+    default=None,
+    help="Custom initial prompt to prime Whisper decoder (defaults to built-in Lithuanian streamer vocabulary).",
+)
+@click.option(
+    "--no-prompt",
+    is_flag=True,
+    default=False,
+    help="Disable Whisper initial prompt conditioning completely.",
 )
 def main(
     input_path: Path,
@@ -128,11 +154,15 @@ def main(
     pad_start: float,
     pad_end: float,
     device: Optional[str],
+    backend: str,
+    model_id: Optional[str],
     mms_align: bool,
     export_srt: bool,
     keep_temp: bool,
     transcribe_only: bool,
     highlight_clips: Optional[int] = None,
+    initial_prompt: Optional[str] = None,
+    no_prompt: bool = False,
 ) -> None:
     """
     Zalia-Ruta: Automated Lithuanian Video & Audio Profanity Bleeper.
@@ -209,8 +239,36 @@ def main(
 
         # Step 3: Transcription & MMS Forced Alignment
         align_desc = "with MMS forced alignment" if mms_align else "(raw Whisper timestamps)"
-        click.echo(f"\n[4/{total_steps}] Transcribing Lithuanian speech {align_desc} on {device or 'auto'}...")
-        asr = LithuanianASR(device=device, use_mms_align=mms_align)
+        backend_desc = f" [{backend}]" if backend != "auto" else ""
+        click.echo(f"\n[4/{total_steps}] Transcribing Lithuanian speech {align_desc} on {device or 'auto'}{backend_desc}...")
+
+        if model_id is None:
+            if backend == "faster-whisper":
+                local_ct2 = Path("models/paprika-whisper-lt-v3-ct2-int8_float16")
+                resolved_model = str(local_ct2) if local_ct2.exists() else "RobertasTa/paprika-whisper-lt-v3-ct2-int8"
+            else:
+                resolved_model = "kristijonas/paprika-whisper-lt-v3"
+        else:
+            resolved_model = model_id
+
+        if device != "cpu" and backend == "transformers":
+            try:
+                import torch
+                if torch.cuda.is_available() and torch.cuda.get_device_properties(0).total_memory <= 4.5 * (1024 ** 3):
+                    click.secho("  Tip: Detected <=4GB VRAM GPU. If transcription feels slow, use '--backend faster-whisper' for 5x speed.", fg="cyan")
+            except Exception:
+                pass
+
+        from zalia_ruta.asr import DEFAULT_INITIAL_PROMPT
+        asr_prompt = "" if no_prompt else (initial_prompt if initial_prompt is not None else DEFAULT_INITIAL_PROMPT)
+
+        asr = LithuanianASR(
+            model_id=resolved_model,
+            device=device,
+            use_mms_align=mms_align,
+            backend=backend,
+            initial_prompt=asr_prompt,
+        )
         words = asr.transcribe_chunks(chunks, sr=sr)
         click.echo(f"  Transcribed {len(words)} words total.")
 

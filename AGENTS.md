@@ -22,6 +22,16 @@ uv run zalia-ruta -i "<input_path>" --transcribe-only
 - Skips profanity bleeping, sine generation, audio modification, and video remuxing.
 - Directly exports clean, verbatim word-level `.srt` subtitles without `[BLEEP: word]` tags.
 
+### Optional Acceleration: High-Speed CTranslate2 / INT8 Backend
+For memory-constrained GPUs (<=4GB VRAM) or when 5x–8x faster processing is preferred:
+
+```powershell
+uv run zalia-ruta -i "<input_path>" --backend faster-whisper
+```
+- Runs `faster-whisper` CTranslate2 INT8 model (`models/paprika-whisper-lt-v3-ct2-int8_float16` or `RobertasTa/paprika-whisper-lt-v3-ct2-int8`).
+- Uses only ~1.4 GB to 2.1 GB VRAM, completely avoiding Windows RAM paging on 4 GB GPUs.
+- Note: The default backend remains `transformers` (PyTorch FP16) to ensure minimum WER (13.43% WER vs 16.37% INT8).
+
 ### Critical Rules for Path Handling
 1. **Always double-quote the input path (`"<path>"`)**:
    - Windows file paths frequently contain spaces, parentheses, or Lithuanian diacritics (e.g. `"original_videos\Obage velniu (atiduok karve2).mp4"`).

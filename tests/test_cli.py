@@ -12,6 +12,9 @@ def test_cli_help():
     assert "--transcribe-only" in result.output
     assert "--freq" in result.output
     assert "--volume" in result.output
+    assert "--backend" in result.output
+    assert "--initial-prompt" in result.output
+    assert "--no-prompt" in result.output
 
 
 def test_cli_missing_input():

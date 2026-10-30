@@ -1,8 +1,10 @@
 import logging
+import os
 import re
 import sys
 import warnings
 from dataclasses import dataclass
+from pathlib import Path
 from typing import List, Optional, Union
 import numpy as np
 import torch
@@ -14,6 +16,23 @@ from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=UserWarning, module="transformers")
 logging.getLogger("transformers").setLevel(logging.ERROR)
+
+
+def setup_cuda_dll_path() -> None:
+    """
+    On Windows, ensures torch/lib is in the DLL search path so CTranslate2 can locate CUDA 12 DLLs (cublas64_12.dll).
+    """
+    if sys.platform == "win32":
+        try:
+            import torch
+            torch_lib = Path(torch.__file__).parent / "lib"
+            if torch_lib.exists() and hasattr(os, "add_dll_directory"):
+                os.add_dll_directory(str(torch_lib))
+        except Exception:
+            pass
+
+
+setup_cuda_dll_path()
 
 from zalia_ruta.chunker import AudioChunk
 
@@ -157,11 +176,19 @@ class MMSWordAligner:
         return results
 
 
+DEFAULT_INITIAL_PROMPT = (
+    "Seni, davai, davadzia, streameris. Blet, nachui, kurva, pize, pisau, jobtvaimat. "
+    "Actually, fuck this, mind fucked, I guess."
+)
+
+
 class LithuanianASR:
     """
     ASR transcription wrapper for Lithuanian Whisper models (default: kristijonas/paprika-whisper-lt-v3)
-    with MMS forced alignment for word-boundary precision.
+    supporting both 'transformers' and 'faster-whisper' (CTranslate2) backends, with MMS forced alignment.
     """
+
+    _SENTINEL = object()
 
     def __init__(
         self,
@@ -169,59 +196,110 @@ class LithuanianASR:
         device: Optional[str] = None,
         torch_dtype: Optional[torch.dtype] = None,
         use_mms_align: bool = True,
+        backend: str = "auto",
+        compute_type: Optional[str] = None,
+        initial_prompt: Optional[str] = DEFAULT_INITIAL_PROMPT,
     ):
-        self.model_id = model_id
+        self.model_id = str(model_id)
         if device is None:
             self.device = "cuda" if torch.cuda.is_available() else "cpu"
         else:
             self.device = device
 
-        if torch_dtype is None:
-            self.torch_dtype = torch.float16 if self.device == "cuda" else torch.float32
-        else:
-            self.torch_dtype = torch_dtype
-
+        self.backend = backend
         self.use_mms_align = use_mms_align
+        self.initial_prompt = initial_prompt.strip() if isinstance(initial_prompt, str) and initial_prompt.strip() else None
+        self._prompt_ids_tensor: Optional[torch.Tensor] = None
         self._aligner: Optional[MMSWordAligner] = None
 
-        print(f"[ASR] Loading model '{self.model_id}' on {self.device} ({self.torch_dtype})...")
-
-        self.processor = AutoProcessor.from_pretrained(
-            self.model_id,
-            language="lithuanian",
-            task="transcribe",
+        # Resolve effective backend
+        model_path = Path(self.model_id)
+        is_ct2_model = (
+            (model_path.exists() and (model_path / "model.bin").exists())
+            or "ct2" in self.model_id.lower()
+            or "robertasta/paprika-whisper" in self.model_id.lower()
         )
-        self.model = AutoModelForSpeechSeq2Seq.from_pretrained(
-            self.model_id,
-            torch_dtype=self.torch_dtype,
-            low_cpu_mem_usage=True,
-            use_safetensors=True,
-        ).to(self.device)
-        self.model.eval()
+        if self.backend == "auto":
+            self.effective_backend = "faster-whisper" if is_ct2_model else "transformers"
+        else:
+            self.effective_backend = self.backend
 
-        if getattr(self.model.generation_config, "no_timestamps_token_id", None) is None:
+        if self.effective_backend == "faster-whisper":
+            setup_cuda_dll_path()
             try:
-                from transformers import GenerationConfig
-                base_name = "openai/whisper-small"
-                if "base" in self.model_id.lower():
-                    base_name = "openai/whisper-base"
-                elif "medium" in self.model_id.lower():
-                    base_name = "openai/whisper-medium"
-                elif "large" in self.model_id.lower():
-                    base_name = "openai/whisper-large-v3"
-                self.model.generation_config = GenerationConfig.from_pretrained(base_name)
-            except Exception:
-                pass
+                from faster_whisper import WhisperModel
+            except ImportError as e:
+                raise ImportError(
+                    "faster-whisper is required for backend='faster-whisper'. "
+                    "Install it via `uv add faster-whisper`."
+                ) from e
 
-        self.pipe = pipeline(
-            "automatic-speech-recognition",
-            model=self.model,
-            tokenizer=self.processor.tokenizer,
-            feature_extractor=self.processor.feature_extractor,
-            torch_dtype=self.torch_dtype,
-            device=self.device,
-        )
-        print("[ASR] Whisper model loaded.")
+            if compute_type is None:
+                if "float16" in self.model_id.lower() and "int8" not in self.model_id.lower():
+                    self.compute_type = "float16" if self.device == "cuda" else "float32"
+                else:
+                    self.compute_type = "int8_float16" if self.device == "cuda" else "int8"
+            else:
+                self.compute_type = compute_type
+
+            print(f"[ASR] Loading faster-whisper model '{self.model_id}' on {self.device} ({self.compute_type})...")
+            self._fw_model = WhisperModel(
+                self.model_id,
+                device=self.device,
+                compute_type=self.compute_type,
+            )
+            print("[ASR] faster-whisper model loaded.")
+        else:
+            if torch_dtype is None:
+                self.torch_dtype = torch.float16 if self.device == "cuda" else torch.float32
+            else:
+                self.torch_dtype = torch_dtype
+
+            print(f"[ASR] Loading transformers model '{self.model_id}' on {self.device} ({self.torch_dtype})...")
+
+            self.processor = AutoProcessor.from_pretrained(
+                self.model_id,
+                language="lithuanian",
+                task="transcribe",
+            )
+            self.model = AutoModelForSpeechSeq2Seq.from_pretrained(
+                self.model_id,
+                torch_dtype=self.torch_dtype,
+                low_cpu_mem_usage=True,
+                use_safetensors=True,
+            ).to(self.device)
+            self.model.eval()
+
+            if getattr(self.model.generation_config, "no_timestamps_token_id", None) is None:
+                try:
+                    from transformers import GenerationConfig
+                    base_name = "openai/whisper-small"
+                    if "base" in self.model_id.lower():
+                        base_name = "openai/whisper-base"
+                    elif "medium" in self.model_id.lower():
+                        base_name = "openai/whisper-medium"
+                    elif "large" in self.model_id.lower():
+                        base_name = "openai/whisper-large-v3"
+                    self.model.generation_config = GenerationConfig.from_pretrained(base_name)
+                except Exception:
+                    pass
+
+            if self.initial_prompt:
+                try:
+                    p_ids = self.processor.get_prompt_ids(self.initial_prompt)
+                    self._prompt_ids_tensor = torch.tensor(p_ids, device=self.device)
+                except Exception as e:
+                    print(f"[ASR] Warning: Could not pre-tokenize initial_prompt: {e}")
+
+            self.pipe = pipeline(
+                "automatic-speech-recognition",
+                model=self.model,
+                tokenizer=self.processor.tokenizer,
+                feature_extractor=self.processor.feature_extractor,
+                torch_dtype=self.torch_dtype,
+                device=self.device,
+            )
+            print("[ASR] Whisper model loaded.")
 
         if self.use_mms_align:
             print(f"[ASR] Initializing MMS Forced Aligner on {self.device}...")
@@ -249,6 +327,7 @@ class LithuanianASR:
         audio: np.ndarray,
         sr: int = 16000,
         time_offset: float = 0.0,
+        initial_prompt: Optional[Union[str, object]] = _SENTINEL,
     ) -> List[WordTimestamp]:
         """
         Transcribes a single audio chunk and returns word timestamps with global time offset added.
@@ -257,50 +336,102 @@ class LithuanianASR:
         if audio.dtype != np.float32:
             audio = audio.astype(np.float32)
 
-        # Call pipeline with word-level timestamp generation
-        result = self.pipe(
-            {"raw": audio, "sampling_rate": sr},
-            return_timestamps="word",
-            generate_kwargs={
+        # Resolve effective prompt for this chunk
+        if initial_prompt is self._SENTINEL:
+            effective_prompt = self.initial_prompt
+        else:
+            effective_prompt = initial_prompt.strip() if isinstance(initial_prompt, str) and initial_prompt.strip() else None
+
+        words: List[WordTimestamp] = []
+
+        if self.effective_backend == "faster-whisper":
+            fw_kwargs = {
+                "language": "lt",
+                "task": "transcribe",
+                "condition_on_previous_text": False,
+                "word_timestamps": True,
+            }
+            if effective_prompt:
+                fw_kwargs["initial_prompt"] = effective_prompt
+
+            segments, info = self._fw_model.transcribe(
+                audio,
+                **fw_kwargs,
+            )
+            for seg in segments:
+                if not seg.words:
+                    continue
+                for item in seg.words:
+                    w_text = item.word.strip()
+                    if not w_text:
+                        continue
+                    start_sec = time_offset + float(item.start)
+                    end_sec = time_offset + float(item.end)
+                    if end_sec <= start_sec:
+                        end_sec = start_sec + 0.10
+                    words.append(
+                        WordTimestamp(
+                            word=w_text,
+                            start=round(start_sec, 3),
+                            end=round(end_sec, 3),
+                            score=getattr(item, "probability", None),
+                        )
+                    )
+        else:
+            generate_kwargs = {
                 "language": "lithuanian",
                 "task": "transcribe",
                 "condition_on_prev_tokens": False,
-            },
-        )
+            }
+            if effective_prompt:
+                if effective_prompt == self.initial_prompt and self._prompt_ids_tensor is not None:
+                    generate_kwargs["prompt_ids"] = self._prompt_ids_tensor
+                else:
+                    try:
+                        p_ids = self.processor.get_prompt_ids(effective_prompt)
+                        generate_kwargs["prompt_ids"] = torch.tensor(p_ids, device=self.device)
+                    except Exception as e:
+                        print(f"[ASR] Warning: Failed to tokenize chunk prompt: {e}")
 
-        words: List[WordTimestamp] = []
-        raw_chunks = result.get("chunks", [])
-
-        last_valid_end = time_offset
-        for item in raw_chunks:
-            word_str = item.get("text", "").strip()
-            if not word_str:
-                continue
-
-            ts = item.get("timestamp", (None, None))
-            raw_start, raw_end = ts[0], ts[1]
-
-            if raw_start is None:
-                start_sec = last_valid_end
-            else:
-                start_sec = time_offset + float(raw_start)
-
-            if raw_end is None:
-                end_sec = start_sec + 0.30
-            else:
-                end_sec = time_offset + float(raw_end)
-
-            if end_sec < start_sec:
-                end_sec = start_sec + 0.10
-
-            last_valid_end = end_sec
-            words.append(
-                WordTimestamp(
-                    word=word_str,
-                    start=round(start_sec, 3),
-                    end=round(end_sec, 3),
-                )
+            # Call pipeline with word-level timestamp generation
+            result = self.pipe(
+                {"raw": audio, "sampling_rate": sr},
+                return_timestamps="word",
+                generate_kwargs=generate_kwargs,
             )
+
+            raw_chunks = result.get("chunks", [])
+
+            last_valid_end = time_offset
+            for item in raw_chunks:
+                word_str = item.get("text", "").strip()
+                if not word_str:
+                    continue
+
+                ts = item.get("timestamp", (None, None))
+                raw_start, raw_end = ts[0], ts[1]
+
+                if raw_start is None:
+                    start_sec = last_valid_end
+                else:
+                    start_sec = time_offset + float(raw_start)
+
+                if raw_end is None:
+                    end_sec = start_sec + 0.30
+                else:
+                    end_sec = time_offset + float(raw_end)
+
+                if end_sec < start_sec:
+                    end_sec = start_sec + 0.10
+
+                last_valid_end = end_sec
+                words.append(
+                    WordTimestamp(
+                        word=word_str,
+                        start=round(start_sec, 3),
+                        end=round(end_sec, 3),
+                    )
+                )
 
         # Align timestamps using MMS Forced Alignment if enabled
         if self.use_mms_align and words:
@@ -317,6 +448,7 @@ class LithuanianASR:
         self,
         chunks: List[AudioChunk],
         sr: int = 16000,
+        initial_prompt: Optional[Union[str, object]] = _SENTINEL,
     ) -> List[WordTimestamp]:
         """
         Transcribes a sequence of pause-aligned chunks and reconciles them into
@@ -341,6 +473,7 @@ class LithuanianASR:
                     chunk.audio,
                     sr=sr,
                     time_offset=chunk.start_sec,
+                    initial_prompt=initial_prompt,
                 )
                 all_words.extend(chunk_words)
                 if self.device == "cuda":

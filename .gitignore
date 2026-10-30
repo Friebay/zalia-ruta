@@ -186,7 +186,7 @@ output/
 output_test/
 
 # Benchmark working data
-# benchmark/audio/ tracks only the trimmed 47 benchmark clips (~16MB total)
+# benchmark/audio/ tracks trimmed benchmark clips
 benchmark/drafts/
 benchmark/hyp/
 benchmark/youtube/
@@ -195,4 +195,5 @@ benchmark/audio/B7Mygu8uiYM.*
 benchmark/audio/UBisblxMd5w.*
 benchmark/audio/CT0GB0vd1RI.*
 hf_export/
+models/
 
