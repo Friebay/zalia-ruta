@@ -65,11 +65,11 @@ A curated evaluation dataset consisting of **{total_clips} Lithuanian audio clip
 ## Dataset Overview
 
 - **Clips:** **{total_clips} unique clips** (16 kHz mono WAV, 16-bit PCM).
-- **Transcripts:** Human-audited verbatim Lithuanian orthographic transcripts.
+- **Transcripts:** Human-audited verbatim Lithuanian orthographic transcripts (~95% estimated accuracy; rapidly transcribed and audited to expand clip coverage, so minor colloquial phrasing, background noise mishearings, or non-standard slang spellings may be present).
 - **Coverage & Speech Diversity:**
   - Conversational speech, political debates, and news commentary (Alexander Stubb, Virginijus Sinkevičius, Vytautas Sinica, Ingrida Šimonytė).
-  - Streamer commentary, gaming reactions, heavy profanities, and compound slang / loanwords (100 Karalius clips).
-  - Natural pauses, background audio, and acoustic noise challenges.
+  - Streamer commentary, gaming reactions, heavy profanities, and compound slang / loanwords (~120 Karalius clips, including 97 profanity clips).
+  - Natural pauses, background audio, overlapping audio artifacts, and acoustic noise challenges.
 - **Alignment:** Word-level alignment timestamps will be provided in a future update.
 
 ---
