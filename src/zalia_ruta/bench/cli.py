@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Optional
 import click
 import soundfile as sf
+from tqdm import tqdm
 
 # Ensure UTF-8 console output on Windows
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
@@ -96,14 +97,18 @@ def run(system: Optional[str], model: Optional[str], clip: Optional[str], force:
     # Determine which model/system to run
     selected_model = model or ("whisper_small_lt" if system and "whisper_small" in system else None)
 
-    for c in manifest.get("clips", []):
+    all_clips = manifest.get("clips", [])
+    clips = [c for c in all_clips if not clip or c["id"] == clip]
+    tag = system or selected_model or "paprika"
+    pbar = tqdm(clips, desc=f"Benchmarking ({tag})", unit="clip")
+
+    for c in pbar:
         cid = c["id"]
-        if clip and cid != clip:
-            continue
+        pbar.set_postfix_str(cid)
 
         wav_path = BENCH_DIR / "audio" / f"{cid}.wav"
         if not wav_path.exists():
-            click.echo(f"[{cid}] Audio missing ({wav_path}), run 'zalia-bench prepare' first.")
+            pbar.write(f"[{cid}] Audio missing ({wav_path}), run 'zalia-bench prepare' first.")
             continue
 
         audio, sr = sf.read(str(wav_path))
