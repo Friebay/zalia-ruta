@@ -253,7 +253,7 @@ class BenchmarkRunner:
                     click.echo(f"  [{clip_id}] {system_id} (cached): total {m.get('latency_s', 0):.2f}s (audio: {m.get('duration_s', 0):.2f}s | RTF: {m.get('rtf', 0):.3f} | {m.get('speedup', 0)}x speed)")
                 return cached
 
-        raw_words = self.run_model_raw(model_id, prefix, clip_id, audio, sr=sr, force=False)
+        raw_words = self.run_model_raw(model_id, prefix, clip_id, audio, sr=sr, force=force)
         if self._mms_aligner is None:
             self._mms_aligner = MMSAligner()
 
@@ -301,7 +301,7 @@ class BenchmarkRunner:
                     click.echo(f"  [{clip_id}] {system_id} (cached): total {m.get('latency_s', 0):.2f}s (audio: {m.get('duration_s', 0):.2f}s | RTF: {m.get('rtf', 0):.3f} | {m.get('speedup', 0)}x speed)")
                 return cached
 
-        base_words = self.run_model_refined(model_id, prefix, clip_id, audio, sr=sr, force=False)
+        base_words = self.run_model_refined(model_id, prefix, clip_id, audio, sr=sr, force=force)
 
         t0 = time.perf_counter()
         refined = refine_word_boundaries(audio, base_words, sr=sr)
