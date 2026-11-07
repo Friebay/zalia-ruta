@@ -15,7 +15,7 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
         pass
 
 from zalia_ruta.bench.draft import create_disagreement_draft
-from zalia_ruta.bench.score import score_system
+from zalia_ruta.bench.score import compute_profanity_metrics_for_system, score_system
 from zalia_ruta.bench.srt_io import parse_srt, write_srt
 from zalia_ruta.bench.systems import BenchmarkRunner, KNOWN_MODELS, deserialize_words
 from zalia_ruta.bench.validate import validate_reference_file
@@ -348,6 +348,23 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
     click.echo("-" * 122)
     click.echo("*Timing metrics computed strictly across human-audited clips (excluding timing_audited=False).")
 
+    # Profanity Censorship Leaderboard (Swear Word Catch Rate)
+    prof_headers = ["System", "Caught / Total", "Missed", "False Alarm", "Recall% (Catch Rate)", "Precision%", "F1%"]
+    prof_results = {}
+    for sys_id in systems:
+        prof_results[sys_id] = compute_profanity_metrics_for_system(
+            manifest.get("clips", []), BENCH_DIR, runner, sys_id
+        )
+
+    click.echo("\n==================== Profanity Censorship Leaderboard (Swear Word Catch Rate) ====================")
+    click.echo("{:<26} {:>16} {:>8} {:>13} {:>22} {:>12} {:>8}".format(*prof_headers))
+    click.echo("-" * 110)
+    for sys_id, pm in prof_results.items():
+        click.echo("{:<26} {:>10}/{} {:>8} {:>13} {:>21.2f}% {:>11.2f}% {:>7.2f}%".format(
+            sys_id, pm.caught, pm.total_gt, pm.missed, pm.false_alarms, pm.recall_pct, pm.precision_pct, pm.f1_pct
+        ))
+    click.echo("-" * 110)
+
     # Print Detailed Per-Clip Table
     click.echo("\nDetailed Per-Clip Results:")
     headers = ["System", "Clip", "WER%", "CER%", "Start Med (ms)", "End Med (ms)", "≤50ms%", "End Bias (ms)", "Pause Bleed%", "RTF", "Latency (s)"]
@@ -365,6 +382,15 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
             f"| {sys_id} | {agg['clips']} | {agg['wer']:.2f}% | {agg['cer']:.2f}% | {agg['within_50']:.1f}% | {agg['bleed']:.1f}% | {agg['rtf']} | {agg['speed']} | {agg['vram']} |"
         )
     report_lines.append("\n> \\*Timing precision and pause bleed metrics are evaluated exclusively on human-audited clips (`timing_audited: true`). Clips marked `timing_audited: false` are evaluated for WER%/CER% only to prevent circular ground-truth bias.\n")
+
+    report_lines.append("## Profanity Censorship Leaderboard (Swear Word Catch Rate)\n")
+    report_lines.append(f"| {' | '.join(prof_headers)} |")
+    report_lines.append(f"| {' | '.join(['---'] * len(prof_headers))} |")
+    for sys_id, pm in prof_results.items():
+        report_lines.append(
+            f"| {sys_id} | {pm.caught}/{pm.total_gt} | {pm.missed} | {pm.false_alarms} | {pm.recall_pct:.2f}% | {pm.precision_pct:.2f}% | {pm.f1_pct:.2f}% |"
+        )
+    report_lines.append("\n> Evaluates how reliably each ASR model catches swear words across human-audited ground-truth profanities. Essential for automated censorship and bleeping pipelines.\n")
     report_lines.append("## Detailed Per-Clip Results\n")
     report_lines.append(f"| {' | '.join(headers)} |")
     report_lines.append(f"| {' | '.join(['---'] * len(headers))} |")

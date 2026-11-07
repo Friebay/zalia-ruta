@@ -71,3 +71,37 @@ def test_brand_name_normalization():
     assert normalize_word("dicord'as") == normalize_word("diskordas")
     assert normalize_word("Edge'ą") == normalize_word("edžą")
 
+
+def test_compute_profanity_metrics(tmp_path):
+    from unittest.mock import MagicMock
+    from zalia_ruta.bench.score import compute_profanity_metrics_for_system
+    from zalia_ruta.bench.srt_io import write_srt
+
+    refs_dir = tmp_path / "references"
+    refs_dir.mkdir(parents=True)
+    cues = [
+        Cue(index=1, start=1.0, end=1.5, text="labas"),
+        Cue(index=2, start=2.0, end=2.5, text="blet"),
+        Cue(index=3, start=3.0, end=3.5, text="kurva"),
+    ]
+    write_srt(cues, refs_dir / "c1.srt")
+
+    mock_runner = MagicMock()
+    # Model caught 'blet' at 2.0-2.5, missed 'kurva', and added an extra false alarm 'nachui' at 5.0
+    mock_runner.load_cached.return_value = [
+        WordTimestamp(word="blet", start=2.0, end=2.4),
+        WordTimestamp(word="saule", start=3.0, end=3.5),
+        WordTimestamp(word="nachui", start=5.0, end=5.5),
+    ]
+
+    manifest_clips = [{"id": "c1"}]
+    pm = compute_profanity_metrics_for_system(manifest_clips, tmp_path, mock_runner, "test_sys")
+    assert pm.total_gt == 2
+    assert pm.caught == 1
+    assert pm.missed == 1
+    assert pm.false_alarms == 1
+    assert pm.recall_pct == 50.0
+    assert pm.precision_pct == 50.0
+    assert pm.f1_pct == 50.0
+
+

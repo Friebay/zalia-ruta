@@ -4,33 +4,65 @@
 
 | System | Clips | Macro WER% | Macro CER% | ≤50ms Precision* | Pause Bleed%* | RTF | Speed | Peak VRAM |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| paprika_acoustic | 48 | 13.58% | 5.54% | 77.7% | 8.9% | 1.496 | 0.7x | 5050 MB |
-| paprika_ct2_acoustic | 133 | 13.01% | 5.33% | 78.7% | 8.6% | 0.331 | 3.0x | 2116 MB |
-| paprika_ct2_prompt_acoustic | 47 | 17.61% | 9.14% | 77.7% | 11.4% | 0.632 | 1.6x | 2116 MB |
+| paprika_acoustic | 48 | 13.38% | 5.50% | 77.8% | 8.9% | 1.496 | 0.7x | 5050 MB |
+| paprika_ct2_acoustic | 133 | 12.86% | 5.30% | 78.8% | 8.6% | 0.331 | 3.0x | 2116 MB |
+| paprika_ct2_prompt_acoustic | 47 | 17.41% | 9.09% | 77.8% | 11.4% | 0.632 | 1.6x | 2116 MB |
 | paprika_ct2_fp16_acoustic | 1 | 0.00% | 0.00% | 78.3% | 13.8% | 1.563 | 0.6x | 1426 MB |
-| whisper_small_lt_acoustic | 47 | 169.91% | 120.62% | 65.9% | 14.0% | 2.052 | 0.5x | 5205 MB |
-| azuolas_acoustic | 133 | 13.95% | 6.56% | 77.0% | 7.8% | 2.027 | 0.5x | 9462 MB |
-| turbo_acoustic | 47 | 39.72% | 31.69% | 76.7% | 6.6% | 2.054 | 0.5x | 7444 MB |
+| whisper_small_lt_acoustic | 47 | 169.91% | 120.56% | 65.9% | 14.0% | 2.052 | 0.5x | 5205 MB |
+| azuolas_acoustic | 133 | 13.81% | 6.52% | 77.2% | 7.8% | 2.027 | 0.5x | 9462 MB |
+| turbo_acoustic | 47 | 39.51% | 31.64% | 76.8% | 6.6% | 2.054 | 0.5x | 7444 MB |
 | lt_ausys_acoustic | 1 | 78.79% | 53.40% | 85.7% | 0.0% | 0.193 | 5.2x | 1388 MB |
-| paprika_refined | 48 | 13.58% | 5.54% | 69.9% | 7.5% | 1.494 | 0.7x | 5050 MB |
-| paprika_ct2_refined | 133 | 13.01% | 5.33% | 70.9% | 7.5% | 0.331 | 3.0x | 2116 MB |
-| paprika_ct2_prompt_refined | 47 | 17.61% | 9.14% | 69.9% | 9.8% | 0.632 | 1.6x | 2116 MB |
+| paprika_refined | 48 | 13.38% | 5.50% | 69.8% | 7.5% | 1.494 | 0.7x | 5050 MB |
+| paprika_ct2_refined | 133 | 12.86% | 5.30% | 70.8% | 7.5% | 0.331 | 3.0x | 2116 MB |
+| paprika_ct2_prompt_refined | 47 | 17.41% | 9.09% | 69.8% | 9.8% | 0.632 | 1.6x | 2116 MB |
 | paprika_ct2_fp16_refined | 1 | 0.00% | 0.00% | 60.9% | 10.8% | 1.562 | 0.6x | 1426 MB |
-| whisper_small_lt_refined | 47 | 169.91% | 120.62% | 58.4% | 13.0% | 2.052 | 0.5x | 5205 MB |
-| azuolas_refined | 133 | 13.95% | 6.56% | 69.6% | 6.6% | 2.027 | 0.5x | 9462 MB |
-| turbo_refined | 47 | 39.72% | 31.69% | 68.6% | 5.5% | 2.053 | 0.5x | 7444 MB |
+| whisper_small_lt_refined | 47 | 169.91% | 120.56% | 58.4% | 13.0% | 2.052 | 0.5x | 5205 MB |
+| azuolas_refined | 133 | 13.81% | 6.52% | 69.6% | 6.6% | 2.027 | 0.5x | 9462 MB |
+| turbo_refined | 47 | 39.51% | 31.64% | 68.5% | 5.5% | 2.053 | 0.5x | 7444 MB |
 | lt_ausys_refined | 1 | 78.79% | 53.40% | 85.7% | 0.0% | 0.191 | 5.2x | 1388 MB |
-| paprika_raw | 48 | 13.58% | 5.54% | 32.7% | 60.8% | 1.201 | 0.8x | 5050 MB |
-| paprika_ct2_raw | 133 | 13.01% | 5.33% | 34.3% | 64.3% | 0.273 | 3.7x | 1212 MB |
-| paprika_ct2_prompt_raw | 47 | 17.61% | 9.14% | 33.5% | 66.1% | 0.598 | 1.7x | 1212 MB |
+| paprika_raw | 48 | 13.38% | 5.50% | 32.6% | 60.8% | 1.201 | 0.8x | 5050 MB |
+| paprika_ct2_raw | 133 | 12.86% | 5.30% | 34.2% | 64.3% | 0.273 | 3.7x | 1212 MB |
+| paprika_ct2_prompt_raw | 47 | 17.41% | 9.09% | 33.5% | 66.1% | 0.598 | 1.7x | 1212 MB |
 | paprika_ct2_fp16_raw | 1 | 0.00% | 0.00% | 21.7% | 100.0% | 0.813 | 1.2x | 1212 MB |
-| whisper_small_lt_raw | 133 | 104.44% | 63.99% | 17.6% | 69.8% | 0.717 | 1.4x | 5205 MB |
-| azuolas_raw | 133 | 13.95% | 6.56% | 2.2% | 68.8% | 1.300 | 0.8x | 9462 MB |
-| turbo_raw | 133 | 33.92% | 18.95% | 29.1% | 59.1% | 1.894 | 0.5x | 7444 MB |
+| whisper_small_lt_raw | 133 | 104.44% | 63.97% | 17.6% | 69.8% | 0.717 | 1.4x | 5205 MB |
+| azuolas_raw | 133 | 13.81% | 6.52% | 2.2% | 68.8% | 1.300 | 0.8x | 9462 MB |
+| turbo_raw | 133 | 33.82% | 18.92% | 29.3% | 59.1% | 1.894 | 0.5x | 7444 MB |
 | lt_ausys_raw | 1 | 78.79% | 53.40% | 28.6% | 0.0% | 0.162 | 6.2x | 1212 MB |
 | youtube_auto | 1 | 5.71% | 2.01% | 57.0% | 0.0% | N/A | N/A | N/A |
 
 > \*Timing precision and pause bleed metrics are evaluated exclusively on human-audited clips (`timing_audited: true`). Clips marked `timing_audited: false` are evaluated for WER%/CER% only to prevent circular ground-truth bias.
+
+## Profanity Censorship Leaderboard (Swear Word Catch Rate)
+
+| System | Caught / Total | Missed | False Alarm | Recall% (Catch Rate) | Precision% | F1% |
+| --- | --- | --- | --- | --- | --- | --- |
+| paprika_acoustic | 28/262 | 234 | 0 | 10.69% | 100.00% | 19.31% |
+| paprika_ct2_acoustic | 240/262 | 22 | 0 | 91.60% | 100.00% | 95.62% |
+| paprika_ct2_prompt_acoustic | 25/262 | 237 | 0 | 9.54% | 100.00% | 17.42% |
+| paprika_ct2_fp16_acoustic | 0/262 | 262 | 0 | 0.00% | 0.00% | 0.00% |
+| whisper_small_lt_acoustic | 18/262 | 244 | 10 | 6.87% | 64.29% | 12.41% |
+| azuolas_acoustic | 235/262 | 27 | 1 | 89.69% | 99.58% | 94.38% |
+| turbo_acoustic | 27/262 | 235 | 0 | 10.31% | 100.00% | 18.69% |
+| lt_ausys_acoustic | 0/262 | 262 | 0 | 0.00% | 0.00% | 0.00% |
+| paprika_refined | 28/262 | 234 | 0 | 10.69% | 100.00% | 19.31% |
+| paprika_ct2_refined | 240/262 | 22 | 0 | 91.60% | 100.00% | 95.62% |
+| paprika_ct2_prompt_refined | 25/262 | 237 | 0 | 9.54% | 100.00% | 17.42% |
+| paprika_ct2_fp16_refined | 0/262 | 262 | 0 | 0.00% | 0.00% | 0.00% |
+| whisper_small_lt_refined | 18/262 | 244 | 10 | 6.87% | 64.29% | 12.41% |
+| azuolas_refined | 235/262 | 27 | 1 | 89.69% | 99.58% | 94.38% |
+| turbo_refined | 27/262 | 235 | 0 | 10.31% | 100.00% | 18.69% |
+| lt_ausys_refined | 0/262 | 262 | 0 | 0.00% | 0.00% | 0.00% |
+| paprika_raw | 28/262 | 234 | 0 | 10.69% | 100.00% | 19.31% |
+| paprika_ct2_raw | 240/262 | 22 | 0 | 91.60% | 100.00% | 95.62% |
+| paprika_ct2_prompt_raw | 25/262 | 237 | 0 | 9.54% | 100.00% | 17.42% |
+| paprika_ct2_fp16_raw | 0/262 | 262 | 0 | 0.00% | 0.00% | 0.00% |
+| whisper_small_lt_raw | 166/262 | 96 | 11 | 63.36% | 93.79% | 75.63% |
+| azuolas_raw | 236/262 | 26 | 1 | 90.08% | 99.58% | 94.59% |
+| turbo_raw | 214/262 | 48 | 0 | 81.68% | 100.00% | 89.92% |
+| lt_ausys_raw | 0/262 | 262 | 0 | 0.00% | 0.00% | 0.00% |
+| youtube_auto | 0/262 | 262 | 0 | 0.00% | 0.00% | 0.00% |
+
+> Evaluates how reliably each ASR model catches swear words across human-audited ground-truth profanities. Essential for automated censorship and bleeping pipelines.
 
 ## Detailed Per-Clip Results
 
@@ -94,24 +126,24 @@
 | whisper_small_lt_raw | jav_kariai | 44.0 | 9.5 | 92.5 | 38.0 | 35.7 | -1.0 | 73.2% | N/A | N/A |
 | azuolas_raw | jav_kariai | 4.0 | 0.5 | 130.0 | 71.5 | 0.0 | -61.3 | 100.0% | N/A | N/A |
 | turbo_raw | jav_kariai | 20.0 | 5.5 | 67.0 | 21.0 | 38.1 | +15.6 | 81.5% | 1.402 | 17.80s |
-| paprika_acoustic | paramedikas | 0.0 | 0.0 | 14.5 | 10.5 | 73.5 | +5.4 | 4.7% | N/A | N/A |
-| paprika_ct2_acoustic | paramedikas | 5.9 | 1.3 | 16.5 | 12.0 | 71.9 | +5.4 | 4.7% | 0.324 | 4.70s |
-| paprika_ct2_prompt_acoustic | paramedikas | 0.0 | 0.0 | 14.5 | 10.5 | 73.5 | +5.4 | 4.7% | 0.421 | 6.11s |
-| whisper_small_lt_acoustic | paramedikas | 79.4 | 21.3 | 13.0 | 18.0 | 75.0 | -19.9 | 4.7% | N/A | N/A |
-| azuolas_acoustic | paramedikas | 11.8 | 4.4 | 12.0 | 10.0 | 70.0 | +3.0 | 4.7% | N/A | N/A |
-| turbo_acoustic | paramedikas | 38.2 | 11.6 | 12.5 | 10.0 | 63.6 | +5.0 | 4.7% | 1.734 | 25.17s |
-| paprika_refined | paramedikas | 0.0 | 0.0 | 20.5 | 0.0 | 70.6 | -13.4 | 0.0% | N/A | N/A |
-| paprika_ct2_refined | paramedikas | 5.9 | 1.3 | 24.0 | 4.5 | 68.8 | -14.2 | 0.0% | 0.324 | 4.70s |
-| paprika_ct2_prompt_refined | paramedikas | 0.0 | 0.0 | 20.5 | 0.0 | 70.6 | -13.4 | 0.0% | 0.421 | 6.10s |
-| whisper_small_lt_refined | paramedikas | 79.4 | 21.3 | 29.5 | 4.5 | 37.5 | -45.2 | 0.0% | N/A | N/A |
-| azuolas_refined | paramedikas | 11.8 | 4.4 | 17.5 | 4.5 | 66.7 | -16.6 | 0.0% | N/A | N/A |
-| turbo_refined | paramedikas | 38.2 | 11.6 | 29.5 | 0.0 | 63.6 | -10.2 | 0.0% | 1.734 | 25.16s |
-| paprika_raw | paramedikas | 0.0 | 0.0 | 45.5 | 25.5 | 50.0 | -14.1 | 97.5% | N/A | N/A |
-| paprika_ct2_raw | paramedikas | 5.9 | 1.3 | 66.5 | 32.0 | 25.0 | -6.4 | 100.0% | 0.294 | 4.27s |
-| paprika_ct2_prompt_raw | paramedikas | 0.0 | 0.0 | 66.5 | 30.5 | 26.5 | -2.6 | 100.0% | 0.391 | 5.67s |
-| whisper_small_lt_raw | paramedikas | 79.4 | 21.3 | 117.0 | 16.5 | 37.5 | -37.4 | 100.0% | N/A | N/A |
-| azuolas_raw | paramedikas | 11.8 | 4.4 | 145.5 | 92.0 | 3.3 | -92.8 | 100.0% | N/A | N/A |
-| turbo_raw | paramedikas | 38.2 | 11.6 | 66.0 | 21.0 | 13.6 | +5.3 | 100.0% | 1.359 | 19.72s |
+| paprika_acoustic | paramedikas | 2.9 | 0.5 | 15.0 | 11.0 | 72.7 | +5.5 | 4.7% | N/A | N/A |
+| paprika_ct2_acoustic | paramedikas | 2.9 | 0.9 | 15.0 | 13.0 | 72.7 | +4.1 | 4.7% | 0.324 | 4.70s |
+| paprika_ct2_prompt_acoustic | paramedikas | 2.9 | 0.5 | 15.0 | 11.0 | 72.7 | +5.5 | 4.7% | 0.421 | 6.11s |
+| whisper_small_lt_acoustic | paramedikas | 79.4 | 21.0 | 13.0 | 18.0 | 75.0 | -19.9 | 4.7% | N/A | N/A |
+| azuolas_acoustic | paramedikas | 8.8 | 4.0 | 10.0 | 10.0 | 71.0 | +1.6 | 4.7% | N/A | N/A |
+| turbo_acoustic | paramedikas | 41.2 | 12.1 | 15.0 | 10.0 | 61.9 | +5.1 | 4.7% | 1.734 | 25.17s |
+| paprika_refined | paramedikas | 2.9 | 0.5 | 22.0 | 0.0 | 69.7 | -13.8 | 0.0% | N/A | N/A |
+| paprika_ct2_refined | paramedikas | 2.9 | 0.9 | 22.0 | 9.0 | 69.7 | -15.0 | 0.0% | 0.324 | 4.70s |
+| paprika_ct2_prompt_refined | paramedikas | 2.9 | 0.5 | 22.0 | 0.0 | 69.7 | -13.8 | 0.0% | 0.421 | 6.10s |
+| whisper_small_lt_refined | paramedikas | 79.4 | 21.0 | 29.5 | 4.5 | 37.5 | -45.2 | 0.0% | N/A | N/A |
+| azuolas_refined | paramedikas | 8.8 | 4.0 | 16.0 | 9.0 | 67.7 | -17.3 | 0.0% | N/A | N/A |
+| turbo_refined | paramedikas | 41.2 | 12.1 | 31.0 | 0.0 | 61.9 | -10.7 | 0.0% | 1.734 | 25.16s |
+| paprika_raw | paramedikas | 2.9 | 0.5 | 44.0 | 25.0 | 48.5 | -13.2 | 97.5% | N/A | N/A |
+| paprika_ct2_raw | paramedikas | 2.9 | 0.9 | 69.0 | 32.0 | 24.2 | -7.8 | 100.0% | 0.294 | 4.27s |
+| paprika_ct2_prompt_raw | paramedikas | 2.9 | 0.5 | 64.0 | 29.0 | 27.3 | -4.8 | 100.0% | 0.391 | 5.67s |
+| whisper_small_lt_raw | paramedikas | 79.4 | 21.0 | 117.0 | 16.5 | 37.5 | -37.4 | 100.0% | N/A | N/A |
+| azuolas_raw | paramedikas | 8.8 | 4.0 | 149.0 | 92.0 | 3.2 | -95.4 | 100.0% | N/A | N/A |
+| turbo_raw | paramedikas | 41.2 | 12.1 | 63.0 | 18.0 | 14.3 | -8.1 | 100.0% | 1.359 | 19.72s |
 | paprika_acoustic | sinica | 3.9 | 2.2 | 9.0 | 10.0 | 88.0 | +8.9 | 33.0% | N/A | N/A |
 | paprika_ct2_acoustic | sinica | 2.0 | 1.0 | 9.0 | 10.0 | 88.0 | +8.9 | 12.1% | 0.512 | 8.60s |
 | paprika_ct2_prompt_acoustic | sinica | 3.9 | 2.2 | 9.0 | 10.0 | 88.0 | +8.9 | 33.0% | 0.342 | 5.75s |
@@ -403,24 +435,24 @@
 | whisper_small_lt_raw | orlauskas_prof_04 | 80.0 | 35.0 | 62.5 | 16.0 | 50.0 | -9.0 | 0.0% | N/A | N/A |
 | azuolas_raw | orlauskas_prof_04 | 30.0 | 5.0 | 80.0 | 82.0 | 14.3 | -75.0 | 0.0% | N/A | N/A |
 | turbo_raw | orlauskas_prof_04 | 40.0 | 21.7 | 15.0 | 42.0 | 42.9 | -35.0 | 0.0% | 3.447 | 12.65s |
-| paprika_acoustic | orlauskas_prof_05 | 12.5 | 2.7 | 12.0 | 37.0 | 57.1 | -48.4 | 0.0% | N/A | N/A |
-| paprika_ct2_acoustic | orlauskas_prof_05 | 12.5 | 2.7 | 12.0 | 37.0 | 57.1 | -48.4 | 0.0% | 1.656 | 4.85s |
-| paprika_ct2_prompt_acoustic | orlauskas_prof_05 | 12.5 | 2.7 | 12.0 | 37.0 | 57.1 | -48.4 | 0.0% | 2.022 | 5.91s |
-| whisper_small_lt_acoustic | orlauskas_prof_05 | 25.0 | 8.1 | 15.5 | 22.5 | 66.7 | -40.7 | 0.0% | N/A | N/A |
-| azuolas_acoustic | orlauskas_prof_05 | 12.5 | 2.7 | 12.0 | 37.0 | 57.1 | -48.4 | 0.0% | N/A | N/A |
-| turbo_acoustic | orlauskas_prof_05 | 12.5 | 2.7 | 12.0 | 37.0 | 57.1 | -48.4 | 0.0% | 4.484 | 13.12s |
-| paprika_refined | orlauskas_prof_05 | 12.5 | 2.7 | 19.0 | 67.0 | 28.6 | -84.4 | 0.0% | N/A | N/A |
-| paprika_ct2_refined | orlauskas_prof_05 | 12.5 | 2.7 | 19.0 | 67.0 | 28.6 | -84.4 | 0.0% | 1.656 | 4.84s |
-| paprika_ct2_prompt_refined | orlauskas_prof_05 | 12.5 | 2.7 | 19.0 | 67.0 | 28.6 | -84.4 | 0.0% | 2.021 | 5.91s |
-| whisper_small_lt_refined | orlauskas_prof_05 | 25.0 | 8.1 | 15.5 | 55.5 | 33.3 | -75.3 | 0.0% | N/A | N/A |
-| azuolas_refined | orlauskas_prof_05 | 12.5 | 2.7 | 19.0 | 67.0 | 28.6 | -84.4 | 0.0% | N/A | N/A |
-| turbo_refined | orlauskas_prof_05 | 12.5 | 2.7 | 19.0 | 67.0 | 28.6 | -84.4 | 0.0% | 4.484 | 13.12s |
-| paprika_raw | orlauskas_prof_05 | 12.5 | 2.7 | 113.0 | 92.0 | 0.0 | -78.4 | 0.0% | N/A | N/A |
-| paprika_ct2_raw | orlauskas_prof_05 | 12.5 | 2.7 | 80.0 | 80.0 | 0.0 | -58.4 | 0.0% | 1.623 | 4.75s |
-| paprika_ct2_prompt_raw | orlauskas_prof_05 | 12.5 | 2.7 | 80.0 | 80.0 | 0.0 | -58.4 | 0.0% | 1.972 | 5.77s |
-| whisper_small_lt_raw | orlauskas_prof_05 | 25.0 | 8.1 | 106.5 | 82.0 | 16.7 | -58.2 | 0.0% | N/A | N/A |
-| azuolas_raw | orlauskas_prof_05 | 12.5 | 2.7 | 153.0 | 145.0 | 0.0 | -152.7 | 0.0% | N/A | N/A |
-| turbo_raw | orlauskas_prof_05 | 12.5 | 2.7 | 80.0 | 35.0 | 14.3 | -12.7 | 0.0% | 3.945 | 11.54s |
+| paprika_acoustic | orlauskas_prof_05 | 0.0 | 0.0 | 6.0 | 28.0 | 62.5 | -44.7 | 0.0% | N/A | N/A |
+| paprika_ct2_acoustic | orlauskas_prof_05 | 0.0 | 0.0 | 6.0 | 28.0 | 62.5 | -44.7 | 0.0% | 1.656 | 4.85s |
+| paprika_ct2_prompt_acoustic | orlauskas_prof_05 | 0.0 | 0.0 | 6.0 | 28.0 | 62.5 | -44.7 | 0.0% | 2.022 | 5.91s |
+| whisper_small_lt_acoustic | orlauskas_prof_05 | 25.0 | 5.6 | 15.5 | 22.5 | 66.7 | -40.7 | 0.0% | N/A | N/A |
+| azuolas_acoustic | orlauskas_prof_05 | 0.0 | 0.0 | 6.0 | 28.0 | 62.5 | -44.7 | 0.0% | N/A | N/A |
+| turbo_acoustic | orlauskas_prof_05 | 0.0 | 0.0 | 6.0 | 28.0 | 62.5 | -44.7 | 0.0% | 4.484 | 13.12s |
+| paprika_refined | orlauskas_prof_05 | 0.0 | 0.0 | 22.5 | 64.5 | 25.0 | -81.6 | 0.0% | N/A | N/A |
+| paprika_ct2_refined | orlauskas_prof_05 | 0.0 | 0.0 | 22.5 | 64.5 | 25.0 | -81.6 | 0.0% | 1.656 | 4.84s |
+| paprika_ct2_prompt_refined | orlauskas_prof_05 | 0.0 | 0.0 | 22.5 | 64.5 | 25.0 | -81.6 | 0.0% | 2.021 | 5.91s |
+| whisper_small_lt_refined | orlauskas_prof_05 | 25.0 | 5.6 | 15.5 | 55.5 | 33.3 | -75.3 | 0.0% | N/A | N/A |
+| azuolas_refined | orlauskas_prof_05 | 0.0 | 0.0 | 22.5 | 64.5 | 25.0 | -81.6 | 0.0% | N/A | N/A |
+| turbo_refined | orlauskas_prof_05 | 0.0 | 0.0 | 22.5 | 64.5 | 25.0 | -81.6 | 0.0% | 4.484 | 13.12s |
+| paprika_raw | orlauskas_prof_05 | 0.0 | 0.0 | 124.0 | 88.5 | 0.0 | -76.6 | 0.0% | N/A | N/A |
+| paprika_ct2_raw | orlauskas_prof_05 | 0.0 | 0.0 | 96.5 | 72.0 | 0.0 | -59.1 | 0.0% | 1.623 | 4.75s |
+| paprika_ct2_prompt_raw | orlauskas_prof_05 | 0.0 | 0.0 | 96.5 | 72.0 | 0.0 | -59.1 | 0.0% | 1.972 | 5.77s |
+| whisper_small_lt_raw | orlauskas_prof_05 | 25.0 | 5.6 | 106.5 | 82.0 | 16.7 | -58.2 | 0.0% | N/A | N/A |
+| azuolas_raw | orlauskas_prof_05 | 0.0 | 0.0 | 164.0 | 144.5 | 0.0 | -151.6 | 0.0% | N/A | N/A |
+| turbo_raw | orlauskas_prof_05 | 0.0 | 0.0 | 65.5 | 39.5 | 25.0 | -16.6 | 0.0% | 3.945 | 11.54s |
 | paprika_acoustic | karalius_prof_02 | 0.0 | 0.0 | 5.0 | 7.0 | 93.3 | -2.1 | 0.0% | N/A | N/A |
 | paprika_ct2_acoustic | karalius_prof_02 | 0.0 | 0.0 | 5.0 | 7.0 | 93.3 | -2.1 | 0.0% | 0.996 | 5.23s |
 | paprika_ct2_prompt_acoustic | karalius_prof_02 | 0.0 | 0.0 | 5.0 | 7.0 | 93.3 | -2.1 | 0.0% | 2.366 | 12.42s |
@@ -1244,14 +1276,14 @@
 | whisper_small_lt_raw | karalius_prof_82 | 62.5 | 23.6 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.663 | 13.54s |
 | azuolas_raw | karalius_prof_82 | 14.6 | 5.1 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.867 | 17.70s |
 | turbo_raw | karalius_prof_82 | 45.8 | 15.4 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.700 | 34.72s |
-| paprika_ct2_acoustic | karalius_prof_83 | 12.5 | 3.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.274 | 5.83s |
-| azuolas_acoustic | karalius_prof_83 | 1.8 | 1.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.156 | 24.55s |
-| paprika_ct2_refined | karalius_prof_83 | 12.5 | 3.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.274 | 5.82s |
-| azuolas_refined | karalius_prof_83 | 1.8 | 1.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.155 | 24.55s |
-| paprika_ct2_raw | karalius_prof_83 | 12.5 | 3.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.141 | 3.00s |
-| whisper_small_lt_raw | karalius_prof_83 | 55.4 | 16.8 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.593 | 12.60s |
-| azuolas_raw | karalius_prof_83 | 1.8 | 1.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.886 | 18.83s |
-| turbo_raw | karalius_prof_83 | 21.4 | 7.4 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.558 | 33.10s |
+| paprika_ct2_acoustic | karalius_prof_83 | 10.7 | 2.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.274 | 5.83s |
+| azuolas_acoustic | karalius_prof_83 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.156 | 24.55s |
+| paprika_ct2_refined | karalius_prof_83 | 10.7 | 2.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.274 | 5.82s |
+| azuolas_refined | karalius_prof_83 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.155 | 24.55s |
+| paprika_ct2_raw | karalius_prof_83 | 10.7 | 2.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.141 | 3.00s |
+| whisper_small_lt_raw | karalius_prof_83 | 55.4 | 16.6 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.593 | 12.60s |
+| azuolas_raw | karalius_prof_83 | 0.0 | 0.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.886 | 18.83s |
+| turbo_raw | karalius_prof_83 | 19.6 | 6.5 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.558 | 33.10s |
 | paprika_ct2_acoustic | karalius_prof_84 | 9.1 | 2.8 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.269 | 5.08s |
 | azuolas_acoustic | karalius_prof_84 | 20.4 | 8.3 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.788 | 33.76s |
 | paprika_ct2_refined | karalius_prof_84 | 9.1 | 2.8 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.269 | 5.08s |
@@ -1500,14 +1532,14 @@
 | whisper_small_lt_raw | karalius_prof_114 | 59.6 | 17.1 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.505 | 10.26s |
 | azuolas_raw | karalius_prof_114 | 8.5 | 3.6 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.786 | 15.97s |
 | turbo_raw | karalius_prof_114 | 23.4 | 8.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 2.568 | 52.17s |
-| paprika_ct2_acoustic | karalius_prof_115 | 5.2 | 1.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.177 | 3.54s |
-| azuolas_acoustic | karalius_prof_115 | 6.9 | 2.5 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.960 | 39.17s |
-| paprika_ct2_refined | karalius_prof_115 | 5.2 | 1.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.177 | 3.54s |
-| azuolas_refined | karalius_prof_115 | 6.9 | 2.5 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.960 | 39.16s |
-| paprika_ct2_raw | karalius_prof_115 | 5.2 | 1.9 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.145 | 2.89s |
+| paprika_ct2_acoustic | karalius_prof_115 | 3.5 | 1.6 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.177 | 3.54s |
+| azuolas_acoustic | karalius_prof_115 | 5.2 | 2.2 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.960 | 39.17s |
+| paprika_ct2_refined | karalius_prof_115 | 3.5 | 1.6 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.177 | 3.54s |
+| azuolas_refined | karalius_prof_115 | 5.2 | 2.2 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.960 | 39.16s |
+| paprika_ct2_raw | karalius_prof_115 | 3.5 | 1.6 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.145 | 2.89s |
 | whisper_small_lt_raw | karalius_prof_115 | 58.6 | 22.8 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.599 | 11.97s |
-| azuolas_raw | karalius_prof_115 | 6.9 | 2.5 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.879 | 17.57s |
-| turbo_raw | karalius_prof_115 | 25.9 | 8.8 | N/A* | N/A* | N/A* | N/A* | N/A* | 3.163 | 63.18s |
+| azuolas_raw | karalius_prof_115 | 5.2 | 2.2 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.879 | 17.57s |
+| turbo_raw | karalius_prof_115 | 24.1 | 8.4 | N/A* | N/A* | N/A* | N/A* | N/A* | 3.163 | 63.18s |
 | paprika_ct2_acoustic | karalius_prof_116 | 25.0 | 8.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.146 | 2.78s |
 | azuolas_acoustic | karalius_prof_116 | 25.0 | 15.2 | N/A* | N/A* | N/A* | N/A* | N/A* | 1.562 | 29.59s |
 | paprika_ct2_refined | karalius_prof_116 | 25.0 | 8.0 | N/A* | N/A* | N/A* | N/A* | N/A* | 0.146 | 2.77s |

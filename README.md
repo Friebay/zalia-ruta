@@ -117,13 +117,28 @@ The dataset is publicly hosted on Hugging Face: [**Frararo/zalia-ruta-bench-lt**
 
 | Rank | Model | Model Type | Micro WER% (Corpus) | Macro WER% | Micro CER% | WER (No Diacritics) | RTF | Speed |
 | :---: | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | Whisper Large v3 (CT2 INT8) | **11.15%** | **13.01%** | **4.30%** | **10.38%** | **0.28** | **3.6x** |
-| 🥈 | **[azuolas-whisper-lt](https://huggingface.co/akisviete/azuolas-whisper-lt)** | Whisper Large v3 (CT2 INT8) | **11.68%** | **13.95%** | **4.98%** | **10.96%** | **1.30** | **0.8x** |
-| 🥉 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | Whisper Large v3 Turbo (OpenAI) | **29.97%** | **33.92%** | **14.35%** | **27.44%** | **1.89** | **0.5x** |
-| 4 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | Whisper Small (DeividasM) | **74.66%** | **104.44%** | **36.52%** | **71.73%** | **0.72** | **1.4x** |
+| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | Whisper Large v3 (CT2 INT8) | **11.08%** | **12.86%** | **4.28%** | **10.30%** | **0.28** | **3.6x** |
+| 🥈 | **[azuolas-whisper-lt](https://huggingface.co/akisviete/azuolas-whisper-lt)** | Whisper Large v3 (CT2 INT8) | **11.60%** | **13.81%** | **4.96%** | **10.88%** | **1.30** | **0.8x** |
+| 🥉 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | Whisper Large v3 Turbo (OpenAI) | **29.93%** | **33.82%** | **14.34%** | **27.40%** | **1.89** | **0.5x** |
+| 4 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | Whisper Small (DeividasM) | **74.66%** | **104.44%** | **36.51%** | **71.73%** | **0.72** | **1.4x** |
 
 * **Real-Time Factor (RTF):** Ratio of total transcription latency to total audio duration (`latency / duration`). Lower is faster; RTF < 1.0 means faster than real-time.
 * **Speed:** Speedup factor (`duration / latency` = `1 / RTF`). Evaluated on NVIDIA GTX 1650 (4 GB VRAM).
+
+### Profanity Censorship Leaderboard (Swear Word Catch Rate)
+
+Evaluates how reliably each model catches Lithuanian and Slavic swear words across **262 human-audited ground-truth profanities** across the benchmark dataset. Critical for automated censorship and bleeping pipelines:
+
+| Rank | Model | Caught / Total | Missed | False Alarms | Recall% (Catch Rate) | Precision% | F1-Score |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | **240 / 262** | 22 | 0 | **91.60%** | **100.00%** | **95.62%** |
+| 🥈 | **[azuolas-whisper-lt](https://huggingface.co/akisviete/azuolas-whisper-lt)** | **236 / 262** | 26 | 1 | **90.08%** | **99.58%** | **94.59%** |
+| 🥉 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | **214 / 262** | 48 | 0 | **81.68%** | **100.00%** | **89.92%** |
+| 4 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | **166 / 262** | 96 | 11 | **63.36%** | **93.79%** | **75.63%** |
+
+* **Recall% (Catch Rate):** $\frac{\text{Profanities Caught}}{\text{Total Ground-Truth Profanities}} \times 100\%$. The primary metric for censorship safety.
+* **Precision%:** $\frac{\text{Profanities Caught}}{\text{Profanities Caught + False Alarms}} \times 100\%$. Measures false-positive bleeping rate.
+
 *Detailed per-clip breakdown is saved at [benchmark/reports/results.md](benchmark/reports/results.md).*
 
 ---

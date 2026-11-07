@@ -1,12 +1,12 @@
 import re
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 import jiwer
 import numpy as np
 
 from zalia_ruta.asr import WordTimestamp
 from zalia_ruta.bench.mms_align import _LT_DIACRITICS
-from zalia_ruta.bench.srt_io import Cue
+from zalia_ruta.bench.srt_io import Cue, parse_srt
 
 
 _PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
@@ -279,3 +279,81 @@ def score_system(
         wer_no_diacritics=round(wer_no_dia * 100, 2),
         timing=timing,
     )
+
+
+@dataclass
+class ProfanityMetrics:
+    total_gt: int
+    caught: int
+    missed: int
+    false_alarms: int
+    recall_pct: float
+    precision_pct: float
+    f1_pct: float
+
+
+def compute_profanity_metrics_for_system(
+    manifest_clips: List[dict],
+    bench_dir: Any,
+    runner: Any,
+    system_id: str,
+    detector: Optional[Any] = None,
+) -> ProfanityMetrics:
+    from pathlib import Path
+    from zalia_ruta.profanity import ProfanityDetector
+
+    if detector is None:
+        detector = ProfanityDetector()
+
+    bench_path = Path(bench_dir)
+    refs_dir = bench_path / "references"
+
+    total_gt = 0
+    tp = 0
+    fn = 0
+    fp = 0
+
+    for c in manifest_clips:
+        cid = c["id"]
+        ref_file = refs_dir / f"{cid}.srt"
+        if not ref_file.exists():
+            continue
+
+        cues = parse_srt(ref_file.read_text(encoding="utf-8"))
+        eval_cues, _ = filter_cues_and_regions(cues)
+        gt_profanities = [
+            cue for cue in eval_cues
+            if detector.is_profanity(cue.text.strip())
+        ]
+        total_gt += len(gt_profanities)
+
+        hyp_words = runner.load_cached(system_id, cid) or []
+        hyp_profanities = [
+            w for w in hyp_words
+            if detector.is_profanity(w.word)
+        ]
+
+        for gt in gt_profanities:
+            if any(hw.start < gt.end + 0.35 and hw.end > gt.start - 0.35 for hw in hyp_profanities):
+                tp += 1
+            else:
+                fn += 1
+
+        for hw in hyp_profanities:
+            if not any(hw.start < gt.end + 0.35 and hw.end > gt.start - 0.35 for gt in gt_profanities):
+                fp += 1
+
+    recall = (tp / total_gt) * 100.0 if total_gt > 0 else 0.0
+    precision = (tp / (tp + fp)) * 100.0 if (tp + fp) > 0 else 0.0
+    f1 = (2 * precision * recall) / (precision + recall) if (precision + recall) > 0.0 else 0.0
+
+    return ProfanityMetrics(
+        total_gt=total_gt,
+        caught=tp,
+        missed=fn,
+        false_alarms=fp,
+        recall_pct=round(recall, 2),
+        precision_pct=round(precision, 2),
+        f1_pct=round(f1, 2),
+    )
+
