@@ -53,7 +53,7 @@ configs:
 - config_name: default
   data_files:
   - split: test
-    path: "data/metadata.jsonl"
+    path: "data/test-*"
 ---
 
 # Žalia Rūta: Lithuanian Speech Benchmark (`zalia-ruta-bench-lt`)
@@ -286,7 +286,7 @@ def export_dataset(
         click.echo("Generating Parquet file with native Audio feature...")
         ds = Dataset.from_list(hf_dataset_rows)
         ds = ds.cast_column("audio", Audio(sampling_rate=16000))
-        parquet_file = data_dir / "train-00000-of-00001.parquet"
+        parquet_file = data_dir / "test-00000-of-00001.parquet"
         ds.to_parquet(str(parquet_file))
         click.echo(f"Parquet dataset built: {parquet_file}")
     except Exception as e:
