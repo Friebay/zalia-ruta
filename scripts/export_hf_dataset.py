@@ -126,6 +126,65 @@ Evaluated across all **{total_clips} clips** (5,146 reference words), spanning f
 
 ---
 
+## How to Evaluate Your Model
+
+You can benchmark any ASR model against this dataset using the following self-contained evaluation script:
+
+```python
+import re
+import jiwer
+from datasets import load_dataset
+
+# 1. Load the benchmark dataset
+ds = load_dataset("Frararo/zalia-ruta-bench-lt", split="test")
+
+# 2. Official benchmark normalizer
+_PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
+
+def normalize(text: str) -> str:
+    words = []
+    for w in _PUNCT_RE.sub("", text.lower()).split():
+        if w.startswith("facebook"):
+            w = "feisbuk" + w[8:]
+        elif w in ("youtubes", "youtubės", "jutubes"):
+            w = "jutubės"
+        elif w.startswith("youtube") or w.startswith("youtub"):
+            w = "jutub" + w[7:]
+        elif w.startswith("discord") or w.startswith("dicord"):
+            w = "diskord" + w[7:]
+        elif w.startswith("edge"):
+            w = "edž" + w[4:]
+        words.append(w)
+    return " ".join(words)
+
+# 3. Transcribe each sample with your model
+refs, hyps = [], []
+for sample in ds:
+    audio_array = sample["audio"]["array"]
+    sampling_rate = sample["audio"]["sampling_rate"]
+    
+    # Replace this with your model's transcription call:
+    # predicted_text = my_model.transcribe(audio_array, sampling_rate)
+    predicted_text = sample["text"] # placeholder
+    
+    refs.append(normalize(sample["text"]))
+    hyps.append(normalize(predicted_text))
+
+# 4. Compute official benchmark scores
+micro_wer = jiwer.wer(refs, hyps) * 100
+micro_cer = jiwer.cer(refs, hyps) * 100
+print(f"Official Micro WER: {micro_wer:.2f}%")
+print(f"Official Micro CER: {micro_cer:.2f}%")
+```
+
+### Submitting to the Leaderboard
+To submit your model to the leaderboard table:
+1. Open a **Discussion** or **Pull Request** on this dataset repo.
+2. Provide your model name and Hugging Face link.
+3. Provide your predictions in JSON format (`{"clip_id": "predicted text", ...}`) so the score can be reproduced and verified.
+
+---
+
 ## Terms of Use & License
 
 - **License:** [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).

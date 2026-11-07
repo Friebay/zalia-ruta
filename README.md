@@ -109,38 +109,87 @@ uv run zalia-ruta -i "video.mp4" --custom-words "custom_words.txt"
 
 ## Lithuanian Word-Level Benchmark (`zalia-bench`)
 
-The repository includes an empirical benchmark evaluating Lithuanian ASR accuracy and acoustic word-boundary precision against **21 human-audited ground truth references** across news broadcasts, reaction streams, colloquial slang, and heavy profanity:
+The repository includes an empirical speech benchmark evaluating Lithuanian ASR accuracy and acoustic word-boundary precision against **133 human-audited ground truth references** (5,146 reference words) across news broadcasts, political debates, colloquial streamer reactions, and heavy profanity.
+
+The dataset is publicly hosted on Hugging Face: [**Frararo/zalia-ruta-bench-lt**](https://huggingface.co/datasets/Frararo/zalia-ruta-bench-lt).
+
+### Official Leaderboard (133 Clips)
+
+| Rank | Model | Model Type | Micro WER% (Corpus) | Macro WER% | Micro CER% | WER (No Diacritics) |
+| :---: | :--- | :--- | :---: | :---: | :---: | :---: |
+| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | Whisper Large v3 (CT2 INT8) | **11.15%** | **13.01%** | **4.39%** | **10.42%** |
+| 🥈 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | Whisper Large v3 Turbo (OpenAI) | **29.97%** | **33.92%** | **14.36%** | **27.44%** |
+| 🥉 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | Whisper Small (DeividasM) | **74.66%** | **104.44%** | **36.53%** | **71.74%** |
+
+*Detailed per-clip breakdown is saved at [benchmark/reports/results.md](benchmark/reports/results.md).*
+
+---
+
+### Running the Benchmark Locally
 
 ```powershell
 # 1. Validate reference SRT formatting
 uv run zalia-bench validate
 
-# 2. Run the production model (paprika)
+# 2. Run the production model (paprika) with live tqdm progress bar
 uv run zalia-bench run
 
-# 3. Run alternative models (e.g. azuolas, whisper_small_lt, turbo)
-uv run zalia-bench run --model azuolas
+# 3. Run alternative models (e.g. whisper_small_lt, turbo, azuolas)
 uv run zalia-bench run --model whisper_small_lt
+uv run zalia-bench run --model turbo
 
 # 4. Score systems against human references
 uv run zalia-bench score
 
 # Optional: score specific clip, system, or include legacy baselines
 uv run zalia-bench score --clip <clip_id>
-uv run zalia-bench score --model azuolas
+uv run zalia-bench score --system paprika_ct2_acoustic
 uv run zalia-bench score --all-systems
 ```
 
-### Model Comparison Executive Summary (21 Clips)
+---
 
-| System | Architecture / Model | Macro WER% | Macro CER% | ≤50ms Precision | Pause Bleed% |
-| :--- | :--- | :---: | :---: | :---: | :---: |
-| **`paprika_acoustic`** (Production) | `whisper-large-v3-turbo` (809M) + MMS + Energy Refiner | **8.55%** | **2.63%** | **80.2%** | **6.3%** |
-| `paprika_refined` | `whisper-large-v3-turbo` (809M) + MMS Forced Alignment | 8.55% | 2.63% | 69.6% | 3.8% |
-| `azuolas_acoustic` | `whisper-large-v3` (1.55B) + MMS + Energy Refiner | 15.87% | 10.16% | 78.7% | 8.8% |
-| `whisper_small_lt_acoustic` | `whisper-small` (244M) + MMS + Energy Refiner | 58.30% | 18.77% | 79.4% | 7.2% |
+### Evaluating Third-Party Models
 
-Full per-clip breakdown is saved at [benchmark/reports/results.md](benchmark/reports/results.md).
+Anyone can benchmark their own ASR model against this dataset using Python:
+
+```python
+import re
+import jiwer
+from datasets import load_dataset
+
+# 1. Load the benchmark dataset
+ds = load_dataset("Frararo/zalia-ruta-bench-lt", split="test")
+
+# 2. Official benchmark normalizer
+_PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
+
+def normalize(text: str) -> str:
+    words = []
+    for w in _PUNCT_RE.sub("", text.lower()).split():
+        if w.startswith("facebook"): w = "feisbuk" + w[8:]
+        elif w in ("youtubes", "youtubės", "jutubes"): w = "jutubės"
+        elif w.startswith("youtube") or w.startswith("youtub"): w = "jutub" + w[7:]
+        elif w.startswith("discord") or w.startswith("dicord"): w = "diskord" + w[7:]
+        elif w.startswith("edge"): w = "edž" + w[4:]
+        words.append(w)
+    return " ".join(words)
+
+# 3. Transcribe with your model
+refs, hyps = [], []
+for sample in ds:
+    audio_array = sample["audio"]["array"]
+    sampling_rate = sample["audio"]["sampling_rate"]
+    
+    predicted_text = my_model.transcribe(audio_array, sampling_rate) # <-- Put model here
+    
+    refs.append(normalize(sample["text"]))
+    hyps.append(normalize(predicted_text))
+
+# 4. Official Leaderboard Score
+micro_wer = jiwer.wer(refs, hyps) * 100
+print(f"Official Micro WER: {micro_wer:.2f}%")
+```
 
 ---
 
