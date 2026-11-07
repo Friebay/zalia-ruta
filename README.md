@@ -136,8 +136,8 @@ Evaluates how reliably each model catches Lithuanian and Slavic swear words acro
 | 🥉 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | **214 / 262** | 48 | 0 | **81.68%** | **100.00%** | **89.92%** |
 | 4 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | **166 / 262** | 96 | 11 | **63.36%** | **93.79%** | **75.63%** |
 
-* **Recall% (Catch Rate):** $\frac{\text{Profanities Caught}}{\text{Total Ground-Truth Profanities}} \times 100\%$. The primary metric for censorship safety.
-* **Precision%:** $\frac{\text{Profanities Caught}}{\text{Profanities Caught + False Alarms}} \times 100\%$. Measures false-positive bleeping rate.
+* **Recall% (Catch Rate):** `(Profanities Caught / Total Ground-Truth Profanities) × 100%`. The primary metric for censorship safety.
+* **Precision%:** `(Profanities Caught / (Profanities Caught + False Alarms)) × 100%`. Measures false-positive bleeping rate.
 
 *Detailed per-clip breakdown is saved at [benchmark/reports/results.md](benchmark/reports/results.md).*
 
