@@ -30,7 +30,7 @@ from zalia_ruta.bench.srt_io import parse_srt
 
 
 BENCH_DIR = Path("benchmark")
-DEFAULT_REPO_ID = "Friebay/zalia-ruta-bench-lt"
+DEFAULT_REPO_ID = "Frararo/zalia-ruta-bench-lt"
 DEFAULT_EXPORT_DIR = Path("hf_export/zalia-ruta-bench-lt")
 
 
@@ -58,17 +58,17 @@ configs:
 
 # Žalia Rūta: Lithuanian Speech Benchmark (`zalia-ruta-bench-lt`)
 
-A curated evaluation dataset consisting of **47 audited Lithuanian audio clips** and verbatim human-verified transcripts for speech recognition benchmarking.
+A curated evaluation dataset consisting of **{total_clips} Lithuanian audio clips** and verbatim human-verified transcripts for speech recognition benchmarking.
 
 ---
 
 ## Dataset Overview
 
-- **Clips:** **47 unique clips** (16 kHz mono WAV, 16-bit PCM).
+- **Clips:** **{total_clips} unique clips** (16 kHz mono WAV, 16-bit PCM).
 - **Transcripts:** Human-audited verbatim Lithuanian orthographic transcripts.
 - **Coverage & Speech Diversity:**
-  - Conversational speech, political debates, and news commentary (Alexander Stubb, Virginijus Sinkevičius, Vytautas Sinica).
-  - Streamer speech, gaming commentary, vulgarities, and compound slang / loanwords.
+  - Conversational speech, political debates, and news commentary (Alexander Stubb, Virginijus Sinkevičius, Vytautas Sinica, Ingrida Šimonytė).
+  - Streamer commentary, gaming reactions, heavy profanities, and compound slang / loanwords (100 Karalius clips).
   - Natural pauses, background audio, and acoustic noise challenges.
 - **Alignment:** Word-level alignment timestamps will be provided in a future update.
 
@@ -101,7 +101,7 @@ Each sample in `test` contains:
 ```python
 from datasets import load_dataset
 
-dataset = load_dataset("Friebay/zalia-ruta-bench-lt", split="test")
+dataset = load_dataset("Frararo/zalia-ruta-bench-lt", split="test")
 
 sample = dataset[0]
 print("Clip ID:", sample["id"])
@@ -276,7 +276,8 @@ def export_dataset(
 
     # Write README.md (Dataset Card)
     readme_file = output_dir / "README.md"
-    readme_file.write_text(DATASET_CARD_TEMPLATE.strip() + "\n", encoding="utf-8")
+    readme_text = DATASET_CARD_TEMPLATE.replace("{total_clips}", str(len(records))).strip() + "\n"
+    readme_file.write_text(readme_text, encoding="utf-8")
     click.echo(f"Saved dataset card: {readme_file}")
 
     # Build Parquet split using datasets library

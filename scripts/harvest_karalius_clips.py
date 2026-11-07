@@ -37,7 +37,51 @@ ROOT_PATTERNS = {
 }
 
 CHANNEL_VIDEOS = [
-    # Videos with already downloaded subtitles containing high-density profanities
+    # Additional fresh uploads from @luckartist
+    "qNARYuB_LhA",
+    "WQjHDDZmV4Y",
+    "_s-BUwyrmKc",
+    "zsWmEyaCrtw",
+    "W-plOXYvwpU",
+    "sZlFhF7KRdQ",
+    "Ggcb3NZObXc",
+    "fPFn50Di4jo",
+    "2FX44Z5KxB8",
+    "oy2Gm5hwb4k",
+    "B2mkp2h0zWQ",
+    "M9je9RFNIlI",
+    "PyuQg8-3Tm8",
+    "Bmb_i3AbST4",
+    "P7Z79-DKkss",
+    "7QUgoT7pPYk",
+    "n9PiOT5Dngo",
+    "N_3-QmUa9Ps",
+    "jjDBnbl6Nm4",
+    "LpmnByDqFwY",
+    "rfxWP9vhdEs",
+    "cjzDDjtwnmM",
+    "-DHjziJXatQ",
+    "x1a0uu8-J2M",
+    "Q1d5c5qKEII",
+    # Newest uploads from @luckartist (Late Oct - Nov 2026)
+    "1Dp5-JLvH_M",
+    "1bxV9Jxv9T0",
+    "OnhEaA4Y2Y0",
+    "C0V5WkQHMgs",
+    "wAfLFUDTZXY",
+    "jfU7VWIRLSQ",
+    "IXorMoCC9II",
+    "Su4htU5ryuU",
+    "TlcJLqFELd8",
+    "G1BsnrCCl24",
+    "wrmwEPDRWrA",
+    "TIxw2hi6HRg",
+    "0cMUuJkhNBU",
+    "goNDivRYUv0",
+    "2dKMm3wgnDw",
+    "QrKpwV4WP5w",
+    "SN1X3bWDg5w",
+    # Earlier video pool
     "Q7EuWWdNeV0",
     "DAXhjychhoE",
     "grm1qgjoROg",
@@ -176,28 +220,39 @@ def main():
         if m:
             highest_idx = max(highest_idx, int(m.group(1)))
 
-    target_total_clips = 100
-    needed_clips = target_total_clips - len(existing_clips)
-    print(f"Current benchmark clips: {len(existing_clips)} | Target: {target_total_clips} (Need {needed_clips} more clips)", flush=True)
+    target_k_prof_clips = 100
+    current_k_prof_count = len([c for c in existing_clips if "karalius_prof_" in c["id"]])
+    needed_clips = target_k_prof_clips - current_k_prof_count
+    print(f"Current Karalius profanity clips: {current_k_prof_count} (Total benchmark: {len(existing_clips)})", flush=True)
+    print(f"Target Karalius profanity clips: {target_k_prof_clips} (Need {needed_clips} more clips)", flush=True)
     if needed_clips <= 0:
-        print("Target already reached!", flush=True)
+        print("Karalius profanity target already reached!", flush=True)
         return
 
     runner = BenchmarkRunner(bench_dir)
     detector = ProfanityDetector()
 
+    # Blacklist videos already present in manifest.json to guarantee 0% duplicate audio
+    already_used_vids = {c["youtube_id"] for c in existing_clips if c.get("youtube_id")}
+    # Blacklist known problematic / deleted videos (e.g. tGw1JL9vQ0k was discarded)
+    blacklist_vids = set(already_used_vids) | {"tGw1JL9vQ0k"}
+    print(f"Excluding {len(already_used_vids)} already used YouTube videos from harvest to guarantee no duplicate audio.", flush=True)
+
+    MAX_CLIPS_PER_NEW_VIDEO = 4
+    video_clips_count: Dict[str, int] = {}
     used_spans: Dict[str, List[Tuple[float, float]]] = {}
-    for c in existing_clips:
-        vid = c.get("youtube_id")
-        if vid:
-            if vid not in used_spans:
-                used_spans[vid] = []
 
     current_idx = highest_idx + 1
 
     for vid in CHANNEL_VIDEOS:
-        if len(manifest["clips"]) >= target_total_clips:
+        if current_k_prof_count >= target_k_prof_clips:
             break
+
+        if vid in blacklist_vids:
+            continue
+
+        if video_clips_count.get(vid, 0) >= MAX_CLIPS_PER_NEW_VIDEO:
+            continue
 
         json3_path = yt_dir / f"{vid}.lt-orig.json3"
         if not json3_path.exists():
@@ -229,19 +284,25 @@ def main():
         if not anchor_times:
             continue
 
+        if vid not in used_spans:
+            used_spans[vid] = []
+
         candidate_starts = []
         for t in anchor_times:
             win_start = max(0.0, t - 10.0)
-            if all(abs(win_start - cs) >= 25.0 for cs in candidate_starts):
-                if vid in used_spans:
-                    if any(abs(win_start - s[0]) < 25.0 for s in used_spans[vid]):
-                        continue
+            if all(abs(win_start - cs) >= 30.0 for cs in candidate_starts):
+                if any(abs(win_start - s[0]) < 30.0 for s in used_spans[vid]):
+                    continue
                 candidate_starts.append(win_start)
 
         print(f"\n[{vid}] Found {len(candidate_starts)} candidate windows to inspect", flush=True)
 
         for c_start in candidate_starts:
-            if len(manifest["clips"]) >= target_total_clips:
+            if current_k_prof_count >= target_k_prof_clips:
+                break
+
+            if video_clips_count.get(vid, 0) >= MAX_CLIPS_PER_NEW_VIDEO:
+                print(f"[{vid}] Reached max clips limit ({MAX_CLIPS_PER_NEW_VIDEO}), moving to next video.", flush=True)
                 break
 
             c_end = c_start + 20.0
@@ -358,9 +419,11 @@ def main():
                 if vid not in used_spans:
                     used_spans[vid] = []
                 used_spans[vid].append((c_start, c_end))
+                video_clips_count[vid] = video_clips_count.get(vid, 0) + 1
 
+                current_k_prof_count += 1
                 print(f"    >>> ACCEPTED [{clip_id}] ({final_dur:.1f}s): {words_summary}", flush=True)
-                print(f"        Benchmark clips: {len(manifest['clips'])} / {target_total_clips}", flush=True)
+                print(f"        Karalius prof clips: {current_k_prof_count} / {target_k_prof_clips} (Total benchmark: {len(manifest['clips'])})", flush=True)
                 current_idx += 1
             else:
                 temp_wav.unlink()
