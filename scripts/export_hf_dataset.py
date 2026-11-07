@@ -273,7 +273,7 @@ def export_dataset(
 
         hf_row = {
             "id": cid,
-            "audio": str(dest_wav),
+            "audio": {"bytes": dest_wav.read_bytes(), "path": f"{cid}.wav"},
             "text": r["text"],
             "duration": r["duration"],
             "category": r["category"],
