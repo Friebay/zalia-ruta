@@ -300,9 +300,11 @@ def export_dataset(
         if not hf_token and Path(".env").exists():
             for line in Path(".env").read_text(encoding="utf-8").splitlines():
                 line = line.strip()
-                if line.startswith("HF_TOKEN="):
-                    hf_token = line.split("=", 1)[1].strip().strip("'\"")
-                    break
+                if "=" in line:
+                    k, v = line.split("=", 1)
+                    if k.strip() == "HF_TOKEN":
+                        hf_token = v.strip().strip("'\"")
+                        break
         click.echo(f"\nPushing dataset to Hugging Face Hub ({repo_id})...")
         try:
             from huggingface_hub import HfApi
