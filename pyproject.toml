@@ -1,8 +1,9 @@
 [project]
 name = "zalia-ruta"
 version = "0.1.0"
-description = "Add your description here"
+description = "Lithuanian speech transcription, MMS forced alignment, automated profanity bleeping, and ASR benchmark suite"
 readme = "README.md"
+license = { text = "MIT" }
 authors = [
     { name = "Friebay", email = "frybaylt@gmail.com" }
 ]

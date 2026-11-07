@@ -190,10 +190,12 @@ output_test/
 benchmark/drafts/
 benchmark/hyp/
 benchmark/youtube/
+benchmark/comparison_videos/
 benchmark/audio/*.webm
 benchmark/audio/B7Mygu8uiYM.*
 benchmark/audio/UBisblxMd5w.*
 benchmark/audio/CT0GB0vd1RI.*
+praat_samples/
 hf_export/
 models/
 

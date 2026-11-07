@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Package and publish the 47-clip Lithuanian ASR Benchmark (zalia-ruta-bench-lt)
+Package and publish the 133-clip Lithuanian ASR Benchmark (zalia-ruta-bench-lt)
 to Hugging Face Datasets.
 
 Exports:
-- 16 kHz mono WAV audio files.
+- 16 kHz mono WAV audio files (embedded into Parquet).
 - Verbatim human-audited Lithuanian transcripts.
 - Non-commercial research dataset card (CC BY-NC 4.0).
 - Pure audio + text schema (no word timestamps, no internal model run data).
@@ -14,7 +14,7 @@ Usage:
     uv run python scripts/export_hf_dataset.py
 
     # 2. Export and push to Hugging Face Hub (public, non-commercial):
-    uv run python scripts/export_hf_dataset.py --push --repo-id Friebay/zalia-ruta-bench-lt
+    uv run python scripts/export_hf_dataset.py --push --repo-id Frararo/zalia-ruta-bench-lt
 """
 
 import json
@@ -276,7 +276,7 @@ def load_and_validate_records(include_timestamps: bool = False) -> List[Dict[str
 @click.option(
     "--repo-id",
     default=DEFAULT_REPO_ID,
-    help="Hugging Face Hub repository ID (e.g. Friebay/zalia-ruta-bench-lt).",
+    help="Hugging Face Hub repository ID (e.g. Frararo/zalia-ruta-bench-lt).",
 )
 @click.option(
     "--private",
@@ -297,7 +297,7 @@ def export_dataset(
     private: bool,
     token: Optional[str],
 ):
-    """Packages the 47-clip benchmark dataset for Hugging Face and optionally pushes to the Hub."""
+    """Packages the 133-clip benchmark dataset for Hugging Face and optionally pushes to the Hub."""
     click.echo(f"Validating and preparing dataset from {BENCH_DIR}...")
     records = load_and_validate_records(include_timestamps=include_timestamps)
     click.echo(f"Loaded {len(records)} verified clips.")
