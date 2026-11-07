@@ -59,3 +59,15 @@ def test_special_tokens_excluded():
     res = score_system("test_sys", "clip1", ref_cues, hyp_words)
     assert res.ref_words_count == 1
     assert res.wer == 0.0
+
+
+def test_brand_name_normalization():
+    from zalia_ruta.bench.score import normalize_word
+
+    assert normalize_word("Facebook'o") == normalize_word("feisbuko")
+    assert normalize_word("Facebook'e") == normalize_word("feisbuke")
+    assert normalize_word("YouTube's") == normalize_word("jutubės")
+    assert normalize_word("discord'ą") == normalize_word("diskordą")
+    assert normalize_word("dicord'as") == normalize_word("diskordas")
+    assert normalize_word("Edge'ą") == normalize_word("edžą")
+

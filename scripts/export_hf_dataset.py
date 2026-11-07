@@ -116,9 +116,9 @@ Evaluated across all **{total_clips} clips** (5,146 reference words), spanning f
 
 | Rank | Model | Model Type | Micro WER% (Corpus) | Macro WER% | Micro CER% | WER (No Diacritics) |
 | :---: | :--- | :--- | :---: | :---: | :---: | :---: |
-| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | Whisper Large v3 (CT2 INT8) | **11.29%** | **13.12%** | **4.39%** | **10.51%** |
-| 🥈 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | Whisper Large v3 Turbo (OpenAI) | **30.00%** | **33.96%** | **14.36%** | **27.46%** |
-| 🥉 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | Whisper Small (DeividasM) | **74.68%** | **104.46%** | **36.53%** | **71.76%** |
+| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | Whisper Large v3 (CT2 INT8) | **11.15%** | **13.01%** | **4.39%** | **10.42%** |
+| 🥈 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | Whisper Large v3 Turbo (OpenAI) | **29.97%** | **33.92%** | **14.36%** | **27.44%** |
+| 🥉 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | Whisper Small (DeividasM) | **74.66%** | **104.44%** | **36.53%** | **71.74%** |
 
 * **Micro WER% (Corpus WER):** Total word errors (substitutions + deletions + insertions) divided by total reference words across the entire dataset. Primary benchmark metric.
 * **Macro WER%:** Arithmetic mean of per-clip WERs.

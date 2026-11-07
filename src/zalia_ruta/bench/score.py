@@ -13,9 +13,27 @@ _PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
 
 
 def normalize_word(w: str) -> str:
-    """Lowercases and strips punctuation."""
+    """Lowercases, strips punctuation, and normalizes approved brand name variants."""
     w = w.lower().strip()
-    return _PUNCT_RE.sub("", w)
+    w = _PUNCT_RE.sub("", w)
+
+    # Approved Brand Name Equivalence Normalization
+    if w.startswith("facebook"):
+        w = "feisbuk" + w[8:]
+    elif w in ("youtubes", "youtubės", "jutubes"):
+        w = "jutubės"
+    elif w.startswith("youtube"):
+        w = "jutub" + w[7:]
+    elif w.startswith("youtub"):
+        w = "jutub" + w[6:]
+    elif w.startswith("discord"):
+        w = "diskord" + w[7:]
+    elif w.startswith("dicord"):
+        w = "diskord" + w[6:]
+    elif w.startswith("edge"):
+        w = "edž" + w[4:]
+
+    return w
 
 
 def strip_lt_diacritics(w: str) -> str:
