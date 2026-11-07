@@ -114,11 +114,12 @@ print("Transcript:", sample["text"])
 
 Evaluated across all **{total_clips} clips** (5,146 reference words), spanning formal broadcast speech, debates, and challenging colloquial streamer reactions with heavy slang, background audio, and profanities.
 
-| Rank | Model | Model Type | Micro WER% (Corpus) | Macro WER% | Micro CER% | WER (No Diacritics) |
-| :---: | :--- | :--- | :---: | :---: | :---: | :---: |
-| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | Whisper Large v3 (CT2 INT8) | **11.15%** | **13.01%** | **4.39%** | **10.42%** |
-| 🥈 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | Whisper Large v3 Turbo (OpenAI) | **29.97%** | **33.92%** | **14.36%** | **27.44%** |
-| 🥉 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | Whisper Small (DeividasM) | **74.66%** | **104.44%** | **36.53%** | **71.74%** |
+| Rank | Model | Model Type | Micro WER% (Corpus) | Macro WER% | Micro CER% | WER (No Diacritics) | RTF | Speed |
+| :---: | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | Whisper Large v3 (CT2 INT8) | **11.15%** | **13.01%** | **4.30%** | **10.38%** | **0.28** | **3.6x** |
+| 🥈 | **[azuolas-whisper-lt](https://huggingface.co/akisviete/azuolas-whisper-lt)** | Whisper Large v3 (CT2 INT8) | **11.68%** | **13.95%** | **4.98%** | **10.96%** | **1.30** | **0.8x** |
+| 🥉 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | Whisper Large v3 Turbo (OpenAI) | **29.97%** | **33.92%** | **14.35%** | **27.44%** | **1.89** | **0.5x** |
+| 4 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | Whisper Small (DeividasM) | **74.66%** | **104.44%** | **36.52%** | **71.73%** | **0.72** | **1.4x** |
 
 * **Micro WER% (Corpus WER):** Total word errors (substitutions + deletions + insertions) divided by total reference words across the entire dataset. Primary benchmark metric.
 * **Macro WER%:** Arithmetic mean of per-clip WERs.

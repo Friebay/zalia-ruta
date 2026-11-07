@@ -322,11 +322,13 @@ def score(system: Optional[str], model: Optional[str], clip: Optional[str], all_
         sys_metrics = runner.load_metrics(sys_id)
         clip_metrics = [sys_metrics[r.clip_id] for r in sys_res if r.clip_id in sys_metrics]
         if clip_metrics:
-            mean_rtf = sum(m["rtf"] for m in clip_metrics) / len(clip_metrics)
-            mean_speed = sum(m["speedup"] for m in clip_metrics) / len(clip_metrics)
+            total_latency = sum(m.get("latency_s", 0.0) for m in clip_metrics)
+            total_duration = sum(m.get("duration_s", 0.0) for m in clip_metrics)
+            corpus_rtf = total_latency / total_duration if total_duration > 0 else 0.0
+            corpus_speed = total_duration / total_latency if total_latency > 0 else 0.0
             max_vram = max(m.get("peak_vram_mb", 0.0) for m in clip_metrics)
-            system_aggregates[sys_id]["rtf"] = f"{mean_rtf:.3f}"
-            system_aggregates[sys_id]["speed"] = f"{mean_speed:.1f}x"
+            system_aggregates[sys_id]["rtf"] = f"{corpus_rtf:.3f}"
+            system_aggregates[sys_id]["speed"] = f"{corpus_speed:.1f}x"
             system_aggregates[sys_id]["vram"] = f"{max_vram:.0f} MB" if max_vram > 0 else "N/A"
         else:
             system_aggregates[sys_id]["rtf"] = "N/A"

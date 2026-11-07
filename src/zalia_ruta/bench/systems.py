@@ -2,6 +2,7 @@ import json
 import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+import click
 import numpy as np
 import soundfile as sf
 import torch
@@ -42,6 +43,9 @@ CT2_MODEL_ID = str(CT2_LOCAL_PATH) if CT2_LOCAL_PATH.exists() else "RobertasTa/p
 CT2_FP16_LOCAL_PATH = Path("models/paprika-whisper-lt-v3-ct2-float16")
 CT2_FP16_MODEL_ID = str(CT2_FP16_LOCAL_PATH)
 
+AZUOLAS_CT2_PATH = Path("models/azuolas-whisper-lt-ct2-int8_float16")
+AZUOLAS_MODEL_ID = str(AZUOLAS_CT2_PATH) if AZUOLAS_CT2_PATH.exists() else "akisviete/azuolas-whisper-lt"
+
 KNOWN_MODELS: Dict[str, str] = {
     "paprika": "kristijonas/paprika-whisper-lt-v3",
     "paprika_prompt": "kristijonas/paprika-whisper-lt-v3",
@@ -49,7 +53,9 @@ KNOWN_MODELS: Dict[str, str] = {
     "paprika_ct2_prompt": CT2_MODEL_ID,
     "paprika_ct2_fp16": CT2_FP16_MODEL_ID,
     "whisper_small_lt": "DeividasM/whisper-small-lt",
-    "azuolas": "akisviete/azuolas-whisper-lt",
+    "azuolas": AZUOLAS_MODEL_ID,
+    "azuolas_ct2": AZUOLAS_MODEL_ID,
+    "azuolas_hf": "akisviete/azuolas-whisper-lt",
     "turbo": "openai/whisper-large-v3-turbo",
     "lt_ausys": "RobertasTa/lt-ausys",
 }
@@ -199,6 +205,9 @@ class BenchmarkRunner:
         if not force:
             cached = self.load_cached(system_id, clip_id)
             if cached is not None:
+                m = self.load_metrics(system_id).get(clip_id, {})
+                if m:
+                    click.echo(f"  [{clip_id}] {system_id} (cached): {m.get('latency_s', 0):.2f}s (audio: {m.get('duration_s', 0):.2f}s | RTF: {m.get('rtf', 0):.3f} | {m.get('speedup', 0)}x speed)")
                 return cached
 
         from zalia_ruta.asr import DEFAULT_INITIAL_PROMPT
@@ -221,6 +230,8 @@ class BenchmarkRunner:
         speedup = float(duration_s / latency_s) if latency_s > 0 else 0.0
         peak_vram_mb = float(torch.cuda.max_memory_allocated() / (1024 ** 2)) if torch.cuda.is_available() else 0.0
 
+        click.echo(f"  [{clip_id}] {system_id}: {latency_s:.2f}s (audio: {duration_s:.2f}s | RTF: {rtf:.3f} | {speedup:.1f}x speed)")
+
         self.save_cached(system_id, clip_id, words)
         self.save_metric(system_id, clip_id, {
             "duration_s": round(duration_s, 3),
@@ -237,9 +248,12 @@ class BenchmarkRunner:
         if not force:
             cached = self.load_cached(system_id, clip_id)
             if cached is not None:
+                m = self.load_metrics(system_id).get(clip_id, {})
+                if m:
+                    click.echo(f"  [{clip_id}] {system_id} (cached): total {m.get('latency_s', 0):.2f}s (audio: {m.get('duration_s', 0):.2f}s | RTF: {m.get('rtf', 0):.3f} | {m.get('speedup', 0)}x speed)")
                 return cached
 
-        raw_words = self.run_model_raw(model_id, prefix, clip_id, audio, sr=sr, force=force)
+        raw_words = self.run_model_raw(model_id, prefix, clip_id, audio, sr=sr, force=False)
         if self._mms_aligner is None:
             self._mms_aligner = MMSAligner()
 
@@ -263,6 +277,8 @@ class BenchmarkRunner:
         speedup = float(duration_s / total_latency_s) if total_latency_s > 0 else 0.0
         peak_vram_mb = float(torch.cuda.max_memory_allocated() / (1024 ** 2)) if torch.cuda.is_available() else 0.0
 
+        click.echo(f"  [{clip_id}] {system_id}: total {total_latency_s:.2f}s (align {stage_latency_s:.2f}s | audio {duration_s:.2f}s | RTF: {rtf:.3f} | {speedup:.1f}x speed)")
+
         self.save_cached(system_id, clip_id, refined)
         self.save_metric(system_id, clip_id, {
             "duration_s": round(duration_s, 3),
@@ -280,9 +296,12 @@ class BenchmarkRunner:
         if not force:
             cached = self.load_cached(system_id, clip_id)
             if cached is not None:
+                m = self.load_metrics(system_id).get(clip_id, {})
+                if m:
+                    click.echo(f"  [{clip_id}] {system_id} (cached): total {m.get('latency_s', 0):.2f}s (audio: {m.get('duration_s', 0):.2f}s | RTF: {m.get('rtf', 0):.3f} | {m.get('speedup', 0)}x speed)")
                 return cached
 
-        base_words = self.run_model_refined(model_id, prefix, clip_id, audio, sr=sr, force=force)
+        base_words = self.run_model_refined(model_id, prefix, clip_id, audio, sr=sr, force=False)
 
         t0 = time.perf_counter()
         refined = refine_word_boundaries(audio, base_words, sr=sr)
@@ -298,6 +317,8 @@ class BenchmarkRunner:
         rtf = float(total_latency_s / duration_s) if duration_s > 0 else 0.0
         speedup = float(duration_s / total_latency_s) if total_latency_s > 0 else 0.0
         peak_vram_mb = float(torch.cuda.max_memory_allocated() / (1024 ** 2)) if torch.cuda.is_available() else 0.0
+
+        click.echo(f"  [{clip_id}] {system_id}: total {total_latency_s:.2f}s (boundary {stage_latency_s:.2f}s | audio {duration_s:.2f}s | RTF: {rtf:.3f} | {speedup:.1f}x speed)")
 
         self.save_cached(system_id, clip_id, refined)
         self.save_metric(system_id, clip_id, {
