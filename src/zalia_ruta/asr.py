@@ -382,6 +382,8 @@ class LithuanianASR:
                 "language": "lithuanian",
                 "task": "transcribe",
                 "condition_on_prev_tokens": False,
+                "repetition_penalty": 1.15,
+                "no_repeat_ngram_size": 3,
             }
             if effective_prompt:
                 if effective_prompt == self.initial_prompt and self._prompt_ids_tensor is not None:

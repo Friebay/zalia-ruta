@@ -115,18 +115,21 @@ Duomenų rinkinys viešai pasiekiamas „Hugging Face“ platformoje: [**Frararo
 
 ### Oficiali lyderių lentelė (133 įrašai)
 
-| Vieta | Modelis | Modelio tipas | Mikro WER% (Viso korpuso) | Makro WER% | Mikro CER% | WER (Be diakritikų) | RTF | Greitis |
-| :---: | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | Whisper Large v3 (CT2 INT8) | **11.08%** | **12.86%** | **4.28%** | **10.30%** | **0.28** | **3.6x** |
-| 🥈 | **[azuolas-whisper-lt](https://huggingface.co/akisviete/azuolas-whisper-lt)** | Whisper Large v3 (CT2 INT8) | **11.60%** | **13.81%** | **4.96%** | **10.88%** | **1.30** | **0.8x** |
-| 🥉 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | Whisper Large v3 Turbo (OpenAI) | **29.93%** | **33.82%** | **14.34%** | **27.40%** | **1.89** | **0.5x** |
-| 4 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | Whisper Small (DeividasM) | **74.66%** | **104.44%** | **36.51%** | **71.73%** | **0.72** | **1.4x** |
-| 5 | **[svogunas-turbo-lt](https://huggingface.co/svogunas/whisper-large-v3-turbo-lt)** | Whisper Large v3 Turbo (CT2 INT8)* | **87.78%** | **83.89%** | **75.00%** | **87.54%** | **1.55** | **0.6x** |
+| Vieta | Modelis | Modelio tipas | Mikro WER% (Viso korpuso) | Makro WER% | Mikro CER% | WER (Be diakritikų) | RTF | Greitis | Aparatinė įranga |
+| :---: | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | Whisper Large v3 (CT2 INT8) | **11.08%** | **12.86%** | **4.28%** | **10.30%** | **0.28** | **3.6x** | NVIDIA GTX 1650 (4 GB) |
+| 🥈 | **[paprika-whisper-lt-v3](https://huggingface.co/kristijonas/paprika-whisper-lt-v3)** | Whisper Large v3 (PyTorch FP16)* | **11.36%** | **12.33%** | **4.13%** | **10.51%** | **0.26** | **3.9x** | NVIDIA Tesla T4 (16 GB) |
+| 🥉 | **[azuolas-whisper-lt](https://huggingface.co/akisviete/azuolas-whisper-lt)** | Whisper Large v3 (CT2 INT8) | **11.60%** | **13.81%** | **4.96%** | **10.88%** | **1.30** | **0.8x** | NVIDIA GTX 1650 (4 GB) |
+| 4 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | Whisper Large v3 Turbo (OpenAI) | **29.93%** | **33.82%** | **14.34%** | **27.40%** | **1.89** | **0.5x** | NVIDIA GTX 1650 (4 GB) |
+| 5 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | Whisper Small (DeividasM) | **74.66%** | **104.44%** | **36.51%** | **71.73%** | **0.72** | **1.4x** | NVIDIA GTX 1650 (4 GB) |
+| 6 | **[svogunas-turbo-lt](https://huggingface.co/svogunas/whisper-large-v3-turbo-lt)** | Whisper Large v3 Turbo (CT2 INT8)** | **87.78%** | **83.89%** | **75.00%** | **87.54%** | **1.55** | **0.6x** | NVIDIA GTX 1650 (4 GB) |
 
-> \* **Pastaba dėl `svogunas-turbo-lt`:** Testuota su CTranslate2 INT8 kvantavimu (`int8_float16`). Dėl 4 sluoksnių Turbo architektūros tiesioginis INT8 kvantavimas sukelia svorių kolapsą ir nuolatines haliucinacijas šnekamojoje kalboje. Jei turite kokybiškesnę kvantavimo konfigūraciją ar pilną FP16/FP32 testą, pateikite PR / Diskusiją.
+> \* **Pastaba dėl `paprika-whisper-lt-v3 (PyTorch FP16)`:** Vykdyta per Hugging Face `transformers` su `no_repeat_ngram_size=3` ir `repetition_penalty=1.15` generavimo nustatymais (kurie neleidžia Whisper modeliui patekti į haliucinacijų kilpas emocingose ar juoko atkarpose). Pilnas modelis reikalauja ~7.4 GB VRAM, todėl greitis (3.9x) išmatuotas su NVIDIA Tesla T4 (ant 4 GB kortų sistema veikia žymiai lėčiau dėl PCIe atminties puslapiavimo).
+>
+> \*\* **Pastaba dėl `svogunas-turbo-lt`:** Testuota su CTranslate2 INT8 kvantavimu (`int8_float16`). Dėl 4 sluoksnių Turbo architektūros tiesioginis INT8 kvantavimas sukelia svorių kolapsą ir nuolatines haliucinacijas šnekamojoje kalboje. Jei turite kokybiškesnę kvantavimo konfigūraciją ar pilną FP16/FP32 testą, pateikite PR / Diskusiją.
 
 * **Realaus laiko koeficientas (RTF):** Bendros transkripcijos trukmės ir garso trukmės santykis (`trukmė / garso_trukmė`). Kuo mažesnis – tuo greičiau; RTF < 1.0 reiškia greičiau nei realiu laiku.
-* **Greitis:** Pagreitinimo koeficientas (`garso_trukmė / trukmė` = `1 / RTF`). Išmatuota su NVIDIA GTX 1650 (4 GB VRAM).
+* **Greitis:** Pagreitinimo koeficientas (`garso_trukmė / trukmė` = `1 / RTF`).
 
 ### Keiksmažodžių cenzūravimo lyderių lentelė (Atpažinimo dažnis)
 
@@ -134,11 +137,12 @@ Vertina, kaip patikimai kiekvienas modelis atpažįsta lietuviškus ir slavišku
 
 | Vieta | Modelis | Atpažinta / Viso | Praleista | Klaidingi signalai | Atpažinimas% (Recall) | Tikslumas% (Precision) | F1 balas |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | **233 / 255** | 22 | 0 | **91.37%** | **100.00%** | **95.49%** |
-| 🥈 | **[azuolas-whisper-lt](https://huggingface.co/akisviete/azuolas-whisper-lt)** | **224 / 255** | 31 | 1 | **87.84%** | **99.56%** | **93.33%** |
-| 🥉 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | **206 / 255** | 49 | 0 | **80.78%** | **100.00%** | **89.37%** |
-| 4 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | **162 / 255** | 93 | 1 | **63.53%** | **99.39%** | **77.51%** |
-| 5 | **[svogunas-turbo-lt](https://huggingface.co/svogunas/whisper-large-v3-turbo-lt)** | **18 / 255** | 237 | 4 | **7.06%** | **81.82%** | **13.00%** |
+| 🥇 | **[paprika-whisper-lt-v3 (CT2 INT8)](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | **233 / 255** | 22 | 0 | **91.37%** | **100.00%** | **95.49%** |
+| 🥈 | **[paprika-whisper-lt-v3 (PyTorch FP16)](https://huggingface.co/kristijonas/paprika-whisper-lt-v3)** | **230 / 255** | 25 | 0 | **90.20%** | **100.00%** | **94.85%** |
+| 🥉 | **[azuolas-whisper-lt](https://huggingface.co/akisviete/azuolas-whisper-lt)** | **224 / 255** | 31 | 1 | **87.84%** | **99.56%** | **93.33%** |
+| 4 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | **206 / 255** | 49 | 0 | **80.78%** | **100.00%** | **89.37%** |
+| 5 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | **162 / 255** | 93 | 1 | **63.53%** | **99.39%** | **77.51%** |
+| 6 | **[svogunas-turbo-lt](https://huggingface.co/svogunas/whisper-large-v3-turbo-lt)** | **18 / 255** | 237 | 4 | **7.06%** | **81.82%** | **13.00%** |
 
 * **Atpažinimas% (Recall / Catch Rate):** `(Atpažinti keiksmažodžiai / Visi etaloniniai keiksmažodžiai) × 100%`. Svarbiausias saugaus cenzūravimo rodiklis.
 * **Tikslumas% (Precision):** `(Atpažinti keiksmažodžiai / (Atpažinti keiksmažodžiai + Klaidingi signalai)) × 100%`. Rodo, kaip retai be reikalo užbleepinami švarūs žodžiai.
