@@ -20,8 +20,8 @@ class BleepInterval:
 
 # Default regex patterns for core Lithuanian / Slavic profanities and their inflections
 DEFAULT_PROFANITY_PATTERNS = [
-    # blet, blėt, bleit, bliat, bliad, buliot, ble, bliamba, bletis (does not match blefas, blynai)
-    r"^b[u]?l+[eiyoa]+($|[tdkch]|mb).*$",
+    # blet, blėt, bleit, bliat, bliad, buliot, ble, bliamba, bletis, blecha (does not match blefas, blynai, blokai, blitz)
+    r"^(ble+[iy]?($|[tdch]|mb)|blia[tdchmb]|buliot).*$",
     # nachui, nahui, nachuj, pochui, nach, etc.
     r"^(na|po|za)[chx]+u?[ijy]?.*$",
     # suka, sukos, sukų, sukom (standalone inflections, does not match sukasi, sukau, sukti)
@@ -36,8 +36,8 @@ DEFAULT_PROFANITY_PATTERNS = [
     r"^.*(job[atn]|jeb[atn]|dalbajob|dolbajob).*$",
     # bybys, bibis
     r"^b[iy]b([iy][rs]|u|a|k|el|o|ui).*$",
-    # sikna, sikt
-    r"^(sikn|sikt|prisik|apsisik).*$",
+    # sikna, sikt, apsišikti, prišiko (does not match prisikviesti, prisikelti)
+    r"^(sikn.*|sikt.*|apsisik.*|prisik(o|om|ot|us|ti|au|ai|es|usi|t))$",
     # debil
     r"^debil.*$",
 ]

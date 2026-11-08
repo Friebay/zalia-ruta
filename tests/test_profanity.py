@@ -49,6 +49,11 @@ def test_profanity_matches():
     assert detector.is_profanity("supistas")
     assert detector.is_profanity("atsipisk")
     assert detector.is_profanity("pyzda")
+    assert detector.is_profanity("šikna")
+    assert detector.is_profanity("šiknos")
+    assert detector.is_profanity("šikną")
+    assert detector.is_profanity("apsišiko")
+    assert detector.is_profanity("prišiko")
 
     # Clean non-profane words should NOT match (no false positives)
     assert not detector.is_profanity("labas")
@@ -61,6 +66,13 @@ def test_profanity_matches():
     assert not detector.is_profanity("sukau")
     assert not detector.is_profanity("sukti")
     assert not detector.is_profanity("suktas")
+    assert not detector.is_profanity("blokų")
+    assert not detector.is_profanity("block")
+    assert not detector.is_profanity("blitzas")
+    assert not detector.is_profanity("prisikviest")
+    assert not detector.is_profanity("prisikviestum")
+    assert not detector.is_profanity("prisikelti")
+    assert not detector.is_profanity("nusikaltimas")
 
 
 def test_find_intervals_and_merging():

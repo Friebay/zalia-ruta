@@ -56,27 +56,27 @@ configs:
     path: "data/test-*"
 ---
 
-# Žalia Rūta: Lithuanian Speech Benchmark (`zalia-ruta-bench-lt`)
+# Žalia Rūta: Lietuvių šnekos etalonas (`zalia-ruta-bench-lt`)
 
-A curated evaluation dataset consisting of **{total_clips} Lithuanian audio clips** and verbatim human-verified transcripts for speech recognition benchmarking.
-
----
-
-## Dataset Overview
-
-- **Clips:** **{total_clips} unique clips** (16 kHz mono WAV, 16-bit PCM).
-- **Transcripts:** Human-audited verbatim Lithuanian orthographic transcripts (~95% estimated accuracy; rapidly transcribed and audited to expand clip coverage, so minor colloquial phrasing, background noise mishearings, or non-standard slang spellings may be present).
-- **Coverage & Speech Diversity:**
-  - Conversational speech, political debates, and news commentary (Alexander Stubb, Virginijus Sinkevičius, Vytautas Sinica, Ingrida Šimonytė).
-  - Streamer commentary, gaming reactions, heavy profanities, and compound slang / loanwords (~120 Karalius clips, including 97 profanity clips).
-  - Natural pauses, background audio, overlapping audio artifacts, and acoustic noise challenges.
-- **Alignment:** Word-level alignment timestamps will be provided in a future update.
+Kuruotas vertinimo duomenų rinkinys, kurį sudaro **{total_clips} lietuviški garso įrašai** ir žmogaus patikrinti paraidžiui suderinti etaloniniai tekstai šnekos atpažinimo (ASR) sistemų testavimui.
 
 ---
 
-## Dataset Schema
+## Duomenų rinkinio apžvalga
 
-Each sample in `test` contains:
+- **Įrašai:** **{total_clips} unikalūs įrašai** (16 kHz mono WAV, 16-bit PCM).
+- **Transkripcijos:** Žmogaus patikrinti tikslūs lietuviški ortografiniai tekstai (~95 % numatomas tikslumas; transkribuota ir tikrinta siekiant kuo platesnės įrašų aprėpties, todėl gali pasitaikyti smulkių šnekamosios kalbos niuansų ar nestandartinės žargono rašybos).
+- **Aprėptis ir šnekos įvairovė:**
+  - Šnekamoji kalba, politiniai debatai ir naujienų komentarai (Alexander Stubb, Virginijus Sinkevičius, Vytautas Sinica, Ingrida Šimonytė).
+  - Transliuotojų (streamerių) komentarai, žaidimų reakcijos, tiršta necenzūrinė leksika ir dūriniai bei skoliniai (~120 Karaliaus įrašų, iš jų 97 su keiksmažodžiais).
+  - Natūralios pauzės, foninis garsas, persidengiantys garsiniai trikdžiai ir akustinis triukšmas.
+- **Lygiavimas:** Žodinio lygio laiko žymos bus pateiktos būsimame atnaujinime.
+
+---
+
+## Duomenų schema
+
+Kiekvienas `test` įrašas turi šiuos laukus:
 
 ```python
 {
@@ -96,7 +96,7 @@ Each sample in `test` contains:
 
 ---
 
-## Quick Usage
+## Greitas naudojimas
 
 ```python
 from datasets import load_dataset
@@ -104,58 +104,62 @@ from datasets import load_dataset
 dataset = load_dataset("Frararo/zalia-ruta-bench-lt", split="test")
 
 sample = dataset[0]
-print("Clip ID:", sample["id"])
-print("Transcript:", sample["text"])
+print("Įrašo ID:", sample["id"])
+print("Transkripcija:", sample["text"])
 ```
 
 ---
 
-## Official Benchmark Leaderboard
+## Oficiali etalono lyderių lentelė
 
-Evaluated across all **{total_clips} clips** (5,146 reference words), spanning formal broadcast speech, debates, and challenging colloquial streamer reactions with heavy slang, background audio, and profanities.
+Įvertinta visuose **{total_clips} įrašuose** (5 146 etalono žodžiai): nuo formalių žinių laidų ir debatų iki sudėtingų laisvo stiliaus streamerių reakcijų su žargonu, foniniu garsu ir keiksmažodžiais.
 
-| Rank | Model | Model Type | Micro WER% (Corpus) | Macro WER% | Micro CER% | WER (No Diacritics) | RTF | Speed |
+| Vieta | Modelis | Modelio tipas | Mikro WER% (Viso korpuso) | Makro WER% | Mikro CER% | WER (Be diakritikų) | RTF | Greitis |
 | :---: | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | Whisper Large v3 (CT2 INT8) | **11.08%** | **12.86%** | **4.28%** | **10.30%** | **0.28** | **3.6x** |
 | 🥈 | **[azuolas-whisper-lt](https://huggingface.co/akisviete/azuolas-whisper-lt)** | Whisper Large v3 (CT2 INT8) | **11.60%** | **13.81%** | **4.96%** | **10.88%** | **1.30** | **0.8x** |
 | 🥉 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | Whisper Large v3 Turbo (OpenAI) | **29.93%** | **33.82%** | **14.34%** | **27.40%** | **1.89** | **0.5x** |
 | 4 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | Whisper Small (DeividasM) | **74.66%** | **104.44%** | **36.51%** | **71.73%** | **0.72** | **1.4x** |
+| 5 | **[svogunas-turbo-lt](https://huggingface.co/svogunas/whisper-large-v3-turbo-lt)** | Whisper Large v3 Turbo (CT2 INT8)* | **87.78%** | **83.89%** | **75.00%** | **87.54%** | **1.55** | **0.6x** |
 
-* **Micro WER% (Corpus WER):** Total word errors (substitutions + deletions + insertions) divided by total reference words across the entire dataset. Primary benchmark metric.
-* **Macro WER%:** Arithmetic mean of per-clip WERs.
-* **WER (No Diacritics):** Scored after normalizing Lithuanian diacritic characters (`ą, č, ę, ė, į, š, ų, ū, ž` → `a, c, e, e, i, s, u, u, z`).
+> \* **Pastaba dėl `svogunas-turbo-lt`:** Testuota su CTranslate2 INT8 kvantavimu (`int8_float16`). Dėl 4 sluoksnių Turbo architektūros tiesioginis INT8 kvantavimas sukelia svorių kolapsą ir nuolatines haliucinacijas šnekamojoje kalboje. Jei turite kokybiškesnę kvantavimo konfigūraciją ar pilną FP16/FP32 testą, pateikite PR / Diskusiją.
+
+* **Mikro WER% (Viso korpuso WER):** Bendras žodžių klaidų skaičius (pakeitimai + praleidimai + įterpimai), padalintas iš visų etaloninių žodžių skaičiaus duomenų rinkinyje. Pagrindinė etalono metrika.
+* **Makro WER%:** Atskirų įrašų WER vidurkis.
+* **WER (Be diakritikų):** Rezultatas normalizavus lietuviškus diakritinius ženklus (`ą, č, ę, ė, į, š, ų, ū, ž` → `a, c, e, e, i, s, u, u, z`).
 
 ---
 
-### Profanity Censorship Leaderboard (Swear Word Catch Rate)
+### Keiksmažodžių cenzūravimo lyderių lentelė (Atpažinimo dažnis)
 
-Evaluates how reliably each model catches Lithuanian and Slavic swear words across **262 human-audited ground-truth profanities** across the benchmark dataset:
+Vertina, kaip patikimai kiekvienas modelis atpažįsta lietuviškus ir slaviškus keiksmažodžius tarp **255 žmogaus patvirtintų etaloninių keiksmažodžių** visame duomenų rinkinyje:
 
-| Rank | Model | Caught / Total | Missed | False Alarms | Recall% (Catch Rate) | Precision% | F1-Score |
+| Vieta | Modelis | Atpažinta / Viso | Praleista | Klaidingi signalai | Atpažinimas% (Recall) | Tikslumas% (Precision) | F1 balas |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | **240 / 262** | 22 | 0 | **91.60%** | **100.00%** | **95.62%** |
-| 🥈 | **[azuolas-whisper-lt](https://huggingface.co/akisviete/azuolas-whisper-lt)** | **236 / 262** | 26 | 1 | **90.08%** | **99.58%** | **94.59%** |
-| 🥉 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | **214 / 262** | 48 | 0 | **81.68%** | **100.00%** | **89.92%** |
-| 4 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | **166 / 262** | 96 | 11 | **63.36%** | **93.79%** | **75.63%** |
+| 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | **233 / 255** | 22 | 0 | **91.37%** | **100.00%** | **95.49%** |
+| 🥈 | **[azuolas-whisper-lt](https://huggingface.co/akisviete/azuolas-whisper-lt)** | **224 / 255** | 31 | 1 | **87.84%** | **99.56%** | **93.33%** |
+| 🥉 | **[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo)** | **206 / 255** | 49 | 0 | **80.78%** | **100.00%** | **89.37%** |
+| 4 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | **162 / 255** | 93 | 1 | **63.53%** | **99.39%** | **77.51%** |
+| 5 | **[svogunas-turbo-lt](https://huggingface.co/svogunas/whisper-large-v3-turbo-lt)** | **18 / 255** | 237 | 4 | **7.06%** | **81.82%** | **13.00%** |
 
-* **Recall% (Catch Rate):** `(Profanities Caught / Total Ground-Truth Profanities) × 100%`. The primary metric for censorship safety.
-* **Precision%:** `(Profanities Caught / (Profanities Caught + False Alarms)) × 100%`. Measures false-positive bleeping rate.
+* **Atpažinimas% (Recall / Catch Rate):** `(Atpažinti keiksmažodžiai / Visi etaloniniai keiksmažodžiai) × 100%`. Svarbiausias saugaus cenzūravimo rodiklis.
+* **Tikslumas% (Precision):** `(Atpažinti keiksmažodžiai / (Atpažinti keiksmažodžiai + Klaidingi signalai)) × 100%`. Rodo, kaip retai be reikalo užbleepinami švarūs žodžiai.
 
 ---
 
-## How to Evaluate Your Model
+## Kaip įvertinti savo modelį
 
-You can benchmark any ASR model against this dataset using the following self-contained evaluation script:
+Kiekvienas tyrėjas gali įvertinti bet kurį ASR modelį su šiuo duomenų rinkiniu pasinaudodamas šiuo scenarijumi:
 
 ```python
 import re
 import jiwer
 from datasets import load_dataset
 
-# 1. Load the benchmark dataset
+# 1. Užkraukite etalono duomenų rinkinį
 ds = load_dataset("Frararo/zalia-ruta-bench-lt", split="test")
 
-# 2. Official benchmark normalizer
+# 2. Oficialus etalono normalizatorius
 _PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
 
 def normalize(text: str) -> str:
@@ -174,39 +178,39 @@ def normalize(text: str) -> str:
         words.append(w)
     return " ".join(words)
 
-# 3. Transcribe each sample with your model
+# 3. Transkribuokite kiekvieną įrašą su savo modeliu
 refs, hyps = [], []
 for sample in ds:
     audio_array = sample["audio"]["array"]
     sampling_rate = sample["audio"]["sampling_rate"]
     
-    # Replace this with your model's transcription call:
+    # Čia nurodykite savo modelio transkripcijos iškvietimą:
     # predicted_text = my_model.transcribe(audio_array, sampling_rate)
-    predicted_text = sample["text"] # placeholder
+    predicted_text = sample["text"] # pavyzdys
     
     refs.append(normalize(sample["text"]))
     hyps.append(normalize(predicted_text))
 
-# 4. Compute official benchmark scores
+# 4. Apskaičiuokite oficialius etalono įverčius
 micro_wer = jiwer.wer(refs, hyps) * 100
 micro_cer = jiwer.cer(refs, hyps) * 100
-print(f"Official Micro WER: {micro_wer:.2f}%")
-print(f"Official Micro CER: {micro_cer:.2f}%")
+print(f"Oficialus Mikro WER: {micro_wer:.2f}%")
+print(f"Oficialus Mikro CER: {micro_cer:.2f}%")
 ```
 
-### Submitting to the Leaderboard
-To submit your model to the leaderboard table:
-1. Open a **Discussion** or **Pull Request** on this dataset repo.
-2. Provide your model name and Hugging Face link.
-3. Provide your predictions in JSON format (`{"clip_id": "predicted text", ...}`) so the score can be reproduced and verified.
+### Rezultatų pateikimas lyderių lentelei
+Norėdami pateikti savo modelį į lyderių lentelę:
+1. Atidarykite **Diskusiją (Discussion)** arba **Pull Request** šioje duomenų rinkinio saugykloje.
+2. Nurodykite modelio pavadinimą ir „Hugging Face“ nuorodą.
+3. Pateikite prognozių failą JSON formatu (`{"clip_id": "prognozuotas tekstas", ...}`), kad rezultatus būtų galima atkurti ir patikrinti.
 
 ---
 
-## Terms of Use & License
+## Naudojimo sąlygos ir licencija
 
-- **License:** [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).
-- **Intended Use:** Non-commercial research, academic evaluation, and private benchmarking. Not licensed for commercial deployment or commercial model training without explicit authorization.
-- **Source Project:** Curated as part of the [`zalia-ruta`](https://github.com/Friebay/zalia-ruta) Lithuanian speech processing project.
+- **Licencija:** [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).
+- **Paskirtis:** Ne pelno siekiantys moksliniai tyrimai, akademinis vertinimas ir individualus testavimas. Nekomercinė licencija.
+- **Pirminis projektas:** Sukurta kaip [`zalia-ruta`](https://github.com/Friebay/zalia-ruta) lietuvių šnekos apdorojimo projekto dalis.
 """
 
 

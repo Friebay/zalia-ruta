@@ -46,6 +46,9 @@ CT2_FP16_MODEL_ID = str(CT2_FP16_LOCAL_PATH)
 AZUOLAS_CT2_PATH = Path("models/azuolas-whisper-lt-ct2-int8_float16")
 AZUOLAS_MODEL_ID = str(AZUOLAS_CT2_PATH) if AZUOLAS_CT2_PATH.exists() else "akisviete/azuolas-whisper-lt"
 
+SVOGUNAS_CT2_PATH = Path("models/svogunas-turbo-lt-ct2-int8_float16")
+SVOGUNAS_MODEL_ID = str(SVOGUNAS_CT2_PATH) if SVOGUNAS_CT2_PATH.exists() else "svogunas/whisper-large-v3-turbo-lt"
+
 KNOWN_MODELS: Dict[str, str] = {
     "paprika": "kristijonas/paprika-whisper-lt-v3",
     "paprika_prompt": "kristijonas/paprika-whisper-lt-v3",
@@ -57,6 +60,8 @@ KNOWN_MODELS: Dict[str, str] = {
     "azuolas_ct2": AZUOLAS_MODEL_ID,
     "azuolas_hf": "akisviete/azuolas-whisper-lt",
     "turbo": "openai/whisper-large-v3-turbo",
+    "svogunas": SVOGUNAS_MODEL_ID,
+    "svogunas_ct2": SVOGUNAS_MODEL_ID,
     "lt_ausys": "RobertasTa/lt-ausys",
 }
 
