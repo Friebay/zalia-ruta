@@ -170,21 +170,21 @@ configs:
 # Žalia Rūta: Lietuvių šnekos ir keiksmažodžių etalonas (`zalia-ruta-bench-lt`)
 
 > [!WARNING]
-> **Content Warning (Turinio įspėjimas):** Duomenų rinkinyje yra necenzūrinės leksikos, slaviškų skolinių ir vulgarių šnekamosios kalbos posakių. Rinkinys skirtas akademiniams tyrimams, automatiniam šnekos atpažinimui (ASR) ir turinio moderavimo / filtravimo algoritmų vertinimui.
+> **Turinio įspėjimas (Content Warning):** Duomenų rinkinyje yra necenzūrinės leksikos, slaviškų skolinių ir vulgarių šnekamosios kalbos posakių. Rinkinys skirtas akademiniams tyrimams, automatiniam šnekos atpažinimui (ASR) ir turinio moderavimo / filtravimo algoritmų vertinimui.
 
-Kuruotas vertinimo duomenų rinkinys, kurį sudaro **{total_clips} lietuviški garso įrašai** su etaloniniais tekstais šnekos atpažinimo (ASR) ir necenzūrinės leksikos aptikimo sistemų testavimui.
+Atrinktas ir patikrintas vertinimo duomenų rinkinys, kurį sudaro **{total_clips} lietuviški garso įrašai** su etaloninėmis transkripcijomis šnekos atpažinimo (ASR) ir necenzūrinės leksikos aptikimo modelių testavimui.
 
 ---
 
 ## Duomenų rinkinio apžvalga
 
-- **Įrašai:** **{total_clips} unikalūs įrašai** (16 kHz mono WAV, 16-bit PCM).
+- **Įrašai:** **{total_clips} unikalūs garso įrašai** (16 kHz mono WAV, 16-bit PCM).
 - **Transkripcijos:** Dvigubas transkripcijos standartas:
   - `verbatim_transcript`: Tikslus sakytinis tekstas su autentiška fonetika ir šnekamosios kalbos ypatumais.
-  - `normalized_transcript`: Standartizuota skolinių rašyba (*blet*, *nachui*, *pyzda*, *chuj*) be dirbtinių WER baudų.
-- **Lygiavimas:**
-  - **25 įrašai** turi žmogaus patikrintas ir „Praat“ akustiniu lygiu suderintas žodines laiko žymas (`words` masyvas, `alignment_tier = "human_praat_audited"`).
-  - Likę **108 įrašai** turi `words = null` (`alignment_tier = "none"`), garantuojant, kad sintetiniai mašininiai lygiavimai nebus supainioti su žmogaus etalonu.
+  - `normalized_transcript`: Standartizuota skolinių rašyba (*blet*, *nachui*, *pyzda*, *chuj*), išvengiant dirbtinai išpūsto WER rodiklio dėl rašybos variantų.
+- **Laiko žymų lygiavimas (Forced Alignment):**
+  - **25 įrašai** turi žmogaus patikrintas ir „Praat“ akustiniu lygiu suderintas žodžių lygio laiko žymas (`words` masyvas, `alignment_tier = "human_praat_audited"`).
+  - Likę **108 įrašai** turi `words = null` (`alignment_tier = "none"`), užtikrinant, kad automatinis mašininis lygiavimas (MMS) nebūtų painiojamas su žmogaus patikrintu etalonu.
 
 ---
 
@@ -220,18 +220,18 @@ Kiekvienas `test` įrašas turi šiuos laukus:
 
 ---
 
-## Greitas naudojimas
+## Kaip naudoti (Quickstart)
 
 ```python
 from datasets import load_dataset
 
 dataset = load_dataset("Frararo/zalia-ruta-bench-lt", split="test")
 
-# 1. Pavyzdys su žmogaus patikrintu žodžių lygiavimu
+# 1. Pavyzdys: atrinkti įrašus su žmogaus patikrintu žodžių lygiavimu
 audited_clips = [s for s in dataset if s["alignment_tier"] == "human_praat_audited"]
 print(f"Patikrinti Praat įrašai: {len(audited_clips)} / {len(dataset)}")
 
-# 2. Keiksmažodžių aptikimo įvertinimas
+# 2. Pavyzdys: keiksmažodžių aptikimo įvertinimas
 profane_clips = [s for s in dataset if s["contains_profanity"]]
 print(f"Įrašai su keiksmažodžiais: {len(profane_clips)} / {len(dataset)}")
 ```
@@ -242,7 +242,7 @@ print(f"Įrašai su keiksmažodžiais: {len(profane_clips)} / {len(dataset)}")
 
 Įvertinta visuose **{total_clips} įrašuose** (5 146 etalono žodžiai):
 
-| Vieta | Modelis | Modelio tipas | Mikro WER% (Viso korpuso) | Makro WER% | Mikro CER% | WER (Be diakritikų) | RTF | Greitis | Aparatinė įranga |
+| Vieta | Modelis | Modelio tipas | Mikro WER% (visas korpusas) | Makro WER% | Mikro CER% | WER (be diakritikų) | RTF | Greitis | Aparatinė įranga |
 | :---: | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
 | 🥇 | **[paprika-whisper-lt-v3](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | Whisper Large v3 (CT2 INT8) | **11.08%** | **12.86%** | **4.28%** | **10.30%** | **0.28** | **3.6x** | NVIDIA GTX 1650 (4 GB) |
 | 🥈 | **[paprika-whisper-lt-v3](https://huggingface.co/kristijonas/paprika-whisper-lt-v3)** | Whisper Large v3 (PyTorch FP16)* | **11.36%** | **12.33%** | **4.13%** | **10.51%** | **0.26** | **3.9x** | NVIDIA Tesla T4 (16 GB) |
@@ -251,15 +251,15 @@ print(f"Įrašai su keiksmažodžiais: {len(profane_clips)} / {len(dataset)}")
 | 5 | **[whisper-small-lt](https://huggingface.co/DeividasM/whisper-small-lt)** | Whisper Small (DeividasM) | **74.66%** | **104.44%** | **36.51%** | **71.73%** | **0.72** | **1.4x** | NVIDIA GTX 1650 (4 GB) |
 | 6 | **[svogunas-turbo-lt](https://huggingface.co/svogunas/whisper-large-v3-turbo-lt)** | Whisper Large v3 Turbo (CT2 INT8)** | **87.78%** | **83.89%** | **75.00%** | **87.54%** | **1.55** | **0.6x** | NVIDIA GTX 1650 (4 GB) |
 
-> \* **Pastaba dėl `paprika-whisper-lt-v3 (PyTorch FP16)`:** Vykdyta per Hugging Face `transformers` su `no_repeat_ngram_size=3` ir `repetition_penalty=1.15` generavimo nustatymais (kurie neleidžia Whisper modeliui patekti į haliucinacijų kilpas emocingose ar juoko atkarpose). Pilnas modelis reikalauja ~7.4 GB VRAM, todėl greitis (3.9x) išmatuotas su NVIDIA Tesla T4 (ant 4 GB kortų sistema veikia žymiai lėčiau dėl PCIe atminties puslapiavimo).
+> \* **Pastaba dėl `paprika-whisper-lt-v3 (PyTorch FP16)`:** Vykdyta per Hugging Face `transformers` su `no_repeat_ngram_size=3` ir `repetition_penalty=1.15` generavimo nustatymais (kurie apsaugo nuo haliucinacijų ir pasikartojimų kilpų emocingose ar juoko atkarpose). Pilnas modelis reikalauja ~7.4 GB VRAM, todėl greitis (3.9x) išmatuotas su NVIDIA Tesla T4 (ant 4 GB vaizdo plokščių sistema veikia žymiai lėčiau dėl PCIe operatyviosios atminties puslapiavimo).
 >
-> \*\* **Pastaba dėl `svogunas-turbo-lt`:** Testuota su CTranslate2 INT8 kvantavimu (`int8_float16`). Dėl 4 sluoksnių Turbo architektūros tiesioginis INT8 kvantavimas sukelia svorių kolapsą ir nuolatines haliucinacijas šnekamojoje kalboje. Jei turite kokybiškesnę kvantavimo konfigūraciją ar pilną FP16/FP32 testą, pateikite PR / Diskusiją.
+> \*\* **Pastaba dėl `svogunas-turbo-lt`:** Testuota su CTranslate2 INT8 kvantavimu (`int8_float16`). Dėl 4 sluoksnių Turbo architektūros tiesioginis INT8 kvantavimas sukelia svorių iškraipymą / degradaciją (weight collapse) ir nuolatines haliucinacijas šnekamojoje kalboje. Jei turite kokybiškesnę kvantavimo konfigūraciją ar pilną FP16/FP32 testą, pateikite PR / Diskusiją.
 
 ---
 
 ### Keiksmažodžių aptikimo lyderių lentelė
 
-| Vieta | Modelis | Atpažinta / Viso | Praleista | Klaidingi signalai | Atpažinimas% (Recall) | Tikslumas% (Precision) | F1 balas |
+| Vieta | Modelis | Aptikta / Viso | Praleisti | Klaidingi teigiami (False Alarms) | Aptikimo dažnis% (Recall) | Tikslumas% (Precision) | F1 įvertis |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | 🥇 | **[paprika-whisper-lt-v3 (CT2 INT8)](https://huggingface.co/RobertasTa/paprika-whisper-lt-v3-ct2-int8)** | **233 / 255** | 22 | 0 | **91.37%** | **100.00%** | **95.49%** |
 | 🥈 | **[paprika-whisper-lt-v3 (PyTorch FP16)](https://huggingface.co/kristijonas/paprika-whisper-lt-v3)** | **230 / 255** | 25 | 0 | **90.20%** | **100.00%** | **94.85%** |
@@ -273,7 +273,7 @@ print(f"Įrašai su keiksmažodžiais: {len(profane_clips)} / {len(dataset)}")
 ## Naudojimo sąlygos ir licencija
 
 - **Licencija:** [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).
-- **Paskirtis:** Ne pelno siekiantys moksliniai tyrimai, akademinis vertinimas ir individualus testavimas.
+- **Paskirtis:** Ne pelno siekiantiems moksliniams tyrimams, akademiniam vertinimui ir individualiam testavimui.
 - **Pirminis projektas:** Sukurta kaip [`zalia-ruta`](https://github.com/Friebay/zalia-ruta) lietuvių šnekos apdorojimo projekto dalis.
 """
 
