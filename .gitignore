@@ -198,4 +198,7 @@ benchmark/audio/CT0GB0vd1RI.*
 praat_samples/
 hf_export/
 models/
+.trim_backups/
+incoming_clips/
+trim_plan.json
 
