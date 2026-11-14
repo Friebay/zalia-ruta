@@ -1002,6 +1002,280 @@
       "category": "profanity",
       "timing_audited": false,
       "notes": "Karalius commentary with 2 roots: 'dalbajobai' [dalbajob], 'blet' [ble], 'blet' [ble] (22.3s)"
+    },
+    {
+      "id": "wizjo_01",
+      "file": "incoming_clips/raw/wizjo_01.mp4",
+      "category": "speech",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@wizjo.aep/video/7439797290740616480 (26.7s)"
+    },
+    {
+      "id": "yt_mkkax",
+      "file": "incoming_clips/raw/yt_mkkax.mkv",
+      "youtube_id": "mkkaxNx9TDk",
+      "category": "speech",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.youtube.com/watch?v=mkkaxNx9TDk (16.0s)"
+    },
+    {
+      "id": "lietuvameme_ai",
+      "file": "incoming_clips/raw/lietuvameme_ai.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "AI generated Lithuanian meme; source: https://www.tiktok.com/@lietuvameme/video/7567270196386254102 (9.7s, 2 profanity tokens)"
+    },
+    {
+      "id": "veltiepatys_01",
+      "file": "incoming_clips/raw/veltiepatys_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Up to ~20s, adjust to natural pause; source: https://www.tiktok.com/@veltiepatys/video/7008609458997808390 (19.7s, 1 profanity tokens)"
+    },
+    {
+      "id": "veltiepatys_02",
+      "file": "incoming_clips/raw/veltiepatys_02.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "First 3 seconds; source: https://www.tiktok.com/@veltiepatys/video/7296968999852592417 (2.4s, 1 profanity tokens)"
+    },
+    {
+      "id": "veltiepatys_03",
+      "file": "incoming_clips/raw/veltiepatys_03.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Up to speaker change at ~9-10s; source: https://www.tiktok.com/@veltiepatys/video/7698052076105960726 (9.3s, 2 profanity tokens)"
+    },
+    {
+      "id": "veltiepatys_04",
+      "file": "incoming_clips/raw/veltiepatys_04.mp4",
+      "category": "speech",
+      "timing_audited": false,
+      "notes": "Single speaker with background noise; source: https://www.tiktok.com/@veltiepatys/video/7696866572564024598 (25.0s)"
+    },
+    {
+      "id": "klajumas_01",
+      "file": "incoming_clips/raw/klajumas_01.mp4",
+      "category": "speech",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@dklajumas/video/7690504876861705494 (18.7s)"
+    },
+    {
+      "id": "ltu_clips_01",
+      "file": "incoming_clips/raw/ltu_clips_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "First 2-3 seconds; source: https://www.tiktok.com/@ltu_clips/video/7705475861356547361 (2.5s, 1 profanity tokens)"
+    },
+    {
+      "id": "yt_shorts_1ymi",
+      "file": "incoming_clips/raw/yt_shorts_1ymi.webm",
+      "youtube_id": "1-yMI1SzNQQ",
+      "category": "speech",
+      "timing_audited": false,
+      "notes": "Full short; source: https://www.youtube.com/shorts/1-yMI1SzNQQ (29.0s)"
+    },
+    {
+      "id": "yt_shorts_xzgd",
+      "file": "incoming_clips/raw/yt_shorts_xzgd.webm",
+      "youtube_id": "_xzgdVy4VIM",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Up to ~11s; source: https://www.youtube.com/shorts/_xzgdVy4VIM (10.8s, 2 profanity tokens)"
+    },
+    {
+      "id": "yt_shorts_dpvn",
+      "file": "incoming_clips/raw/yt_shorts_dpvn.webm",
+      "youtube_id": "DpVNAPGd7NE",
+      "category": "speech",
+      "timing_audited": false,
+      "notes": "Full short; source: https://www.youtube.com/shorts/DpVNAPGd7NE (26.4s)"
+    },
+    {
+      "id": "yt_shorts_hxh",
+      "file": "incoming_clips/raw/yt_shorts_hxh.webm",
+      "youtube_id": "hXH-nvss-VY",
+      "category": "speech",
+      "timing_audited": false,
+      "notes": "Full short; source: https://www.youtube.com/shorts/hXH-nvss-VY (39.1s)"
+    },
+    {
+      "id": "yt_shorts_wxhg",
+      "file": "incoming_clips/raw/yt_shorts_wxhg.webm",
+      "youtube_id": "-WXHg6O-sZc",
+      "category": "speech",
+      "timing_audited": false,
+      "notes": "Full short; source: https://www.youtube.com/shorts/-WXHg6O-sZc (26.3s)"
+    },
+    {
+      "id": "yt_shorts_9mkc",
+      "file": "incoming_clips/raw/yt_shorts_9mkc.webm",
+      "youtube_id": "9mKCx-8SKpA",
+      "category": "speech",
+      "timing_audited": false,
+      "notes": "Full short; source: https://www.youtube.com/shorts/9mKCx-8SKpA (16.0s)"
+    },
+    {
+      "id": "yt_zl7f",
+      "file": "incoming_clips/raw/yt_zl7f.webm",
+      "youtube_id": "z-L7f0jxhts",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "From ~12s onwards (segment ~18s); source: https://www.youtube.com/watch?v=z-L7f0jxhts (15.5s, 3 profanity tokens)"
+    },
+    {
+      "id": "radwimpslover_01",
+      "file": "incoming_clips/raw/radwimpslover_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full meme; source: https://www.tiktok.com/@radwimpslover69/video/7405500095069785377 (31.5s, 37 profanity tokens)"
+    },
+    {
+      "id": "belenkaskrc_01",
+      "file": "incoming_clips/raw/belenkaskrc_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@belenkaskrc1/video/6986947936265506053 (12.3s, 8 profanity tokens)"
+    },
+    {
+      "id": "joku_bas_01",
+      "file": "incoming_clips/raw/joku_bas_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@joku_bas1/video/7679087759184727318 (6.7s, 1 profanity tokens)"
+    },
+    {
+      "id": "dzonis_01",
+      "file": "incoming_clips/raw/dzonis_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@dzonis69/video/7649994303393058070 (7.1s, 1 profanity tokens)"
+    },
+    {
+      "id": "juokofabrikas_01",
+      "file": "incoming_clips/raw/juokofabrikas_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Up to 12 sec; source: https://www.tiktok.com/@juokofabrikas/video/7706615364892871958 (11.7s, 2 profanity tokens)"
+    },
+    {
+      "id": "mandari_nass_01",
+      "file": "incoming_clips/raw/mandari_nass_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@mandari_nass/video/7705456711116606742 (14.2s, 1 profanity tokens)"
+    },
+    {
+      "id": "dominykas_01",
+      "file": "incoming_clips/raw/dominykas_01.mp4",
+      "category": "speech",
+      "timing_audited": false,
+      "notes": "Up to 14 sec; source: https://www.tiktok.com/@dominykaskubilius1/video/7704353833807301910 (13.2s)"
+    },
+    {
+      "id": "lukasdaah_01",
+      "file": "incoming_clips/raw/lukasdaah_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@lukasdaah/video/7703288888478960918 (29.2s, 8 profanity tokens)"
+    },
+    {
+      "id": "lukasdaah_02",
+      "file": "incoming_clips/raw/lukasdaah_02.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "10 seconds; source: https://www.tiktok.com/@lukasdaah/video/7705424272285584662 (9.6s, 1 profanity tokens)"
+    },
+    {
+      "id": "lukasdaah_03",
+      "file": "incoming_clips/raw/lukasdaah_03.mp4",
+      "category": "speech",
+      "timing_audited": false,
+      "notes": "15 seconds; source: https://www.tiktok.com/@lukasdaah/video/7706240727709125910 (15.0s)"
+    },
+    {
+      "id": "lukasdaah_04",
+      "file": "incoming_clips/raw/lukasdaah_04.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@lukasdaah/video/7704368807048908054 (24.1s, 5 profanity tokens)"
+    },
+    {
+      "id": "lukasdaah_05",
+      "file": "incoming_clips/raw/lukasdaah_05.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@lukasdaah/video/7694967188234571030 (32.8s, 6 profanity tokens)"
+    },
+    {
+      "id": "dedes_garazas_01",
+      "file": "incoming_clips/raw/dedes_garazas_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@dedes_garazas/video/7626089952601771286 (60.6s, 1 profanity tokens)"
+    },
+    {
+      "id": "crypto_lietuva_01",
+      "file": "incoming_clips/raw/crypto_lietuva_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@instagram_crypto_lietuva/video/7706437906730208534 (11.9s, 4 profanity tokens)"
+    },
+    {
+      "id": "laimissel_01",
+      "file": "incoming_clips/raw/laimissel_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@laimissel/video/7706895378037116182 (34.1s, 12 profanity tokens)"
+    },
+    {
+      "id": "driveris_01",
+      "file": "incoming_clips/raw/driveris_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@driveris2/video/7706874838303935766 (19.3s, 12 profanity tokens)"
+    },
+    {
+      "id": "driveris_02",
+      "file": "incoming_clips/raw/driveris_02.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@driveris2/video/7698655125635747094 (16.3s, 7 profanity tokens)"
+    },
+    {
+      "id": "driveris_03",
+      "file": "incoming_clips/raw/driveris_03.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@driveris2/video/7681974595955543318 (15.6s, 11 profanity tokens)"
+    },
+    {
+      "id": "driveris_04",
+      "file": "incoming_clips/raw/driveris_04.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@driveris2/video/7676920771322580246 (14.8s, 8 profanity tokens)"
+    },
+    {
+      "id": "driveris_05",
+      "file": "incoming_clips/raw/driveris_05.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@driveris2/video/7666842276743679254 (13.2s, 5 profanity tokens)"
+    },
+    {
+      "id": "driveris_06",
+      "file": "incoming_clips/raw/driveris_06.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@driveris2/video/7662295669327121686 (18.0s, 11 profanity tokens)"
+    },
+    {
+      "id": "ragnaras_01",
+      "file": "incoming_clips/raw/ragnaras_01.mp4",
+      "category": "profanity",
+      "timing_audited": false,
+      "notes": "Full clip; source: https://www.tiktok.com/@ragnaraslt/video/7681312161813024022 (53.2s, 11 profanity tokens)"
     }
   ]
 }
